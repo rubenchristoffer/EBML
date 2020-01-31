@@ -18,10 +18,10 @@ namespace EBML {
         public static ModGUI modGUI { get; private set; }
 
         public static void Initialize () {
-            LogToFile("Loading assembly Mono.Cecil.dll");
+            ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
             Assembly.LoadFile(EBMLInfo.EBML_PATH + "Mono.Cecil.dll");
 
-            LogToFile("Loading assembly 0Harmony.dll");
+            ModLoader.LogToFile("Loading assembly 0Harmony.dll");
             Assembly.LoadFile(EBMLInfo.EBML_PATH + "0Harmony.dll");
 
             LogToFile("Creating new ModGUI");

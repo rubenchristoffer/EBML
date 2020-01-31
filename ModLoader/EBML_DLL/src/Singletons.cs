@@ -12,6 +12,12 @@ namespace EBML {
     /// </summary>
     public static class Singletons {
 
+        public static Loader LOADER {
+            get {
+                return SingletonMonoBehaviour<Loader>.THIS;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

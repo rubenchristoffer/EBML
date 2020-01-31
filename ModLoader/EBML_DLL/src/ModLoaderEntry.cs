@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
+using System.Reflection;
+using System.Linq;
 
 namespace EBML {
 
@@ -12,6 +15,7 @@ namespace EBML {
     /// </summary>
     public class ModLoaderEntry {
 
+        private static Assembly csharpAssembly;
         private static GameObject gameObject;
 
         public static void OnInjection () {
@@ -19,9 +23,20 @@ namespace EBML {
             Directory.CreateDirectory(EBMLInfo.MODS_PATH);
             Directory.CreateDirectory(EBMLInfo.LOG_PATH);
 
-            ModLoader.LogToFile("ModLoader has been injected");
+            ModLoader.LogToFile("ModLoader has been injected.");
 
-            ModLoader.LogToFile("Creating new GameObject...");
+            if (Singletons.LOADER != null) {
+                ModLoader.LogToFile("Loader is not null, so creating bootstrapper immediately");
+                CreateBootstrapper();
+            } else {
+                ModLoader.LogToFile("Loader is null, so waiting a couple of seconds before trying again...");
+                System.Threading.Thread.Sleep(2000);
+                OnInjection();
+            }
+        }
+
+        private static void CreateBootstrapper () {
+            ModLoader.LogToFile("Creating new Bootstrapper GameObject...");
             gameObject = new GameObject();
 
             ModLoader.LogToFile("Enabling DontDestroyOnLoad");
