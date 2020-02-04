@@ -22,18 +22,6 @@ namespace EBML.Hooks {
         [HarmonyPatch(typeof(Loader))]
         private class Patch {
 
-            [HarmonyPatch("Start")]
-            [HarmonyPrefix]
-            static void StartPre(Loader __instance) {
-                Start.InvokePreHooks(__instance);
-            }
-
-            [HarmonyPatch("Start")]
-            [HarmonyPostfix]
-            static void StartPost(Loader __instance) {
-                Start.InvokePostHooks(__instance);
-            }
-
             [HarmonyPatch("StartLoadGameScene")]
             [HarmonyPrefix]
             static void StartLoadGameScenePre(Loader __instance, ref bool isSavedGame) {

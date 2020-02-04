@@ -8,9 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace EBML_GUI {
+
     public partial class MainWindow : Form {
+
+        public static string GAME_PATH = new DirectoryInfo(@".\").FullName;
+        public static string EBML_PATH = GAME_PATH + @"EBML\";
+        public static string LOG_PATH = EBML_PATH + @"GUI_Logs\";
 
         private static bool processRunning = false;
         private static bool injected = false;
@@ -23,6 +29,14 @@ namespace EBML_GUI {
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
+            // Create required directories if they do not exist
+            Directory.CreateDirectory(GAME_PATH);
+            Directory.CreateDirectory(EBML_PATH);
+            Directory.CreateDirectory(LOG_PATH);
+
+            LogToFile("", false);
+            LogToFile("### New Session ###");
+
             Update();
             updateTimer.Start();
         }
@@ -64,7 +78,7 @@ namespace EBML_GUI {
             if (!hasAutoInjected && processRunning && !injected && autoInjectCheckbox.Checked && !injectorWorker.IsBusy) {
                 hasAutoInjected = true;
 
-                InjectModLoaderDLL();
+                injectorWaitTimer.Start();
             }
         }
 
@@ -74,6 +88,8 @@ namespace EBML_GUI {
             statusLabel.Text = "Injecting DLL...";
             statusProgressBar.Visible = true;
 
+            // Run injection async because injection may
+            // take some time if game is not properly loaded
             injectorWorker.RunWorkerAsync();
         }
 
@@ -82,7 +98,7 @@ namespace EBML_GUI {
 
             Process ejector = new Process() {
                 StartInfo = new ProcessStartInfo {
-                    FileName = "smi.exe",
+                    FileName = "EBML/smi.exe",
                     Arguments = "eject -p EvilBankManager -a " + injectedAssemblyAddress + " -n EBML -c ModLoaderEntry -m OnEjection",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
@@ -130,8 +146,19 @@ namespace EBML_GUI {
                 StartGameProcess();
         }
 
-        public void Log (string text) {
-            textBox1.AppendText(String.Format("[{0}] {1}", System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), text) + Environment.NewLine);
+        public void Log (string message) {
+            LogToFile(message);
+
+            textBox1.AppendText(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message) + Environment.NewLine);
+        }
+
+        public void LogToFile (string message, bool includeTimestamp = true) {
+            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
+                if (includeTimestamp)
+                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
+                else
+                    outputFile.WriteLine(message);
+            }
         }
 
         private void injectorWorker_DoWork(object sender, DoWorkEventArgs args) {
@@ -139,8 +166,8 @@ namespace EBML_GUI {
 
             Process injector = new Process() {
                 StartInfo = new ProcessStartInfo {
-                    FileName = "smi.exe",
-                    Arguments = "inject -p EvilBankManager -a EBML.dll -n EBML -c ModLoaderEntry -m OnInjection",
+                    FileName = "EBML/smi.exe",
+                    Arguments = "inject -p EvilBankManager -a EBML/EBML.dll -n EBML -c ModLoaderEntry -m OnInjection",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -171,5 +198,11 @@ namespace EBML_GUI {
             statusProgressBar.Visible = false;
         }
 
+        private void injectorWaitTimer_Tick(object sender, EventArgs e) {
+            injectorWaitTimer.Stop();
+            InjectModLoaderDLL();
+        }
+
     }
+
 }

@@ -17,7 +17,7 @@ namespace EBML {
 
         public static ModGUI modGUI { get; private set; }
 
-        public static void Initialize () {
+        public static void __Initialize () {
             ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
             Assembly.LoadFile(EBMLInfo.EBML_PATH + "Mono.Cecil.dll");
 
@@ -33,21 +33,26 @@ namespace EBML {
             Log("ModLoader has been initialized!");
         }
 
-        public static void LoadMods () {
+        public static void __LoadMods () {
             Log("Loading mods...");
 
-            foreach (string dll in GetDLLsInModsFolder()) {
-                LoadMod(dll);
+            foreach (string dll in __GetDLLsInModsFolder()) {
+                __LoadMod(dll);
             }
         }
 
-        public static void LoadMod (string fullPath) {
+        public static void __LoadMod (string fullPath) {
             try {
                 Assembly assembly = Assembly.LoadFile(fullPath);
 
                 Type modType = assembly.GetTypes()
                     .Where(type => type.IsSubclassOf(typeof(Mod)))
                     .First();
+
+                if (modType == null) {
+                    Log("Could not find entry point of mod at " + fullPath);
+                    return;
+                }
 
                 Mod mod = (Mod)Activator.CreateInstance(modType);
                 loadedMods.Add(mod);
@@ -61,19 +66,18 @@ namespace EBML {
 
         // Later create a custom mod config file
         // because it might need dependencies that need to load first
-        public static string[] GetDLLsInModsFolder () {
+        public static string[] __GetDLLsInModsFolder () {
             return Directory
                 .EnumerateFiles(EBMLInfo.MODS_PATH, "*.*", SearchOption.AllDirectories)
                 .Where(file => Path.GetExtension(file).ToLowerInvariant().Equals(".dll"))
                 .ToArray();
         }
 
-        public static ModInfo[] GetLoadedModsInfo () {
+        public static ModInfo[] __GetLoadedModsInfo () {
             return loadedMods.Select(mod => mod.modInfo).ToArray();
         }
 
-        public static void InstallMethodHooks () {
-            LogToFile("Well, at least it called the function");
+        public static void __InstallMethodHooks () {
             Log("Injecting method hooks...");
 
             try {
@@ -84,10 +88,10 @@ namespace EBML {
             }
         }
 
-        public static void StartMods() {
-            ModManagers.ModResources.ReInitResources();
-
-            loadedMods.ForEach(mod => mod.OnStart());
+        public static void __InitMods() {
+            loadedMods.ForEach(mod => mod.OnInit());
+            //ModManagers.ModResources.ReInitResources();
+            loadedMods.ForEach(mod => mod.OnPostInit());
         }
 
         public static void Log (string message) {
@@ -95,9 +99,12 @@ namespace EBML {
             modGUI.GetObject<GUIBox>("log").AppendLine(message);
         }
 
-        public static void LogToFile (string message) {
+        public static void LogToFile (string message, bool includeTimestamp = true) {
             using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLInfo.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
-                outputFile.WriteLine("[" + System.DateTime.Now.ToString() + "]: " + message);
+                if (includeTimestamp)
+                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
+                else
+                    outputFile.WriteLine(message);
             }
         }
 

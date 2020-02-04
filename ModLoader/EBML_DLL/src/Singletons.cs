@@ -8,13 +8,27 @@ namespace EBML {
 
     /// <summary>
     /// Contains various Singletons that is created by the
-    /// developer of the game in order to find them easily
+    /// developer of the game in order to find them easily.
+    /// It is recommended to use the ModLoader API if you can
+    /// over these classes if you can.
     /// </summary>
     public static class Singletons {
 
         public static Loader LOADER {
             get {
                 return SingletonMonoBehaviour<Loader>.THIS;
+            }
+        }
+
+        public static SoundManager SOUND_MANAGER {
+            get {
+                return SingletonMonoBehaviour<SoundManager>.THIS;
+            }
+        }
+
+        public static TurnManager TURN_MANAGER {
+            get {
+                return SingletonMonoBehaviour<TurnManager>.THIS;
             }
         }
 

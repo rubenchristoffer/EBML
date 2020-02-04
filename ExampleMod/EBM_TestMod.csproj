@@ -123,9 +123,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Steam\steamapps\common\Evil Bank Manager\EvilBankManager_Data\Managed\DOTween50.dll</HintPath>
     </Reference>
-    <Reference Include="EBM_ModLoader, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\EBM_ModLoader_Solution\bin\EBM_ModLoader.dll</HintPath>
+    <Reference Include="EBML">
+      <HintPath>..\ModLoader\EBML_DLL\bin\EBML.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite">
       <HintPath>..\..\..\..\Steam\steamapps\common\Evil Bank Manager\EvilBankManager_Data\Managed\Mono.Data.Sqlite.dll</HintPath>

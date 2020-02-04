@@ -93,14 +93,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\GameAPI\Extensions\AutoPoolExtensions.cs" />
+    <Compile Include="src\GameAPI\Extensions\ResourceControllerExtensions.cs" />
+    <Compile Include="src\GameAPI\Extensions\WeaponCraftWindowExtensions.cs" />
+    <Compile Include="src\GameAPI\Extensions\WeaponInvestWindowExtensions.cs" />
+    <Compile Include="src\GameAPI\StructFactory.cs" />
     <Compile Include="src\GUI\GUIBox.cs" />
     <Compile Include="src\GUI\GUIObject.cs" />
     <Compile Include="src\GUI\ModGUI.cs" />
+    <Compile Include="src\Hooks\GameWindowHooks.cs" />
     <Compile Include="src\Hooks\HookSystem.cs" />
     <Compile Include="src\Hooks\LoaderHooks.cs" />
     <Compile Include="src\Hooks\MapControllerHooks.cs" />
     <Compile Include="src\Hooks\ResourceControllerHooks.cs" />
-    <Compile Include="src\ModManagers\ModResources.cs" />
+    <Compile Include="src\GameAPI\ModResources.cs" />
+    <Compile Include="src\Hooks\WeaponCraftWindowHooks.cs" />
+    <Compile Include="src\SceneMapper.cs" />
     <Compile Include="src\Singletons.cs" />
     <Compile Include="src\Mod.cs" />
     <Compile Include="src\ModBehaviour.cs" />
