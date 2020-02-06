@@ -9,7 +9,7 @@ namespace EBML {
     /// <summary>
     /// Contains various Singletons that is created by the
     /// developer of the game in order to find them easily.
-    /// It is recommended to use the ModLoader API if you can
+    /// It is recommended to use the ModLoader API
     /// over these classes if you can.
     /// </summary>
     public static class Singletons {

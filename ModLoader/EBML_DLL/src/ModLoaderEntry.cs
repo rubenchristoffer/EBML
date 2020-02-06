@@ -10,18 +10,22 @@ using EBML.GameAPI.Extensions;
 namespace EBML {
 
     /// <summary>
-    /// This is the class that gets loaded
-    /// by the AssemblyBootstrapper and is the
-    /// starting point of the mod loader.
+    /// This is the entry point for the EBML DLL
+    /// and API
     /// </summary>
     public class ModLoaderEntry {
 
         /// <summary>
         /// The 'Bootstrapper' gameObject that is used to ensure
-        /// that the ModLoader code is executed on the Unity thread
+        /// that the ModLoader code is executed on the Unity thread.
+        /// The MonoBehaviourCallbacks component is attached to this gameObject.
         /// </summary>
         public static GameObject bootstrapperGameObject { get; private set; }
 
+        /// <summary>
+        /// This will be called by injector
+        /// after assembly is injected.
+        /// </summary>
         private static void OnInjection () {
             Directory.CreateDirectory(EBMLInfo.EBML_PATH);
             Directory.CreateDirectory(EBMLInfo.MODS_PATH);
@@ -37,6 +41,12 @@ namespace EBML {
             CreateBootstrapper();
         }
 
+        /// <summary>
+        /// This will simply wait until the Loader
+        /// singleton is initialized. This is to ensure
+        /// that nothing is affecting game before it is 
+        /// properly loaded.
+        /// </summary>
         private static void WaitUntilLoaderIsPresent () {
             if (Singletons.LOADER == null) {
                 ModLoader.LogToFile("Loader is null, so waiting a couple of seconds before checking again...");
@@ -45,8 +55,10 @@ namespace EBML {
             }
         }
 
-        // Create a Bootstrapper gameobject in order to ensure
-        // that code will be executed by the Unity Thread
+        /// <summary>
+        /// Create a Bootstrapper gameobject in order to ensure
+        /// that code will be executed by the Unity Thread
+        /// </summary>
         private static void CreateBootstrapper () {
             ModLoader.LogToFile("Creating new Bootstrapper GameObject...");
             bootstrapperGameObject = new GameObject("ModLoader");
@@ -55,52 +67,50 @@ namespace EBML {
             MonoBehaviour.DontDestroyOnLoad(bootstrapperGameObject);
 
             ModLoader.LogToFile("Setting up MonoBehaviour callbacks");
-            MonoBehaviourCallbacks.awake += Bootstrapper_Awake;
+            MonoBehaviourCallbacks.start += Bootstrapper_Start;
 
             // Initialize mono behaviour callbacks
             bootstrapperGameObject.AddComponent<MonoBehaviourCallbacks>();
         }
 
-        private static void Bootstrapper_Awake () {
-            ModLoader.LogToFile("ModLoaderEntry Awake has been invoked");
+        /// <summary>
+        /// This is called using a MonoBehaviourCallback
+        /// and is therefore guaranteed to be run on the Unity
+        /// thread.
+        /// </summary>
+        private static void Bootstrapper_Start () {
+            ModLoader.LogToFile("ModLoaderEntry Start has been invoked");
 
             // We only want to call this code ONCE
-            MonoBehaviourCallbacks.awake -= Bootstrapper_Awake;
+            MonoBehaviourCallbacks.start -= Bootstrapper_Start;
 
-            // Initialize ModLoader
+            ModLoader.LogToFile("Initializing ModLoader...");
             ModLoader.__Initialize();
 
-            ModLoader.LogToFile("Attemping to install method hooks...");
-
             try {
-                // Inject method hooks into game assembly
+                // Wrap all of this in a try-catch in order to
+                // try and prevent game from crashing if anything goes wrong
+                // (there is a real possibility that it will crash anyway)
+
+                ModLoader.Log("Attemping to install method hooks...");
                 ModLoader.__InstallMethodHooks();
 
-                // Load mods into memory
+                ModLoader.Log("Loading mods...");
                 ModLoader.__LoadMods();
 
                 ModLoader.LogToFile("Initializing mods...");
-
-                // Initialize mods
-                ModLoader.__InitMods();
+                ModLoader.__InitializeMods();
             } catch (Exception e) {
                 ModLoader.Log(e.ToString());
             }
-
-            Hooks.MapControllerHooks.GenerateStartMap.AddPostHook((instance) => {
-                ModLoader.LogToFile(SceneMapper.GetAllMonobehavioursInScene());
-            });
-
-            /*Singletons.RESOURCE_CONTROLLER.GetStaticResourceProduction().staticResourceProductionDataArr
-                .ToList()
-                .ForEach(srp => ModLoader.Log(String.Format("ID: {0}, RES_ID: {1}, WORK: {2}, TURN_MAT: {3}, PRICE_ID1: {4}, PRICE_ID1_AMOUNT: {5}, PRICE_ID2: {6}, PRICE_ID2_AMOUNT: {7}", srp.id, srp.resourse_id, srp.work_amount, srp.turn_maturation, srp.price_seeding_id1, srp.price_seeding_id1_amount, srp.price_seeding_id2, srp.price_seeding_id2_amount)));
-
-            Singletons.RESOURCE_CONTROLLER.GetStaticResource().staticResourceDataArr
-                .ToList()
-                .ForEach(sr => ModLoader.Log(String.Format("Res: {0}, {1}", sr.id, Singletons.LOCALIZATION_CONTROLLER.GetText(sr.name))));*/
         }
 
-        public static void OnEjection () {
+        /// <summary>
+        /// This will be called by ejector
+        /// before assembly is ejected.
+        /// </summary>
+        private static void OnEjection () {
+            ModLoader.__UninstallMethodHooks();
             MonoBehaviour.Destroy(bootstrapperGameObject);
         }
 

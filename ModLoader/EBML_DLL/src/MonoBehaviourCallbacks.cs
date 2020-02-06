@@ -7,6 +7,7 @@ namespace EBML {
         public delegate void VoidDelegate();
 
         public static event VoidDelegate awake;
+        public static event VoidDelegate start;
         public static event VoidDelegate update;
         public static event VoidDelegate lateUpdate;
         public static event VoidDelegate onGUI;
@@ -14,6 +15,11 @@ namespace EBML {
         void Awake () {
             if (awake != null)
                 awake();
+        }
+
+        void Start() {
+            if (start != null)
+                start();
         }
 
         void Update () {

@@ -11,13 +11,70 @@ using EBML.GUI;
 
 namespace EBML {
 
+    /// <summary>
+    /// This is the class responsible for
+    /// actually loading mods, but also
+    /// logging debug information to console
+    /// and log file. 
+    /// </summary>
     public static class ModLoader {
 
+        /// <summary>
+        /// This list contains all the loaded Mod instances.
+        /// </summary>
         private static List<Mod> loadedMods = new List<Mod>();
 
+        /// <summary>
+        /// The Harmony object that handles all the method patches.
+        /// </summary>
+        private static Harmony harmony;
+
+        /// <summary>
+        /// The ModGUI instance responsible for rendering
+        /// the Console / Log GUI.
+        /// </summary>
         public static ModGUI modGUI { get; private set; }
 
-        public static void __Initialize () {
+        /// <summary>
+        /// Gets mod info for all the loaded mods.
+        /// </summary>
+        /// <returns>A ModInfo array containing info about loaded mods</returns>
+        public static ModInfo[] GetLoadedModsInfo () {
+            return loadedMods.Select(mod => mod.modInfo).ToArray();
+        }
+
+        /// <summary>
+        /// The default Log function.
+        /// This will log info to the Console GUI, but also
+        /// the log file and it includes a timestamp.
+        /// </summary>
+        /// <param name="message">The message you want to log</param>
+        public static void Log (string message) {
+            LogToFile(message);
+            modGUI.GetObject<GUIBox>("log").AppendLine(message);
+        }
+
+        /// <summary>
+        /// This will log info to the log file and NOT
+        /// to the Console GUI.
+        /// This can be called before the ModLoader is initialized.
+        /// </summary>
+        /// <param name="message">The message you want to log</param>
+        /// <param name="includeTimestamp">Should the timestamp be included or not?</param>
+        public static void LogToFile (string message, bool includeTimestamp = true) {
+            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLInfo.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
+                if (includeTimestamp)
+                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
+                else
+                    outputFile.WriteLine(message);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the ModLoader by loading required assemblies
+        /// and creates a new Log GUI.
+        /// </summary>
+        internal static void __Initialize() {
             ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
             Assembly.LoadFile(EBMLInfo.EBML_PATH + "Mono.Cecil.dll");
 
@@ -33,15 +90,20 @@ namespace EBML {
             Log("ModLoader has been initialized!");
         }
 
-        public static void __LoadMods () {
-            Log("Loading mods...");
-
+        /// <summary>
+        /// Loads all DLLs it can find in the Mods directory and sub-directories.
+        /// </summary>
+        internal static void __LoadMods() {
             foreach (string dll in __GetDLLsInModsFolder()) {
                 __LoadMod(dll);
             }
         }
 
-        public static void __LoadMod (string fullPath) {
+        /// <summary>
+        /// Loads a single mod DLL based on full path
+        /// </summary>
+        /// <param name="fullPath">Full path to file</param>
+        internal static void __LoadMod(string fullPath) {
             try {
                 Assembly assembly = Assembly.LoadFile(fullPath);
 
@@ -64,48 +126,52 @@ namespace EBML {
             }
         }
 
-        // Later create a custom mod config file
-        // because it might need dependencies that need to load first
-        public static string[] __GetDLLsInModsFolder () {
+        /// <summary>
+        /// Gets all files with extension .dll in the mods
+        /// directory and sub-directories.
+        /// </summary>
+        /// <returns>String array containing full paths to DLLs</returns>
+        internal static string[] __GetDLLsInModsFolder() {
             return Directory
                 .EnumerateFiles(EBMLInfo.MODS_PATH, "*.*", SearchOption.AllDirectories)
                 .Where(file => Path.GetExtension(file).ToLowerInvariant().Equals(".dll"))
                 .ToArray();
         }
 
-        public static ModInfo[] __GetLoadedModsInfo () {
-            return loadedMods.Select(mod => mod.modInfo).ToArray();
-        }
-
-        public static void __InstallMethodHooks () {
+        /// <summary>
+        /// Install method hooks using the Harmony library.
+        /// It will look for all [HarmonyPatch] attributes
+        /// in order to decide what will get patched.
+        /// All of these patches are done within the Hooks
+        /// namespace.
+        /// </summary>
+        internal static void __InstallMethodHooks() {
             Log("Injecting method hooks...");
 
             try {
-                Harmony harmony = new Harmony("ModLoader");
+                harmony = new Harmony("ModLoader");
                 harmony.PatchAll();
             } catch (Exception e) {
                 Log(e.ToString());
             }
         }
 
-        public static void __InitMods() {
+        /// <summary>
+        /// Uninstalls the method hooks installed by the 
+        /// __InstallMethodHooks function.
+        /// </summary>
+        internal static void __UninstallMethodHooks () {
+            harmony.UnpatchAll();
+        }
+
+        /// <summary>
+        /// First calls the OnInit method for all mods,
+        /// then proceeds to call the OnPostInit method
+        /// for all mods
+        /// </summary>
+        internal static void __InitializeMods() {
             loadedMods.ForEach(mod => mod.OnInit());
-            //ModManagers.ModResources.ReInitResources();
             loadedMods.ForEach(mod => mod.OnPostInit());
-        }
-
-        public static void Log (string message) {
-            LogToFile(message);
-            modGUI.GetObject<GUIBox>("log").AppendLine(message);
-        }
-
-        public static void LogToFile (string message, bool includeTimestamp = true) {
-            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLInfo.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
-                if (includeTimestamp)
-                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
-                else
-                    outputFile.WriteLine(message);
-            }
         }
 
     }

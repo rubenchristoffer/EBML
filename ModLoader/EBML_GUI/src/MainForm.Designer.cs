@@ -81,7 +81,7 @@
 			// updateTimer
 			// 
 			this.updateTimer.Interval = 2000;
-			this.updateTimer.Tick += new System.EventHandler(this.timer1_Tick);
+			this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
 			// 
 			// label1
 			// 

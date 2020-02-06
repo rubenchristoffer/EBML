@@ -15,10 +15,6 @@ namespace EBML {
         public virtual void OnInit() {}
         public virtual void OnPostInit() {}
 
-        public virtual ModBehaviour[] GetModBehaviours() {
-            return new ModBehaviour[0];
-        }
-
     }
 
 }

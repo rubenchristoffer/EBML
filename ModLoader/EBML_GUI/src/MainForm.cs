@@ -37,23 +37,15 @@ namespace EBML_GUI {
             LogToFile("", false);
             LogToFile("### New Session ###");
 
-            Update();
+            PerformUpdate();
             updateTimer.Start();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e) {
-
+        private void updateTimer_Tick(object sender, EventArgs e) {
+            PerformUpdate();   
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e) {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e) {
-            Update();   
-        }
-
-        private void Update () {
+        private void PerformUpdate () {
             processRunning = Process.GetProcesses()
                .Select(p => p.ProcessName.ToLower())
                .Contains("evilbankmanager");

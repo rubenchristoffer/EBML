@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Static;
 using EBML.GameAPI.Extensions;
+using UnityEngine;
 
 namespace EBML.GameAPI {
 
@@ -14,6 +15,7 @@ namespace EBML.GameAPI {
         public static int nextResourceID { get; private set; }
         public static int nextResourceProductionID { get; private set; }
 
+        private static Dictionary<int, Sprite> modResourceIcons = new Dictionary<int, Sprite>();
         private static List<int> modProductionResources = new List<int>();
         private static List<int> modWarResources = new List<int>();
 
@@ -28,7 +30,7 @@ namespace EBML.GameAPI {
             });
 
             // This hook is needed for properly adding modded weapons to 
-            // "Sell Weapons" window
+            // "Sell Weapons" window since the vanilla method uses a hard-coded approach
             Hooks.GameWindowHooks.Start.AddPreHook((instance) => {
                 if (instance.type == GameWindow.WindowType.WeaponInvest) {
                     WeaponInvestWindow window = (WeaponInvestWindow)instance;
@@ -37,6 +39,7 @@ namespace EBML.GameAPI {
                         Array values = Enum.GetValues(typeof(ArmyInfo.WarriorClass));
                         int num = 0;
 
+                        // Add all the vanilla resources
                         for (int i = 0; i < values.Length; i++) {
                             ArmyInfo.WarriorClass warriorClass = (ArmyInfo.WarriorClass)values.GetValue(i);
                             if (warriorClass != ArmyInfo.WarriorClass.Militiaman && SingletonMonoBehaviour<ResourceController>.THIS.IsResourceAvailable((int)warriorClass)) {
@@ -55,6 +58,12 @@ namespace EBML.GameAPI {
                     }));
                 }
             });
+
+            Hooks.ResourceControllerHooks.CreateResources.AddPostHook((instance) => {
+                foreach (int resourceID in modResourceIcons.Keys) {
+                    Singletons.RESOURCE_CONTROLLER.GetResource(resourceID).SetIcon(modResourceIcons[resourceID]);
+                }
+            });
         }
 
         /// <summary>
@@ -63,16 +72,19 @@ namespace EBML.GameAPI {
         /// </summary>
         /// <param name="staticResourceData">Resource Information</param>
         /// <returns>ID of the new resource</returns>
-        public static int RegisterNewResource (StaticResourceData staticResourceData, bool isWarResource = false) {
+        public static int RegisterNewResource (StaticResourceData staticResourceData, Sprite iconSprite = null, bool isWarResource = false) {
             staticResourceData.id = nextResourceID;
             AddStaticResource(staticResourceData);
             modWarResources.Add(nextResourceID);
 
+            if (iconSprite != null)
+                modResourceIcons.Add(nextResourceID, iconSprite);
+
             return nextResourceID++;
         }
 
-        public static int RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, bool isWarResource = true) {
-            int resourceID = RegisterNewResource(staticResourceData, isWarResource);
+        public static int RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, Sprite iconSprite = null, bool isWarResource = true) {
+            int resourceID = RegisterNewResource(staticResourceData, iconSprite, isWarResource);
 
             staticResourceProductionData.id = nextResourceProductionID;
             staticResourceProductionData.resourse_id = resourceID;
