@@ -7,8 +7,14 @@ using HarmonyLib;
 
 namespace EBML.Hooks {
 
+    /// <summary>
+    /// Method hooks for <see cref="ResourceController"/>.
+    /// </summary>
     public class ResourceControllerHooks {
 
+        /// <summary>
+        /// <code>CreateResources()</code>.
+        /// </summary>
         public static HookSystem<ResourceController> CreateResources = new HookSystem<ResourceController>();
 
         [HarmonyPatch(typeof(ResourceController))]

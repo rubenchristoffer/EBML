@@ -7,16 +7,34 @@ using HarmonyLib;
 
 namespace EBML.Hooks {
 
+    /// <summary>
+    /// Method hooks for <see cref="Loader"/>.
+    /// </summary>
     public class LoaderHooks {
 
+        /// <summary>
+        /// The Unity <code>Start()</code> method.
+        /// </summary>
         public static HookSystem<Loader> Start = new HookSystem<Loader>();
 
         /// <summary>
-        /// bool stands for 'isSavedgame'.
+        /// <code>StartLoadGameScene(bool isSavedGame)</code>.
         /// </summary>
         public static HookSystem<Loader, bool> StartLoadGameScene = new HookSystem<Loader, bool>();
+
+        /// <summary>
+        /// <code>ContinueGame()</code>.
+        /// </summary>
         public static HookSystem<Loader> ContinueGame = new HookSystem<Loader>();
+
+        /// <summary>
+        /// <code>StartUnloadScene(string sceneName, System.Action onUnloadFinished)</code>.
+        /// </summary>
         public static HookSystem<Loader, string, System.Action> StartUnloadScene = new HookSystem<Loader, string, System.Action>();
+
+        /// <summary>
+        /// <code>SetActivity(bool value)</code>.
+        /// </summary>
         public static HookSystem<Loader, bool> SetActivity = new HookSystem<Loader, bool>();
 
         [HarmonyPatch(typeof(Loader))]

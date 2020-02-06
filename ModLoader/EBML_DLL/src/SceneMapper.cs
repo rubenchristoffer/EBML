@@ -8,12 +8,16 @@ using UnityEngine.SceneManagement;
 
 namespace EBML {
 
-    public class SceneMapper {
+    /// <summary>
+    /// Utility class containing various functions
+    /// that collects information about the current scene.
+    /// </summary>
+    public static class SceneMapper {
 
         /// <summary>
         /// Creates a scene tree of all the gameobjects that exists.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String in form of a tree with tabs indicating level</returns>
         public static string GetAllGameObjectsInScene() {
             StringBuilder builder = new StringBuilder();
 
@@ -35,6 +39,11 @@ namespace EBML {
             }
         }
 
+        /// <summary>
+        /// Creates a list of all the names of MonoBehaviours attached
+        /// to gameobjects in the scene.
+        /// </summary>
+        /// <returns>String containing lines of monobehaviour names</returns>
         public static string GetAllMonobehavioursInScene () {
             StringBuilder builder = new StringBuilder();
 

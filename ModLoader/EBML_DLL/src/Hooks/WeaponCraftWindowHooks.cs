@@ -7,9 +7,19 @@ using HarmonyLib;
 
 namespace EBML.Hooks {
 
+    /// <summary>
+    /// Method hooks for <see cref="WeaponCraftWindow"/>.
+    /// </summary>
 	public class WeaponCraftWindowHooks {
 
+        /// <summary>
+        /// The Unity <code>Awake()</code> method.
+        /// </summary>
 		public static HookSystem<WeaponCraftWindow> Awake = new HookSystem<WeaponCraftWindow>();
+
+        /// <summary>
+        /// <code>GetResourceUsedCount(int resourceID) : long</code>.
+        /// </summary>
         public static HookSystem<WeaponCraftWindow, long, int> GetResourceUsedCount = new HookSystem<WeaponCraftWindow, long, int>();
 
         [HarmonyPatch(typeof (WeaponCraftWindow))]

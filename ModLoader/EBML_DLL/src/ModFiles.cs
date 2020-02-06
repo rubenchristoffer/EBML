@@ -62,7 +62,7 @@ namespace EBML {
 		/// <param name="relativeModsPath">The path preceding the mods directory</param>
 		/// <returns>String containing full path</returns>
 		public static string GetFullPath (string relativeModsPath) {
-			return Path.Combine(EBMLInfo.MODS_PATH, relativeModsPath);
+			return Path.Combine(EBMLPaths.MODS_PATH, relativeModsPath);
 		}
 
 	}

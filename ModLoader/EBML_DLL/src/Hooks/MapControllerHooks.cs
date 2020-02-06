@@ -8,8 +8,14 @@ using System.Reflection;
 
 namespace EBML.Hooks {
 
+    /// <summary>
+    /// Method hooks for <see cref="MapController"/>.
+    /// </summary>
     public class MapControllerHooks {
 
+        /// <summary>
+        /// <code>GenerateStartMap()</code>.
+        /// </summary>
         public static HookSystem<MapController> GenerateStartMap = new HookSystem<MapController>();
 
         [HarmonyPatch(typeof(MapController))]

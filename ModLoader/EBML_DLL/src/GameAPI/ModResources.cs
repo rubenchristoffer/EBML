@@ -10,9 +10,20 @@ using UnityEngine;
 
 namespace EBML.GameAPI {
 
+    /// <summary>
+    /// This class should be used by mods to register new
+    /// resources to the game.
+    /// </summary>
     public static class ModResources {
 
+        /// <summary>
+        /// The ID that the next modded resource object will have
+        /// </summary>
         public static int nextResourceID { get; private set; }
+
+        /// <summary>
+        /// The ID that the next modded resource production object will have
+        /// </summary>
         public static int nextResourceProductionID { get; private set; }
 
         private static Dictionary<int, Sprite> modResourceIcons = new Dictionary<int, Sprite>();
@@ -20,9 +31,11 @@ namespace EBML.GameAPI {
         private static List<int> modWarResources = new List<int>();
 
         static ModResources () {
-            nextResourceID = Singletons.RESOURCE_CONTROLLER.GetStaticResource().staticResourceDataArr.Length + 1;
-            nextResourceProductionID = 9;
+            nextResourceID = 48; // Last vanilla ID is 47
+            nextResourceProductionID = 9; // Last vanilla ID is 8
 
+            // Hook to properly initialize the usedResources Dictionary
+            // It is hard-coded to use the vanilla resources
             Hooks.WeaponCraftWindowHooks.Awake.AddPreHook((instance) => {
                 Dictionary<int, long> usedResources = instance.GetUsedResources();
 
@@ -59,6 +72,8 @@ namespace EBML.GameAPI {
                 }
             });
 
+            // This hook will properly set the image icon of the modded resource
+            // if a icon has been provided. 
             Hooks.ResourceControllerHooks.CreateResources.AddPostHook((instance) => {
                 foreach (int resourceID in modResourceIcons.Keys) {
                     Singletons.RESOURCE_CONTROLLER.GetResource(resourceID).SetIcon(modResourceIcons[resourceID]);
@@ -69,8 +84,13 @@ namespace EBML.GameAPI {
         /// <summary>
         /// Registers a new resource, which allows you to create your own kind of resource.
         /// The ID will be assigned to nextResourceID automatically.
+        /// Note that the actual resource will not be created until
+        /// <see cref="ResourceController.CreateResources"/> has been called, but this will
+        /// happen automatically.
         /// </summary>
         /// <param name="staticResourceData">Resource Information</param>
+        /// <param name="iconSprite">Optional icon. See <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+        /// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
         /// <returns>ID of the new resource</returns>
         public static int RegisterNewResource (StaticResourceData staticResourceData, Sprite iconSprite = null, bool isWarResource = false) {
             staticResourceData.id = nextResourceID;
@@ -83,9 +103,24 @@ namespace EBML.GameAPI {
             return nextResourceID++;
         }
 
-        public static int RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, Sprite iconSprite = null, bool isWarResource = true) {
+        /// <summary>
+        /// Registers a new resource by calling <see cref="RegisterNewResource(StaticResourceData, Sprite, bool)"/>. 
+        /// In addition to this, it registers the resource production data, indicating that
+        /// this is a resource that can be produced (typically grain or some kind of weapon).
+        /// The IDs will be assigned automatically.
+        /// Note that the actual resource will not be created until
+        /// <see cref="ResourceController.CreateResources"/> has been called, but this will
+        /// happen automatically.
+        /// </summary>
+        /// <param name="staticResourceData">See <see cref="StructFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/> to create this</param>
+        /// <param name="staticResourceProductionData">See <see cref="StructFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/> to create this</param>
+        /// <param name="iconSprite">Optional icon. See <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+        /// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
+        /// <returns>Tuple containing assigned ID of resource and 
+        /// ID of production resource respectively</returns>
+        public static Tuple<int, int> RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, Sprite iconSprite = null, bool isWarResource = true) {
             int resourceID = RegisterNewResource(staticResourceData, iconSprite, isWarResource);
-
+            
             staticResourceProductionData.id = nextResourceProductionID;
             staticResourceProductionData.resourse_id = resourceID;
 
@@ -96,8 +131,8 @@ namespace EBML.GameAPI {
                 modProductionResources.Add(staticResourceProductionData.price_seeding_id2);
 
             AddStaticResourceProduction(staticResourceProductionData);
-
-            return nextResourceProductionID++;
+            
+            return new Tuple<int, int> (resourceID, nextResourceProductionID++);
         }
 
         private static void AddStaticResource(StaticResourceData resource) {

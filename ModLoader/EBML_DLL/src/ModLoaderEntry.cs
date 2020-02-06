@@ -5,7 +5,6 @@ using System.IO;
 using System;
 using System.Reflection;
 using System.Linq;
-using EBML.GameAPI.Extensions;
 
 namespace EBML {
 
@@ -26,10 +25,10 @@ namespace EBML {
         /// This will be called by injector
         /// after assembly is injected.
         /// </summary>
-        private static void OnInjection () {
-            Directory.CreateDirectory(EBMLInfo.EBML_PATH);
-            Directory.CreateDirectory(EBMLInfo.MODS_PATH);
-            Directory.CreateDirectory(EBMLInfo.LOG_PATH);
+        static void OnInjection () {
+            Directory.CreateDirectory(EBMLPaths.EBML_PATH);
+            Directory.CreateDirectory(EBMLPaths.MODS_PATH);
+            Directory.CreateDirectory(EBMLPaths.LOG_PATH);
 
             ModLoader.LogToFile("", false);
             ModLoader.LogToFile("### New Session ###");
@@ -109,7 +108,7 @@ namespace EBML {
         /// This will be called by ejector
         /// before assembly is ejected.
         /// </summary>
-        private static void OnEjection () {
+        static void OnEjection () {
             ModLoader.__UninstallMethodHooks();
             MonoBehaviour.Destroy(bootstrapperGameObject);
         }

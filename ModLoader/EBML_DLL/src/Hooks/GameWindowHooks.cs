@@ -7,9 +7,22 @@ using HarmonyLib;
 
 namespace EBML.Hooks {
 
+    /// <summary>
+    /// Method hooks for <see cref="GameWindow"/>.
+    /// </summary>
 	public class GameWindowHooks {
 
-		public static HookSystem<GameWindow> Start = new HookSystem<GameWindow>();
+        /// <summary>
+        /// The Unity <code>Start()</code> method.
+        /// </summary>
+        public static HookSystem<GameWindow> Start = new HookSystem<GameWindow>();
+
+        /// <summary>
+        /// <code>OnWindowShowing(object windowData)</code>. 
+        /// This is shared by EVERY game window, so you could
+        /// hook this and check if it's the type of window you are looking
+        /// to actually hook using <see cref="GameWindow.type"/>.
+        /// </summary>
         public static HookSystem<GameWindow, object> OnWindowShowing = new HookSystem<GameWindow, object>();
 
         [HarmonyPatch(typeof(GameWindow))]

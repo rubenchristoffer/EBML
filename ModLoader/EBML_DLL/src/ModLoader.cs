@@ -26,8 +26,9 @@ namespace EBML {
 
         /// <summary>
         /// The Harmony object that handles all the method patches.
+        /// It is in object form so that it doens't crash after being injected.
         /// </summary>
-        private static Harmony harmony;
+        private static object harmony;
 
         /// <summary>
         /// The ModGUI instance responsible for rendering
@@ -62,7 +63,7 @@ namespace EBML {
         /// <param name="message">The message you want to log</param>
         /// <param name="includeTimestamp">Should the timestamp be included or not?</param>
         public static void LogToFile (string message, bool includeTimestamp = true) {
-            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLInfo.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
+            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLPaths.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
                 if (includeTimestamp)
                     outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
                 else
@@ -76,10 +77,10 @@ namespace EBML {
         /// </summary>
         internal static void __Initialize() {
             ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
-            Assembly.LoadFile(EBMLInfo.EBML_PATH + "Mono.Cecil.dll");
+            Assembly.LoadFile(EBMLPaths.EBML_PATH + "Mono.Cecil.dll");
 
             ModLoader.LogToFile("Loading assembly 0Harmony.dll");
-            Assembly.LoadFile(EBMLInfo.EBML_PATH + "0Harmony.dll");
+            Assembly.LoadFile(EBMLPaths.EBML_PATH + "0Harmony.dll");
 
             LogToFile("Creating new ModGUI");
             modGUI = new ModGUI();
@@ -133,7 +134,7 @@ namespace EBML {
         /// <returns>String array containing full paths to DLLs</returns>
         internal static string[] __GetDLLsInModsFolder() {
             return Directory
-                .EnumerateFiles(EBMLInfo.MODS_PATH, "*.*", SearchOption.AllDirectories)
+                .EnumerateFiles(EBMLPaths.MODS_PATH, "*.*", SearchOption.AllDirectories)
                 .Where(file => Path.GetExtension(file).ToLowerInvariant().Equals(".dll"))
                 .ToArray();
         }
@@ -150,7 +151,7 @@ namespace EBML {
 
             try {
                 harmony = new Harmony("ModLoader");
-                harmony.PatchAll();
+                ((Harmony)harmony).PatchAll();
             } catch (Exception e) {
                 Log(e.ToString());
             }
@@ -161,7 +162,7 @@ namespace EBML {
         /// __InstallMethodHooks function.
         /// </summary>
         internal static void __UninstallMethodHooks () {
-            harmony.UnpatchAll();
+            ((Harmony)harmony).UnpatchAll();
         }
 
         /// <summary>
@@ -171,6 +172,7 @@ namespace EBML {
         /// </summary>
         internal static void __InitializeMods() {
             loadedMods.ForEach(mod => mod.OnInit());
+            Singletons.RESOURCE_CONTROLLER.CreateResources();
             loadedMods.ForEach(mod => mod.OnPostInit());
         }
 

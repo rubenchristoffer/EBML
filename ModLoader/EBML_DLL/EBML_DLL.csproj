@@ -29,6 +29,7 @@
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\EBML.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -112,12 +113,11 @@
     <Compile Include="src\SceneMapper.cs" />
     <Compile Include="src\Singletons.cs" />
     <Compile Include="src\Mod.cs" />
-    <Compile Include="src\ModBehaviour.cs" />
     <Compile Include="src\ModInfo.cs" />
     <Compile Include="src\ModLoader.cs" />
     <Compile Include="src\ModLoaderEntry.cs" />
     <Compile Include="src\MonoBehaviourCallbacks.cs" />
-    <Compile Include="src\EBMLInfo.cs" />
+    <Compile Include="src\EBMLPaths.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
