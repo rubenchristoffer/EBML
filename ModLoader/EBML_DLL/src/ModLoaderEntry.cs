@@ -26,9 +26,9 @@ namespace EBML {
         /// after assembly is injected.
         /// </summary>
         static void OnInjection () {
-            Directory.CreateDirectory(EBMLPaths.EBML_PATH);
-            Directory.CreateDirectory(EBMLPaths.MODS_PATH);
-            Directory.CreateDirectory(EBMLPaths.LOG_PATH);
+            Directory.CreateDirectory(ModPaths.EBML_PATH);
+            Directory.CreateDirectory(ModPaths.MODS_PATH);
+            Directory.CreateDirectory(ModPaths.LOG_PATH);
 
             ModLoader.LogToFile("", false);
             ModLoader.LogToFile("### New Session ###");

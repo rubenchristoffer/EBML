@@ -88,7 +88,7 @@ namespace EBML.GameAPI {
         /// <see cref="ResourceController.CreateResources"/> has been called, but this will
         /// happen automatically.
         /// </summary>
-        /// <param name="staticResourceData">Resource Information</param>
+        /// <param name="staticResourceData">Resource information</param>
         /// <param name="iconSprite">Optional icon. See <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
         /// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
         /// <returns>ID of the new resource</returns>

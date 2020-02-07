@@ -94,8 +94,11 @@ namespace EBML.Hooks {
         /// See <see cref="HookSystem{I}.AddHooks(Action{I}, Action{I})"/>.
         /// </summary>
         public void AddHooks(System.Action<I, A1> preHook, System.Action<I, A1> postHook) {
-            if (preHook != null) AddPreHook(preHook);
-            AddPostHook(postHook);
+            if (preHook != null) 
+                AddPreHook(preHook);
+
+            if (postHook != null)
+                AddPostHook(postHook);
         }
 
         /// <summary>
@@ -143,8 +146,11 @@ namespace EBML.Hooks {
         /// See <see cref="HookSystem{I}.AddHooks(Action{I}, Action{I})"/>.
         /// </summary>
         public void AddHooks(System.Action<I, A1, A2> preHook, System.Action<I, A1, A2> postHook) {
-            if (preHook != null) AddPreHook(preHook);
-            AddPostHook(postHook);
+            if (preHook != null)
+                AddPreHook(preHook);
+
+            if (postHook != null)
+                AddPostHook(postHook);
         }
 
         /// <summary>
@@ -159,6 +165,59 @@ namespace EBML.Hooks {
         /// </summary>
         public void InvokePostHooks(I __instance, A1 argument1, A2 argument2) {
             postHooks.ForEach(hook => hook.Invoke(__instance, argument1, argument2));
+        }
+
+    }
+
+    /// <summary>
+    /// Same as <see cref="HookSystem{I}"/>, but with three arguments.
+    /// </summary>
+    /// <typeparam name="I">The instance type.</typeparam>
+    /// <typeparam name="A1">The first argument.</typeparam>
+    /// <typeparam name="A2">The second argument.</typeparam>
+    /// <typeparam name="A3">The third argument.</typeparam>
+    public class HookSystem<I, A1, A2, A3> {
+
+        private List<System.Action<I, A1, A2, A3>> preHooks = new List<Action<I, A1, A2, A3>>();
+        private List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>>();
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
+        /// </summary>
+        public void AddPreHook(System.Action<I, A1, A2, A3> preHook) {
+            this.preHooks.Add(preHook);
+        }
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.AddPostHook(Action{I})"/>.
+        /// </summary>
+        public void AddPostHook(System.Action<I, A1, A2, A3> postHook) {
+            this.postHooks.Add(postHook);
+        }
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.AddHooks(Action{I}, Action{I})"/>.
+        /// </summary>
+        public void AddHooks(System.Action<I, A1, A2, A3> preHook, System.Action<I, A1, A2, A3> postHook) {
+            if (preHook != null)
+                AddPreHook(preHook);
+
+            if (postHook != null)
+                AddPostHook(postHook);
+        }
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.InvokePreHooks(I)"/>
+        /// </summary>
+        public void InvokePreHooks(I __instance, A1 argument1, A2 argument2, A3 argument3) {
+            preHooks.ForEach(hook => hook.Invoke(__instance, argument1, argument2, argument3));
+        }
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.InvokePostHooks(I)"/>
+        /// </summary>
+        public void InvokePostHooks(I __instance, A1 argument1, A2 argument2, A3 argument3) {
+            postHooks.ForEach(hook => hook.Invoke(__instance, argument1, argument2, argument3));
         }
 
     }

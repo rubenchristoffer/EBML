@@ -9,7 +9,7 @@ using UnityEngine;
 namespace EBML.GameAPI.Extensions {
 
 	/// <summary>
-	/// Extension methods for WeaponInvestWindow.
+	/// Extension methods for <see cref="WeaponInvestWindow"/>.
 	/// </summary>
 	public static class WeaponInvestWindowExtensions {
 

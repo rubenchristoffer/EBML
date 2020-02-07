@@ -63,7 +63,7 @@ namespace EBML {
         /// <param name="message">The message you want to log</param>
         /// <param name="includeTimestamp">Should the timestamp be included or not?</param>
         public static void LogToFile (string message, bool includeTimestamp = true) {
-            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(EBMLPaths.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
+            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(ModPaths.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
                 if (includeTimestamp)
                     outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
                 else
@@ -77,10 +77,10 @@ namespace EBML {
         /// </summary>
         internal static void __Initialize() {
             ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
-            Assembly.LoadFile(EBMLPaths.EBML_PATH + "Mono.Cecil.dll");
+            Assembly.LoadFile(ModPaths.EBML_PATH + "Mono.Cecil.dll");
 
             ModLoader.LogToFile("Loading assembly 0Harmony.dll");
-            Assembly.LoadFile(EBMLPaths.EBML_PATH + "0Harmony.dll");
+            Assembly.LoadFile(ModPaths.EBML_PATH + "0Harmony.dll");
 
             LogToFile("Creating new ModGUI");
             modGUI = new ModGUI();
@@ -134,7 +134,7 @@ namespace EBML {
         /// <returns>String array containing full paths to DLLs</returns>
         internal static string[] __GetDLLsInModsFolder() {
             return Directory
-                .EnumerateFiles(EBMLPaths.MODS_PATH, "*.*", SearchOption.AllDirectories)
+                .EnumerateFiles(ModPaths.MODS_PATH, "*.*", SearchOption.AllDirectories)
                 .Where(file => Path.GetExtension(file).ToLowerInvariant().Equals(".dll"))
                 .ToArray();
         }

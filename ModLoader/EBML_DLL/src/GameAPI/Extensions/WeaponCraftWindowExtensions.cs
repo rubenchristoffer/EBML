@@ -8,7 +8,7 @@ using System.Reflection;
 namespace EBML.GameAPI.Extensions {
 
 	/// <summary>
-	/// Extension methods for WeaponCraftWindow.
+	/// Extension methods for <see cref="WeaponCraftWindow"/>.
 	/// </summary>
 	public static class WeaponCraftWindowExtensions {
 

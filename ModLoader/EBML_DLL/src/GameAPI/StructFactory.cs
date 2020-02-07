@@ -66,6 +66,7 @@ namespace EBML.GameAPI {
             
             staticResourceProductionData.id = -1;
             staticResourceProductionData.resourse_id = -1;
+
             staticResourceProductionData.work_amount = workAmount;
             staticResourceProductionData.autoseeding_season = autoseedingSeason;
             staticResourceProductionData.turn_maturation = turnMaturation;
@@ -75,6 +76,34 @@ namespace EBML.GameAPI {
             staticResourceProductionData.price_seeding_id2_amount = priceSeedingID2Amount;
 
             return staticResourceProductionData;
+        }
+
+        /// <summary>
+        /// See <see cref="CreateStaticResourceBuildingsData(string, string, string, string, string, int, int, float)"/>.
+        /// </summary>
+        public static StaticResourceBuildingsData CreateStaticResourceBuildingsData(string name1, string name2, string name3, string name4, string description, int resourceID, UserProperty.Type buildingType, float incomeBonus = 1f) {
+            return CreateStaticResourceBuildingsData(name1, name2, name3, name4, description, resourceID, (int)buildingType, incomeBonus);
+        }
+
+        public static StaticResourceBuildingsData CreateStaticResourceBuildingsData (string name1, string name2, string name3, string name4, string description, int resourceID, int buildingType, float incomeBonus = 1f) {
+            StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData();
+
+            staticResourceBuildingsData.id = -1;
+            staticResourceBuildingsData.id_ico_lvl1 = -1;
+            staticResourceBuildingsData.id_ico_lvl2 = -1;
+            staticResourceBuildingsData.id_ico_lvl3 = -1;
+            staticResourceBuildingsData.id_ico_lvl4 = -1;
+
+            staticResourceBuildingsData.name1 = name1;
+            staticResourceBuildingsData.name2 = name2;
+            staticResourceBuildingsData.name3 = name3;
+            staticResourceBuildingsData.name4 = name4;
+            staticResourceBuildingsData.des = description;
+            staticResourceBuildingsData.resourse_id = resourceID;
+            staticResourceBuildingsData.income_bonus = incomeBonus;
+            staticResourceBuildingsData.building_type = buildingType;
+
+            return staticResourceBuildingsData;
         }
 
     }

@@ -10,7 +10,7 @@ namespace EBML {
     /// <summary>
     /// This class contains file paths for EBML. 
     /// </summary>
-    public static class EBMLPaths {
+    public static class ModPaths {
 
         /// <summary>
         /// The path to the actual game executable.
@@ -32,7 +32,7 @@ namespace EBML {
         /// </summary>
         public static string MODS_PATH { get; private set; }
 
-        static EBMLPaths () {
+        static ModPaths () {
             GAME_PATH = new DirectoryInfo(@".\").FullName;
             EBML_PATH = GAME_PATH + @"EBML\";
             LOG_PATH = EBML_PATH + @"DLL_Logs\";

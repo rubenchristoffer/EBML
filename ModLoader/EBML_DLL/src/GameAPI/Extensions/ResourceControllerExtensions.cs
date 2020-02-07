@@ -9,8 +9,8 @@ using Static;
 namespace EBML.GameAPI.Extensions {
 
     /// <summary>
-    /// Extension methods for ResourceController.
-    /// </summary>
+	/// Extension methods for <see cref="ResourceController"/>.
+	/// </summary>
 	public static class ResourceControllerExtensions {
 
         private static Type type = typeof(ResourceController);

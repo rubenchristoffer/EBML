@@ -8,7 +8,7 @@ using UnityEngine;
 namespace EBML.GameAPI.Extensions {
 
 	/// <summary>
-	/// Extension methods for Resource.
+	/// Extension methods for <see cref="Resource"/>.
 	/// </summary>
 	public static class ResourceExtensions {
 
