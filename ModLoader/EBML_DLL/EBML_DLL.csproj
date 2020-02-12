@@ -113,6 +113,7 @@
     <Compile Include="src\Hooks\ResourceControllerHooks.cs" />
     <Compile Include="src\GameAPI\ModResources.cs" />
     <Compile Include="src\Hooks\ReturnValue.cs" />
+    <Compile Include="src\Hooks\UnityResourcesHooks.cs" />
     <Compile Include="src\Hooks\WeaponCraftWindowHooks.cs" />
     <Compile Include="src\ModFiles.cs" />
     <Compile Include="src\SceneMapper.cs" />

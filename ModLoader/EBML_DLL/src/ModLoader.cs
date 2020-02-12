@@ -159,9 +159,11 @@ namespace EBML {
 
         /// <summary>
         /// Uninstalls the method hooks installed by the 
-        /// __InstallMethodHooks function.
+        /// __InstallMethodHooks function and also the registered
+        /// manual hooks.
         /// </summary>
         internal static void __UninstallMethodHooks () {
+            Hooks.ManualHooks.UnpatchAll();
             ((Harmony)harmony).UnpatchAll();
         }
 
