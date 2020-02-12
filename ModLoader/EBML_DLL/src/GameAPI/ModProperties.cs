@@ -25,7 +25,18 @@ namespace EBML.GameAPI {
         static ModProperties () {
             nextResourceBuildingID = 42;
 
+            Hooks.PropertyHooks.GetIcon.skipOriginalMethod = true;
+
             // TODO: Create sprite init hook
+            Hooks.PropertyHooks.GetIcon.AddPreHook((instance, returnValue) => {
+                ModLoader.Log("GetIcon hook here");
+
+                if (modPropertiesIcons.ContainsKey (instance.id)) {
+                    returnValue.SetValue(modPropertiesIcons[instance.id].Item1);
+                }
+
+                ModLoader.Log("Is return null: " + returnValue.isSet);
+            });
         }
 
         /// <summary>

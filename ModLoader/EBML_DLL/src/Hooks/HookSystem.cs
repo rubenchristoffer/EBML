@@ -16,6 +16,12 @@ namespace EBML.Hooks {
         private List<System.Action<I>> postHooks = new List<Action<I>>();
 
         /// <summary>
+        /// Setting this to true will skip the original
+        /// method this hooks is connected to 
+        /// </summary>
+        public bool skipOriginalMethod = false;
+
+        /// <summary>
         /// Adds a pre hook. This means that the Action will be called
         /// before the original method body code.
         /// </summary>
@@ -75,6 +81,11 @@ namespace EBML.Hooks {
 
         private List<System.Action<I, A1>> preHooks = new List<Action<I, A1>>();
         private List<System.Action<I, A1>> postHooks = new List<Action<I, A1>>();
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.skipOriginalMethod"/>
+        /// </summary>
+        public bool skipOriginalMethod = false;
 
         /// <summary>
         /// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
@@ -180,6 +191,11 @@ namespace EBML.Hooks {
 
         private List<System.Action<I, A1, A2, A3>> preHooks = new List<Action<I, A1, A2, A3>>();
         private List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>>();
+
+        /// <summary>
+        /// See <see cref="HookSystem{I}.skipOriginalMethod"/>
+        /// </summary>
+        public bool skipOriginalMethod = false;
 
         /// <summary>
         /// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.

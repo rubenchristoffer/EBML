@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using Static;
+using UnityEngine;
 
 namespace EBML.Hooks {
 
@@ -15,22 +16,28 @@ namespace EBML.Hooks {
 
         /// <summary>
         /// Constructor <code>Property()</code>.
+        /// NOTE: There is no post hooks for this method
+        /// since return value is return before it will
+        /// get there.
         /// </summary>
-        public static HookSystem<StaticResourceBuildingsData, Region, float> Constructor1 = new HookSystem<StaticResourceBuildingsData, Region, float>();
+        public static HookSystem<Property, ReturnValue<Sprite>> GetIcon = new HookSystem<Property, ReturnValue<Sprite>>();
 
         [HarmonyPatch(typeof(Property))]
         private class Patch {
 
-            [HarmonyPatch("Property")]
+            [HarmonyPatch("GetIcon")]
             [HarmonyPrefix]
-            static void CreateConstructor1Pre(StaticResourceBuildingsData buildingData, Region region, float actualPriceBonus) {
-                Constructor1.InvokePreHooks(buildingData, region, actualPriceBonus);
-            }
+            static bool GetIconPre(Property __instance, ref Sprite __result) {
+                ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
+                GetIcon.InvokePreHooks(__instance, returnValue);
 
-            [HarmonyPatch("Property")]
-            [HarmonyPostfix]
-            static void CreateConstructor1Post(StaticResourceBuildingsData buildingData, Region region, float actualPriceBonus) {
-                Constructor1.InvokePostHooks(buildingData, region, actualPriceBonus);
+                ModLoader.Log("After invoke: " + returnValue.isSet);
+                ModLoader.Log("Is null: " + (returnValue.value == null));
+
+                if (returnValue.isSet)
+                    __result = returnValue.value;
+
+                return !GetIcon.skipOriginalMethod;
             }
 
         }
