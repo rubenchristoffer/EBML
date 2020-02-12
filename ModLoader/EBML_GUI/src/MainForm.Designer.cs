@@ -63,9 +63,9 @@
 			this.autoInjectCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.autoInjectCheckbox.Location = new System.Drawing.Point(224, 33);
 			this.autoInjectCheckbox.Name = "autoInjectCheckbox";
-			this.autoInjectCheckbox.Size = new System.Drawing.Size(299, 24);
+			this.autoInjectCheckbox.Size = new System.Drawing.Size(237, 24);
 			this.autoInjectCheckbox.TabIndex = 3;
-			this.autoInjectCheckbox.Text = "Auto Inject ModLoader When Possible";
+			this.autoInjectCheckbox.Text = "Try Auto-Injecting ModLoader";
 			this.autoInjectCheckbox.UseVisualStyleBackColor = true;
 			// 
 			// button1
