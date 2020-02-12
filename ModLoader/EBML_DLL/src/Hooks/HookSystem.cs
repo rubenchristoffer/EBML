@@ -7,19 +7,26 @@ using System.Threading.Tasks;
 namespace EBML.Hooks {
 
     /// <summary>
-    /// Hook System that registers pre and post hooks.
+    /// The base class for all HookSystem classes.
     /// </summary>
-    /// <typeparam name="I">The Instance type.</typeparam>
-    public class HookSystem<I> {
-
-        private List<System.Action<I>> preHooks = new List<Action<I>>();
-        private List<System.Action<I>> postHooks = new List<Action<I>>();
+    public abstract class HookSystemBase<I> {
 
         /// <summary>
         /// Setting this to true will skip the original
         /// method this hooks is connected to 
         /// </summary>
         public bool skipOriginalMethod = false;
+
+    }
+
+    /// <summary>
+    /// Hook System that registers pre and post hooks.
+    /// </summary>
+    /// <typeparam name="I">The Instance type.</typeparam>
+    public class HookSystem<I> : HookSystemBase<I> {
+
+        private List<System.Action<I>> preHooks = new List<Action<I>>();
+        private List<System.Action<I>> postHooks = new List<Action<I>>();
 
         /// <summary>
         /// Adds a pre hook. This means that the Action will be called
@@ -77,15 +84,10 @@ namespace EBML.Hooks {
     /// </summary>
     /// <typeparam name="I">The instance type.</typeparam>
     /// <typeparam name="A1">The argument.</typeparam>
-    public class HookSystem<I, A1> {
+    public class HookSystem<I, A1> : HookSystemBase<I> {
 
         private List<System.Action<I, A1>> preHooks = new List<Action<I, A1>>();
         private List<System.Action<I, A1>> postHooks = new List<Action<I, A1>>();
-
-        /// <summary>
-        /// See <see cref="HookSystem{I}.skipOriginalMethod"/>
-        /// </summary>
-        public bool skipOriginalMethod = false;
 
         /// <summary>
         /// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
@@ -134,7 +136,7 @@ namespace EBML.Hooks {
     /// <typeparam name="I">The instance type.</typeparam>
     /// <typeparam name="A1">The first argument.</typeparam>
     /// <typeparam name="A2">The second argument.</typeparam>
-    public class HookSystem<I, A1, A2> {
+    public class HookSystem<I, A1, A2> : HookSystemBase<I> {
 
         private List<System.Action<I, A1, A2>> preHooks = new List<Action<I, A1, A2>>();
         private List<System.Action<I, A1, A2>> postHooks = new List<Action<I, A1, A2>>();
@@ -187,7 +189,7 @@ namespace EBML.Hooks {
     /// <typeparam name="A1">The first argument.</typeparam>
     /// <typeparam name="A2">The second argument.</typeparam>
     /// <typeparam name="A3">The third argument.</typeparam>
-    public class HookSystem<I, A1, A2, A3> {
+    public class HookSystem<I, A1, A2, A3> : HookSystemBase<I> {
 
         private List<System.Action<I, A1, A2, A3>> preHooks = new List<Action<I, A1, A2, A3>>();
         private List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>>();
