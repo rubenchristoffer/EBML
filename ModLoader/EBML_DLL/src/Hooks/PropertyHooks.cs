@@ -31,9 +31,6 @@ namespace EBML.Hooks {
                 ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
                 GetIcon.InvokePreHooks(__instance, returnValue);
 
-                ModLoader.Log("After invoke: " + returnValue.isSet);
-                ModLoader.Log("Is null: " + (returnValue.value == null));
-
                 if (returnValue.isSet)
                     __result = returnValue.value;
 
