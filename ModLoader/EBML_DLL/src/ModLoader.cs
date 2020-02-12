@@ -152,6 +152,8 @@ namespace EBML {
             try {
                 harmony = new Harmony("ModLoader");
                 ((Harmony)harmony).PatchAll();
+
+                Hooks.ManualHooks.InvokeInternalHooksEvent();
             } catch (Exception e) {
                 Log(e.ToString());
             }

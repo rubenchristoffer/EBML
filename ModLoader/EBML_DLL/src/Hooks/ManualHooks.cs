@@ -21,6 +21,14 @@ namespace EBML.Hooks {
 
 		private static List<Harmony> harmonyList = new List<Harmony>();
 
+		internal delegate void HooksDelegate();
+		internal static event HooksDelegate createInternalHooksEvent;
+
+		internal static void InvokeInternalHooksEvent () {
+			if (createInternalHooksEvent != null)
+				createInternalHooksEvent();
+		}
+
 		public static Harmony GetHookReference (int id) {
 			return harmonyList.FirstOrDefault(h => h.Id.Equals("ManualHook" + id));
 		}
