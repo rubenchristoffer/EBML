@@ -176,7 +176,9 @@ namespace EBML_GUI {
                 }
 
                 injected = injectorProcessOutput.StartsWith("EBML.dll");
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                Log("Something went wrong with injector: " + e.ToString());
+            }
         }
 
         private void injectorWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
