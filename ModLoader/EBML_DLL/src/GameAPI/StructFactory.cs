@@ -85,6 +85,20 @@ namespace EBML.GameAPI {
             return CreateStaticResourceBuildingsData(name1, name2, name3, name4, description, resourceID, (int)buildingType, incomeBonus);
         }
 
+        /// <summary>
+        /// Creates StaticResourceBuildingsData with invalid ID (-1).
+        /// This is used by <see cref="PropertyController"/> when creating
+        /// new properties.
+        /// </summary>
+        /// <param name="name1">Name of lowest tier building type</param>
+        /// <param name="name2">Name of second tier building type</param>
+        /// <param name="name3">Name of third tier building type</param>
+        /// <param name="name4">Name of highest tier building type</param>
+        /// <param name="description">Description of building type</param>
+        /// <param name="resourceID">The resource that this building will produce</param>
+        /// <param name="buildingType">What type of building this is. Luxury type is bound to specific regions.</param>
+        /// <param name="incomeBonus">Bonus that (probably) influences how many resources you get (needs verification)</param>
+        /// <returns></returns>
         public static StaticResourceBuildingsData CreateStaticResourceBuildingsData (string name1, string name2, string name3, string name4, string description, int resourceID, int buildingType, float incomeBonus = 1f) {
             StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData();
 
