@@ -17,6 +17,19 @@ namespace EBML.Hooks {
         /// </summary>
         public bool skipOriginalMethod = false;
 
+        /// <summary>
+        /// This method will get the <see cref="HookSystemBase{I}.skipOriginalMethod"/>
+        /// value and reset it if it is true.
+        /// </summary>
+        /// <returns>Value of <see cref="HookSystemBase{I}.skipOriginalMethod"/> before reset</returns>
+        public bool ResetOriginalMethodSkip () {
+            if (!skipOriginalMethod)
+                return false;
+
+            skipOriginalMethod = false;
+            return true;
+        }
+
     }
 
     /// <summary>

@@ -29,13 +29,20 @@ namespace EBML.GameAPI {
 
             // TODO: Create sprite init hook
             Hooks.PropertyHooks.GetIcon.AddPreHook((instance, returnValue) => {
-                ModLoader.Log("GetIcon hook here");
-
                 if (modPropertiesIcons.ContainsKey (instance.id)) {
-                    returnValue.SetValue(modPropertiesIcons[instance.id].Item1);
-                }
+                    Sprite spriteToSet;
 
-                ModLoader.Log("Is return null: " + returnValue.isSet);
+                    if (instance.price <= 10000f)
+                        spriteToSet = modPropertiesIcons[instance.id].Item1;
+                    else if (instance.price <= 100000f)
+                        spriteToSet = modPropertiesIcons[instance.id].Item2;
+                    else if (instance.price <= 1000000f)
+                        spriteToSet = modPropertiesIcons[instance.id].Item3;
+                    else
+                        spriteToSet = modPropertiesIcons[instance.id].Item4;
+
+                    returnValue.SetValue(spriteToSet);
+                }
             });
         }
 

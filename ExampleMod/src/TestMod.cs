@@ -36,8 +36,6 @@ namespace MyMod {
                 ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png")))
             );
 
-            Singletons.PROPERTY_CONTROLLER.GetStaticResourceBuildings().staticResourceBuildingsDataArr = new Static.StaticResourceBuildingsData[0];
-
             ModProperties.RegisterNewPropertyType(StructFactory.CreateStaticResourceBuildingsData(
                 "n1", "n2", "n3", "n4", "custom property", id, Property.Type.Production),
                 ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png"))));

@@ -37,7 +37,8 @@ namespace EBML.Hooks {
                 if (returnValue.isSet)
                     __result = returnValue.value;
 
-                return !GetIcon.skipOriginalMethod;
+                // TODO: Check if this actually is necessary
+                return GetIcon.ResetOriginalMethodSkip();
             }
 
         }
