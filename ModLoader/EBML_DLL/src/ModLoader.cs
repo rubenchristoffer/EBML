@@ -154,6 +154,7 @@ namespace EBML {
                 ((Harmony)harmony).PatchAll();
 
                 Hooks.ManualHooks.InvokeInternalHooksEvent();
+                Hooks.UnityResourcesHooks.CreateLoadHook();
             } catch (Exception e) {
                 Log(e.ToString());
             }

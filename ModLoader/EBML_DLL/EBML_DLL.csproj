@@ -108,6 +108,7 @@
     <Compile Include="src\Hooks\GameWindowHooks.cs" />
     <Compile Include="src\Hooks\HookSystem.cs" />
     <Compile Include="src\Hooks\LoaderHooks.cs" />
+    <Compile Include="src\Hooks\ManualHooks.cs" />
     <Compile Include="src\Hooks\MapControllerHooks.cs" />
     <Compile Include="src\Hooks\PropertyHooks.cs" />
     <Compile Include="src\Hooks\ResourceControllerHooks.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
+using System.Reflection;
 
 namespace EBML.Hooks {
 
@@ -15,23 +16,24 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<ReturnValue<UnityEngine.Object>, string, Type> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string, Type>();
 
-		[HarmonyPatch(typeof(Resources))]
-		private class Patch {
+		static UnityResourcesHooks () {
+			ManualHooks.createInternalHooksEvent += CreateLoadHook;
+		}
 
-			[HarmonyPatch("Load")]
-			[HarmonyPrefix]
-			static bool LoadPre<T> (ref UnityEngine.Object __result, ref string path) where T : UnityEngine.Object {
-				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>();
-				Load.InvokePreHooks(returnValue, path, null);
+		public static void CreateLoadHook() {
+			ModLoader.LogToFile("### Manual hook here!!!");
 
-				if (returnValue.isSet)
-					__result = returnValue.value;
+			ManualHooks.CreateAndRegisterHook(harmony => {
+				MethodInfo methodInfo = typeof(Resources).GetMethods()
+				.FirstOrDefault(m => m.Name.Equals("Load") && m.IsGenericMethod);
+				MethodInfo spriteHookInfo = typeof(UnityResourcesHooks).GetMethod("LoadSprite", BindingFlags.NonPublic | BindingFlags.Static);
 
-				// TODO: Check if this actually is necessary
-				return Load.ResetOriginalMethodSkip();
-			}
+				harmony.Patch(methodInfo.MakeGenericMethod(typeof(UnityEngine.Sprite)), new HarmonyMethod(spriteHookInfo));
+			});
+		}
 
-
+		private static void LoadSprite (ref Sprite __result, ref string path) {
+			ModLoader.LogToFile(String.Format("Loaded sprite: {0}", path));
 		}
 
 	}
