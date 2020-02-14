@@ -97,8 +97,9 @@ namespace EBML.GameAPI {
             AddStaticResource(staticResourceData);
             modWarResources.Add(nextResourceID);
 
-            if (iconSprite != null)
+            if (iconSprite != null) {
                 modResourceIcons.Add(nextResourceID, iconSprite);
+            }
 
             return nextResourceID++;
         }

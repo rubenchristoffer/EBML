@@ -10,13 +10,14 @@ namespace EBML.GameAPI {
 
 		public static int currentID { get; private set; }
 
-		private static Dictionary<int, UnityEngine.Object> assets = new Dictionary<int, UnityEngine.Object>();
+		private static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset>();
 		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
-		public static int AddAsset(UnityEngine.Object obj) {
-			assets.Add(currentID, obj);
+		public static ModAsset AddAsset(UnityEngine.Object asset) {
+			ModAsset modAsset = new ModAsset(currentID, asset);
+			assets.Add(currentID, modAsset);
 
-			return currentID++;
+			return modAsset;
 		}
 
 		public static void AddResourceMapping (string resourceURL, int assetID) {
@@ -27,12 +28,12 @@ namespace EBML.GameAPI {
 			return resourceToAssetMappings.ContainsKey(resourceURL);
 		}
 
-		public static T GetAsset<T> (int assetID) where T : UnityEngine.Object {
-			return (T) assets[assetID];
+		public static ModAsset GetAsset (int assetID) {
+			return assets[assetID];
 		}
 
-		public static T GetAssetWithMapping<T> (string resourceURL) where T : UnityEngine.Object {
-			return GetAsset<T>(resourceToAssetMappings[resourceURL]);
+		public static ModAsset GetAssetWithMapping (string resourceURL) {
+			return GetAsset(resourceToAssetMappings[resourceURL]);
 		}
 
 	}
