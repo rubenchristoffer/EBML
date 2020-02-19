@@ -11,7 +11,7 @@ namespace EBML.GameAPI {
 		public int id { get; private set; }
 		public UnityEngine.Object asset { get; private set; }
 
-		public ModAsset(int id, UnityEngine.Object asset) {
+		internal ModAsset(int id, UnityEngine.Object asset) {
 			this.id = id;
 			this.asset = asset;
 		}

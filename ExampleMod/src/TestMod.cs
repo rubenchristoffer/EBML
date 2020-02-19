@@ -26,19 +26,30 @@ namespace MyMod {
 
             int id = ModResources.RegisterNewResource(
                 StructFactory.CreateStaticResourceData("Uranium", Resource.ResourceType.Luxury, 5, 0),
-                ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\uranium.png"))),
+                ModAssets.CreateAsset (ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\uranium.png")))),
                 true
             );
+
+            ModAsset atomBomb = ModAssets.CreateAsset(ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png"))));
 
             Tuple<int, int> ids = ModResources.RegisterNewProductionResource(
                 StructFactory.CreateStaticResourceData("Atom Bomb", Resource.ResourceType.Weapon, 1000000, 0),
                 StructFactory.CreateStaticResourceProductionData (5, Turn.Season.None, 0, id, 5, 0, 0),
-                ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png")))
+                atomBomb
             );
 
             ModProperties.RegisterNewPropertyType(StructFactory.CreateStaticResourceBuildingsData(
                 "Small uranium mine", "Medium uranium mine", "Large uranium mine", "Huge uranium mine", "Modded property", id, Property.Type.Production),
-                ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png"))));
+                atomBomb.GetAs<UnityEngine.Sprite>());
+
+            UnityEngine.Sprite test = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/" + id);
+            UnityEngine.Sprite test2 = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/49");
+            ModLoader.Log("Null: " + (test == null));
+            ModLoader.Log("Null2: " + (test2 == null));
+
+            ModLoader.Log(test.name);
+            ModLoader.Log(test.texture.width + "W");
+            ModLoader.Log(test.texture.GetPixel(50, 50) + "P");
         }
 
         public override void OnPostInit() {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EBML.Hooks;
 
 namespace EBML.GameAPI {
 
@@ -13,9 +14,19 @@ namespace EBML.GameAPI {
 		private static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset>();
 		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
-		public static ModAsset AddAsset(UnityEngine.Object asset) {
+		static ModAssets () {
+			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnSprite, path) => {
+				if (DoesMappingExist(path)) {
+					ModLoader.Log(path);
+					returnSprite.SetValue(GetAssetWithMapping(path).GetAs<UnityEngine.Sprite>());
+				}
+			});
+		}
+
+		public static ModAsset CreateAsset(UnityEngine.Object asset) {
 			ModAsset modAsset = new ModAsset(currentID, asset);
 			assets.Add(currentID, modAsset);
+			currentID++;
 
 			return modAsset;
 		}

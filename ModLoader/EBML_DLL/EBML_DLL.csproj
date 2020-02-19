@@ -100,6 +100,8 @@
     <Compile Include="src\GameAPI\Extensions\ResourceExtensions.cs" />
     <Compile Include="src\GameAPI\Extensions\WeaponCraftWindowExtensions.cs" />
     <Compile Include="src\GameAPI\Extensions\WeaponInvestWindowExtensions.cs" />
+    <Compile Include="src\GameAPI\ModAsset.cs" />
+    <Compile Include="src\GameAPI\ModAssets.cs" />
     <Compile Include="src\GameAPI\ModProperties.cs" />
     <Compile Include="src\GameAPI\StructFactory.cs" />
     <Compile Include="src\GUI\GUIBox.cs" />

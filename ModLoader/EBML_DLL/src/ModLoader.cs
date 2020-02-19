@@ -177,7 +177,6 @@ namespace EBML {
         /// </summary>
         internal static void __InitializeMods() {
             loadedMods.ForEach(mod => mod.OnInit());
-            Singletons.RESOURCE_CONTROLLER.CreateResources();
             loadedMods.ForEach(mod => mod.OnPostInit());
         }
 
