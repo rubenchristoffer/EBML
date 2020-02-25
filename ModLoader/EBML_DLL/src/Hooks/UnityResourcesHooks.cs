@@ -14,26 +14,65 @@ namespace EBML.Hooks {
 		/// <summary>
 		/// The <code>Load(string path)</code> method.
 		/// </summary>
-		public static HookSystem<ReturnValue<UnityEngine.Sprite>, string> LoadSprite = new HookSystem<ReturnValue<UnityEngine.Sprite>, string>();
+		public static HookSystem<ReturnValue<UnityEngine.Object>, string> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string>();
+
+		public static HookSystem<ReturnValue<Sprite>, string> LoadSprite = new HookSystem<ReturnValue<Sprite>, string>();
 
 		internal static void CreateLoadHook() {
-			ManualHooks.CreateAndRegisterHook(harmony => {
+			/*ManualHooks.CreateAndRegisterHook(harmony => {
 				MethodInfo methodInfo = typeof(Resources).GetMethods()
-				.FirstOrDefault(m => m.Name.Equals("Load") && m.IsGenericMethod);
-				MethodInfo spriteHookInfo = typeof(UnityResourcesHooks).GetMethod("LoadSpritePre", BindingFlags.NonPublic | BindingFlags.Static);
-
-				harmony.Patch(methodInfo.MakeGenericMethod(typeof(UnityEngine.Sprite)), new HarmonyMethod(spriteHookInfo));
-			});
+				.FirstOrDefault(m => m.Name.Equals("Load") && !m.IsGenericMethod && m.CustomAttributes.Count() == 0);
+				MethodInfo hookInfo = typeof(UnityResourcesHooks).GetMethod("LoadPre", BindingFlags.NonPublic | BindingFlags.Static);
+				
+				harmony.Patch(methodInfo, new HarmonyMethod(hookInfo));
+			});*/
 		}
 
-		static void LoadSpritePre (ref Sprite __result, ref string path) {
-			ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
-			LoadSprite.InvokePreHooks(returnValue, path);
+		[HarmonyPatch]
+		private class Patch_Load {
 
-			if (returnValue.isSet) {
-				// Seems to work here at least
-				__result = returnValue.value;
+			static MethodInfo TargetMethod () {
+				return typeof(Resources).GetMethods()
+				.FirstOrDefault(m => m.Name.Equals("Load") && !m.IsGenericMethod && m.CustomAttributes.Count() == 0);
 			}
+
+			[HarmonyPrefix]
+			static bool LoadPre(ref UnityEngine.Object __result, ref string path) {
+				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>();
+				Load.InvokePreHooks(returnValue, path);
+
+				if (returnValue.isSet) {
+					ModLoader.Log(path + ":/" + (returnValue.value == null));
+					__result = returnValue.value;
+				}
+
+				return Load.ResetOriginalMethodSkip();
+			}
+
+		}
+
+		[HarmonyPatch]
+		private class Patch_LoadSprite {
+
+			static MethodInfo TargetMethod() {
+				return typeof(Resources).GetMethods()
+				.FirstOrDefault(m => m.Name.Equals("Load") && m.IsGenericMethod && m.CustomAttributes.Count() == 0)
+				.MakeGenericMethod (typeof(Sprite));
+			}
+
+			[HarmonyPrefix]
+			static bool LoadPre(ref Sprite __result, ref string path) {
+				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
+				LoadSprite.InvokePreHooks(returnValue, path);
+
+				if (returnValue.isSet) {
+					ModLoader.Log(path + ":sprite/" + (returnValue.value == null));
+					__result = returnValue.value;
+				}
+
+				return Load.ResetOriginalMethodSkip();
+			}
+
 		}
 
 	}

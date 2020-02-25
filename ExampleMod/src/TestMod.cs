@@ -42,14 +42,13 @@ namespace MyMod {
                 "Small uranium mine", "Medium uranium mine", "Large uranium mine", "Huge uranium mine", "Modded property", id, Property.Type.Production),
                 atomBomb.GetAs<UnityEngine.Sprite>());
 
-            UnityEngine.Sprite test = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/" + id);
-            UnityEngine.Sprite test2 = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/49");
+            UnityEngine.Object test = UnityEngine.Resources.Load("ResourceIcons/" + id);
+            UnityEngine.Object test2 = UnityEngine.Resources.Load("ResourceIcons/49");
             ModLoader.Log("Null: " + (test == null));
             ModLoader.Log("Null2: " + (test2 == null));
 
-            ModLoader.Log(test.name);
-            ModLoader.Log(test.texture.width + "W");
-            ModLoader.Log(test.texture.GetPixel(50, 50) + "P");
+            UnityEngine.Sprite test3 = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/49");
+            ModLoader.Log("Null3: " + (test3 == null));
         }
 
         public override void OnPostInit() {

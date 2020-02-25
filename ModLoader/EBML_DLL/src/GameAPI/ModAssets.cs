@@ -15,12 +15,14 @@ namespace EBML.GameAPI {
 		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
 		static ModAssets () {
-			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnSprite, path) => {
+			Hooks.UnityResourcesHooks.Load.AddPreHook((returnObj, path) => {
 				if (DoesMappingExist(path)) {
 					ModLoader.Log(path);
-					returnSprite.SetValue(GetAssetWithMapping(path).GetAs<UnityEngine.Sprite>());
+					returnObj.SetValue(GetAssetWithMapping(path).asset);
 				}
 			});
+
+			// TODO: Create Sprite hook here
 		}
 
 		public static ModAsset CreateAsset(UnityEngine.Object asset) {

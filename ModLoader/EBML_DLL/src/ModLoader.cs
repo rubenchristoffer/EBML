@@ -26,7 +26,7 @@ namespace EBML {
 
         /// <summary>
         /// The Harmony object that handles all the method patches.
-        /// It is in object form so that it doens't crash after being injected.
+        /// It is in object form so that it doesn't crash after being injected.
         /// </summary>
         private static object harmony;
 

@@ -20,8 +20,6 @@ namespace EBML {
 		/// <param name="texture">The texture you want to create sprite from</param>
 		/// <returns>New sprite</returns>
 		public static Sprite CreateSprite (Texture2D texture) {
-			ModLoader.LogToFile("Is texture null: " + (texture == null));
-
 			return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
 		}
 
