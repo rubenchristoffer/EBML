@@ -23,6 +23,12 @@ namespace EBML.GameAPI {
 			});
 
 			// TODO: Create Sprite hook here
+			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnObj, path) => {
+				if (DoesMappingExist(path)) {
+					ModLoader.Log(path);
+					returnObj.SetValue(GetAssetWithMapping(path).GetAs<UnityEngine.Sprite>());
+				}
+			});
 		}
 
 		public static ModAsset CreateAsset(UnityEngine.Object asset) {

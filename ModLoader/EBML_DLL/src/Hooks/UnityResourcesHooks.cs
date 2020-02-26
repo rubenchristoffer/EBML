@@ -68,9 +68,10 @@ namespace EBML.Hooks {
 				if (returnValue.isSet) {
 					ModLoader.Log(path + ":sprite/" + (returnValue.value == null));
 					__result = returnValue.value;
+					return false;
 				}
 
-				return Load.ResetOriginalMethodSkip();
+				return LoadSprite.ResetOriginalMethodSkip();
 			}
 
 		}

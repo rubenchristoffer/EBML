@@ -18,16 +18,16 @@ namespace EBML.Hooks {
         public bool skipOriginalMethod = false;
 
         /// <summary>
-        /// This method will get the <see cref="HookSystemBase{I}.skipOriginalMethod"/>
-        /// value and reset it if it is true.
+        /// This method will reset <see cref="HookSystemBase{I}.skipOriginalMethod"/>
+        /// and return the opposite of it.
         /// </summary>
-        /// <returns>Value of <see cref="HookSystemBase{I}.skipOriginalMethod"/> before reset</returns>
+        /// <returns>Opposite value of <see cref="HookSystemBase{I}.skipOriginalMethod"/> before reset</returns>
         public bool ResetOriginalMethodSkip () {
             if (!skipOriginalMethod)
-                return false;
+                return true;
 
             skipOriginalMethod = false;
-            return true;
+            return false;
         }
 
     }
