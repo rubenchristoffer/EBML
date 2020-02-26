@@ -15,6 +15,9 @@ namespace EBML.GameAPI {
 		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
 		static ModAssets () {
+			// Create Load hooks so that when you use the UnityEngine.Resources.Load functions
+			// it will automatically return mod asset if it has a resource mapping
+
 			Hooks.UnityResourcesHooks.Load.AddPreHook((returnObj, path) => {
 				if (DoesMappingExist(path)) {
 					ModLoader.Log(path);
@@ -22,7 +25,6 @@ namespace EBML.GameAPI {
 				}
 			});
 
-			// TODO: Create Sprite hook here
 			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnObj, path) => {
 				if (DoesMappingExist(path)) {
 					ModLoader.Log(path);
@@ -31,8 +33,8 @@ namespace EBML.GameAPI {
 			});
 		}
 
-		public static ModAsset CreateAsset(UnityEngine.Object asset) {
-			ModAsset modAsset = new ModAsset(currentID, asset);
+		public static ModAsset<T> CreateAsset<T>(T asset) where T : UnityEngine.Object {
+			ModAsset<T> modAsset = new ModAsset<T>(currentID, asset);
 			assets.Add(currentID, modAsset);
 			currentID++;
 

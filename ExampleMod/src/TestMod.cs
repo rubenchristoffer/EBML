@@ -30,7 +30,7 @@ namespace MyMod {
                 true
             );
 
-            ModAsset atomBomb = ModAssets.CreateAsset(ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png"))));
+            ModAsset<UnityEngine.Sprite> atomBomb = ModAssets.CreateAsset(ModFiles.CreateSprite(ModFiles.CreateTexture(ModFiles.ReadFileFromDisk(@"ExampleMod\atombomb.png"))));
 
             Tuple<int, int> ids = ModResources.RegisterNewProductionResource(
                 StructFactory.CreateStaticResourceData("Atom Bomb", Resource.ResourceType.Weapon, 1000000, 0),

@@ -89,10 +89,11 @@ namespace EBML.GameAPI {
         /// happen automatically.
         /// </summary>
         /// <param name="staticResourceData">Resource information</param>
-        /// <param name="iconSprite">Optional icon. See <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+        /// <param name="iconSprite">Optional icon. See <see cref="ModAssets.CreateAsset{T}(T)"/> and 
+        /// <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
         /// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
         /// <returns>ID of the new resource</returns>
-        public static int RegisterNewResource (StaticResourceData staticResourceData, ModAsset iconSprite = null, bool isWarResource = false) {
+        public static int RegisterNewResource (StaticResourceData staticResourceData, ModAsset<Sprite> iconSprite = null, bool isWarResource = false) {
             staticResourceData.id = nextResourceID;
             AddStaticResource(staticResourceData);
             modWarResources.Add(nextResourceID);
@@ -118,11 +119,12 @@ namespace EBML.GameAPI {
         /// </summary>
         /// <param name="staticResourceData">See <see cref="StructFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/> to create this</param>
         /// <param name="staticResourceProductionData">See <see cref="StructFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/> to create this</param>
-        /// <param name="iconSprite">Optional icon. See <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+        /// <param name="iconSprite">Optional icon. See <see cref="ModAssets.CreateAsset{T}(T)"/> and 
+        /// <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
         /// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
         /// <returns>Tuple containing assigned ID of resource and 
         /// ID of production resource respectively</returns>
-        public static Tuple<int, int> RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, ModAsset iconSprite = null, bool isWarResource = true) {
+        public static Tuple<int, int> RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, ModAsset<Sprite> iconSprite = null, bool isWarResource = true) {
             int resourceID = RegisterNewResource(staticResourceData, iconSprite, isWarResource);
             
             staticResourceProductionData.id = nextResourceProductionID;
