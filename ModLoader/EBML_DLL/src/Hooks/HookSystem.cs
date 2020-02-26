@@ -30,6 +30,24 @@ namespace EBML.Hooks {
             return false;
         }
 
+        /// <summary>
+        /// This gets the correct return value for the actual harmony hook function.
+        /// In other words, it will return false if the original function should be skipped.
+        /// It will automatically update return value if a custom one is set.
+        /// </summary>
+        /// <typeparam name="R">Return value type</typeparam>
+        /// <param name="__result">Return value reference</param>
+        /// <param name="returnValue">Custom return value</param>
+        /// <returns>True if skipOriginalMethod is false AND custom return value is not set. False otherwise</returns>
+        public bool GetHarmonyReturnValue<R> (ref R __result, ReturnValue<R> returnValue = null) {
+            if (returnValue != null && returnValue.isSet) {
+                returnValue.UpdateReferenceValue(ref __result);
+                return false;
+            }
+
+            return ResetOriginalMethodSkip();
+        }
+
     }
 
     /// <summary>

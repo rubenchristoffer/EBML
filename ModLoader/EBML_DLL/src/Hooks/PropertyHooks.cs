@@ -32,7 +32,7 @@ namespace EBML.Hooks {
                 GetIcon.InvokePreHooks(__instance, returnValue);
 
                 if (returnValue.isSet)
-                    __result = returnValue.value;
+                    __result = returnValue.customValue;
 
                 // TODO: Check if this actually is necessary
                 return GetIcon.ResetOriginalMethodSkip();

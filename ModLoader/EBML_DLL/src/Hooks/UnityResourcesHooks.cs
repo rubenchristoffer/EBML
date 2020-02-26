@@ -41,12 +41,7 @@ namespace EBML.Hooks {
 				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>();
 				Load.InvokePreHooks(returnValue, path);
 
-				if (returnValue.isSet) {
-					ModLoader.Log(path + ":/" + (returnValue.value == null));
-					__result = returnValue.value;
-				}
-
-				return Load.ResetOriginalMethodSkip();
+				return Load.GetHarmonyReturnValue<UnityEngine.Object>(ref __result, returnValue);
 			}
 
 		}
@@ -65,13 +60,7 @@ namespace EBML.Hooks {
 				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
 				LoadSprite.InvokePreHooks(returnValue, path);
 
-				if (returnValue.isSet) {
-					ModLoader.Log(path + ":sprite/" + (returnValue.value == null));
-					__result = returnValue.value;
-					return false;
-				}
-
-				return LoadSprite.ResetOriginalMethodSkip();
+				return LoadSprite.GetHarmonyReturnValue<Sprite>(ref __result, returnValue);
 			}
 
 		}
