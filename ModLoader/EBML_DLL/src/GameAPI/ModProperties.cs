@@ -20,30 +20,8 @@ namespace EBML.GameAPI {
         /// </summary>
         public static int nextResourceBuildingID { get; private set; }
 
-        private static Dictionary<int, Tuple<Sprite, Sprite, Sprite, Sprite>> modPropertiesIcons = new Dictionary<int, Tuple<Sprite, Sprite, Sprite, Sprite>>();
-
         static ModProperties () {
             nextResourceBuildingID = 42;
-
-            Hooks.PropertyHooks.GetIcon.skipOriginalMethod = true;
-
-            // TODO: Create sprite init hook
-            Hooks.PropertyHooks.GetIcon.AddPreHook((instance, returnValue) => {
-                if (modPropertiesIcons.ContainsKey (instance.id)) {
-                    Sprite spriteToSet;
-
-                    if (instance.price <= 10000f)
-                        spriteToSet = modPropertiesIcons[instance.id].Item1;
-                    else if (instance.price <= 100000f)
-                        spriteToSet = modPropertiesIcons[instance.id].Item2;
-                    else if (instance.price <= 1000000f)
-                        spriteToSet = modPropertiesIcons[instance.id].Item3;
-                    else
-                        spriteToSet = modPropertiesIcons[instance.id].Item4;
-
-                    returnValue.SetValue(spriteToSet);
-                }
-            });
         }
 
         /// <summary>
@@ -57,15 +35,39 @@ namespace EBML.GameAPI {
         /// can fill in the same name / icon sprites in all those fields.
         /// </summary>
         /// <param name="staticResourceBuildingsData">Property information</param>
-        /// <param name="icon1Sprite">Optional icon for type 1</param>
-        /// <param name="icon2Sprite">Optional icon for type 2</param>
-        /// <param name="icon3Sprite">Optional icon for type 3</param>
-        /// <param name="icon4Sprite">Optional icon for type 4</param>
+        /// <param name="icons">Optional icons for the various stages of this property</param>
         /// <returns>ID of the new property type</returns>
-        public static int RegisterNewPropertyType(StaticResourceBuildingsData staticResourceBuildingsData, Sprite icon1Sprite = null, Sprite icon2Sprite = null, Sprite icon3Sprite = null, Sprite icon4Sprite = null) {
+        public static int RegisterNewPropertyType(StaticResourceBuildingsData staticResourceBuildingsData, ModAssetSet4<Sprite> icons = null) {
             staticResourceBuildingsData.id = nextResourceBuildingID;
+
+            if (icons != null) {
+                for (int i = 0; i < icons.assets.Length; i++) {
+                    if (icons.assets[i] != null) {
+                        int iconAssetID = icons.assets[i].id;
+                        string resourceMapping = "Property/" + iconAssetID;
+
+                        if (!ModAssets.DoesMappingExist(resourceMapping))
+                            ModAssets.AddResourceMapping(resourceMapping, iconAssetID);
+
+                        switch (i) {
+                            case 0:
+                                staticResourceBuildingsData.id_ico_lvl1 = iconAssetID;
+                                break;
+                            case 1:
+                                staticResourceBuildingsData.id_ico_lvl2 = iconAssetID;
+                                break;
+                            case 2:
+                                staticResourceBuildingsData.id_ico_lvl3 = iconAssetID;
+                                break;
+                            case 3:
+                                staticResourceBuildingsData.id_ico_lvl4 = iconAssetID;
+                                break;
+                        }
+                    }
+                }
+            }
+
             AddStaticResourceBuilding(staticResourceBuildingsData);
-            modPropertiesIcons.Add(nextResourceBuildingID, new Tuple<Sprite, Sprite, Sprite, Sprite>(icon1Sprite, icon2Sprite, icon3Sprite, icon4Sprite));
 
             return nextResourceBuildingID++;
         }

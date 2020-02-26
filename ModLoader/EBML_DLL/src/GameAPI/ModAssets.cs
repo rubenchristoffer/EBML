@@ -15,6 +15,8 @@ namespace EBML.GameAPI {
 		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
 		static ModAssets () {
+			currentID = 1000;
+
 			// Create Load hooks so that when you use the UnityEngine.Resources.Load functions
 			// it will automatically return mod asset if it has a resource mapping
 

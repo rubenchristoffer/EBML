@@ -38,9 +38,11 @@ namespace MyMod {
                 atomBomb
             );
 
+            Singletons.PROPERTY_CONTROLLER.GetStaticResourceBuildings().staticResourceBuildingsDataArr = new Static.StaticResourceBuildingsData[0];
+
             ModProperties.RegisterNewPropertyType(StructFactory.CreateStaticResourceBuildingsData(
                 "Small uranium mine", "Medium uranium mine", "Large uranium mine", "Huge uranium mine", "Modded property", id, Property.Type.Production),
-                atomBomb.GetAs<UnityEngine.Sprite>());
+                new ModAssetSet4<UnityEngine.Sprite> (atomBomb, atomBomb, atomBomb, atomBomb));
 
             UnityEngine.Object test = UnityEngine.Resources.Load("ResourceIcons/" + id);
             UnityEngine.Object test2 = UnityEngine.Resources.Load("ResourceIcons/49");
@@ -49,6 +51,9 @@ namespace MyMod {
 
             UnityEngine.Sprite test3 = UnityEngine.Resources.Load<UnityEngine.Sprite>("ResourceIcons/49");
             ModLoader.Log("Null3: " + (test3 == null));
+
+            UnityEngine.Sprite test4 = UnityEngine.Resources.Load<UnityEngine.Sprite>("Property/1001");
+            ModLoader.Log("Null4: " + (test4 == null));
         }
 
         public override void OnPostInit() {
