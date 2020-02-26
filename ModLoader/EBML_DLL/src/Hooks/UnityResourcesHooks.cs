@@ -16,17 +16,10 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<ReturnValue<UnityEngine.Object>, string> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string>();
 
+		/// <summary>
+		/// The <code>Load&lt;Sprite&gt; (string path)</code> method.
+		/// </summary>
 		public static HookSystem<ReturnValue<Sprite>, string> LoadSprite = new HookSystem<ReturnValue<Sprite>, string>();
-
-		internal static void CreateLoadHook() {
-			/*ManualHooks.CreateAndRegisterHook(harmony => {
-				MethodInfo methodInfo = typeof(Resources).GetMethods()
-				.FirstOrDefault(m => m.Name.Equals("Load") && !m.IsGenericMethod && m.CustomAttributes.Count() == 0);
-				MethodInfo hookInfo = typeof(UnityResourcesHooks).GetMethod("LoadPre", BindingFlags.NonPublic | BindingFlags.Static);
-				
-				harmony.Patch(methodInfo, new HarmonyMethod(hookInfo));
-			});*/
-		}
 
 		[HarmonyPatch]
 		private class Patch_Load {

@@ -152,9 +152,6 @@ namespace EBML {
             try {
                 harmony = new Harmony("ModLoader");
                 ((Harmony)harmony).PatchAll();
-
-                Hooks.ManualHooks.InvokeInternalHooksEvent();
-                Hooks.UnityResourcesHooks.CreateLoadHook();
             } catch (Exception e) {
                 Log(e.ToString());
             }
@@ -162,11 +159,9 @@ namespace EBML {
 
         /// <summary>
         /// Uninstalls the method hooks installed by the 
-        /// __InstallMethodHooks function and also the registered
-        /// manual hooks.
+        /// __InstallMethodHooks function
         /// </summary>
         internal static void __UninstallMethodHooks () {
-            Hooks.ManualHooks.UnpatchAll();
             ((Harmony)harmony).UnpatchAll();
         }
 
