@@ -38,8 +38,6 @@ namespace MyMod {
                 atomBomb
             );
 
-            Singletons.PROPERTY_CONTROLLER.GetStaticResourceBuildings().staticResourceBuildingsDataArr = new Static.StaticResourceBuildingsData[0];
-
             ModProperties.RegisterNewPropertyType(StructFactory.CreateStaticResourceBuildingsData(
                 "Small uranium mine", "Medium uranium mine", "Large uranium mine", "Huge uranium mine", "Modded property", id, Property.Type.Production),
                 new ModAssetSet4<UnityEngine.Sprite> (atomBomb, atomBomb, atomBomb, atomBomb));
