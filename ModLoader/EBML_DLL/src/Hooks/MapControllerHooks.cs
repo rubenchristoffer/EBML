@@ -23,8 +23,10 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("GenerateStartMap")]
             [HarmonyPrefix]
-            static void GenStartMapPre(MapController __instance) {
+            static bool GenStartMapPre(MapController __instance) {
                 GenerateStartMap.InvokePreHooks(__instance);
+
+                return GenerateStartMap.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("GenerateStartMap")]

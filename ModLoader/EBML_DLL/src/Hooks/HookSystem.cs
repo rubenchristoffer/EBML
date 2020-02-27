@@ -39,7 +39,7 @@ namespace EBML.Hooks {
         /// <param name="__result">Return value reference</param>
         /// <param name="returnValue">Custom return value</param>
         /// <returns>True if skipOriginalMethod is false AND custom return value is not set. False otherwise</returns>
-        public bool GetHarmonyReturnValue<R> (ref R __result, ReturnValue<R> returnValue = null) {
+        public bool GetHarmonyReturnValue<R> (ref R __result, ReturnValue<R> returnValue) {
             if (returnValue != null && returnValue.isSet) {
                 returnValue.UpdateReferenceValue(ref __result);
                 return false;

@@ -42,8 +42,10 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("StartLoadGameScene")]
             [HarmonyPrefix]
-            static void StartLoadGameScenePre(Loader __instance, ref bool isSavedGame) {
+            static bool StartLoadGameScenePre(Loader __instance, ref bool isSavedGame) {
                 StartLoadGameScene.InvokePreHooks(__instance, isSavedGame);
+
+                return StartLoadGameScene.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("StartLoadGameScene")]
@@ -54,8 +56,10 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("ContinueGame")]
             [HarmonyPrefix]
-            static void ContinueGamePre(Loader __instance) {
+            static bool ContinueGamePre(Loader __instance) {
                 ContinueGame.InvokePreHooks(__instance);
+
+                return ContinueGame.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("ContinueGame")]
@@ -66,25 +70,29 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("StartUnloadScene")]
             [HarmonyPrefix]
-            static void StartUnloadScenePre(Loader __instance, ref string sceneName, ref System.Action onUnloadFinished) {
+            static bool StartUnloadScenePre(Loader __instance, string sceneName, System.Action onUnloadFinished) {
                 StartUnloadScene.InvokePreHooks(__instance, sceneName, onUnloadFinished);
+
+                return StartUnloadScene.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("StartUnloadScene")]
             [HarmonyPostfix]
-            static void StartUnloadScenePost(Loader __instance, ref string sceneName, ref System.Action onUnloadFinished) {
+            static void StartUnloadScenePost(Loader __instance, string sceneName, ref System.Action onUnloadFinished) {
                 StartUnloadScene.InvokePostHooks(__instance, sceneName, onUnloadFinished);
             }
 
             [HarmonyPatch("SetActivity")]
             [HarmonyPrefix]
-            static void SetActivityPre(Loader __instance, ref bool value) {
+            static bool SetActivityPre(Loader __instance, bool value) {
                 SetActivity.InvokePreHooks(__instance, value);
+
+                return SetActivity.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("SetActivity")]
             [HarmonyPostfix]
-            static void SetActivityPost(Loader __instance, ref bool value) {
+            static void SetActivityPost(Loader __instance, bool value) {
                 SetActivity.InvokePostHooks(__instance, value);
             }
 

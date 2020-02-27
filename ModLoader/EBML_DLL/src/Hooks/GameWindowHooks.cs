@@ -30,8 +30,10 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("Start")]
             [HarmonyPrefix]
-            static void StartPre(GameWindow __instance) {
+            static bool StartPre(GameWindow __instance) {
                 Start.InvokePreHooks(__instance);
+
+                return Start.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("Start")]
@@ -42,13 +44,15 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("OnWindowShowing")]
             [HarmonyPrefix]
-            static void OnWindowShowingPre(GameWindow __instance, ref object windowData) {
+            static bool OnWindowShowingPre(GameWindow __instance, object windowData) {
                 OnWindowShowing.InvokePreHooks(__instance, windowData);
+
+                return OnWindowShowing.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("OnWindowShowing")]
             [HarmonyPostfix]
-            static void OnWindowShowingPost(GameWindow __instance, ref object windowData) {
+            static void OnWindowShowingPost(GameWindow __instance, object windowData) {
                 OnWindowShowing.InvokePostHooks(__instance, windowData);
             }
 

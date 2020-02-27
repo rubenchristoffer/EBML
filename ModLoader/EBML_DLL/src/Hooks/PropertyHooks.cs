@@ -28,14 +28,10 @@ namespace EBML.Hooks {
             [HarmonyPatch("GetIcon")]
             [HarmonyPrefix]
             static bool GetIconPre(Property __instance, ref Sprite __result) {
-                ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
+                ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>(__result);
                 GetIcon.InvokePreHooks(__instance, returnValue);
 
-                if (returnValue.isSet)
-                    __result = returnValue.customValue;
-
-                // TODO: Check if this actually is necessary
-                return GetIcon.ResetOriginalMethodSkip();
+                return GetIcon.GetHarmonyReturnValue<Sprite>(ref __result, returnValue);
             }
 
         }

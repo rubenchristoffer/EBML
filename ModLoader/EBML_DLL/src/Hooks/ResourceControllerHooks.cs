@@ -22,8 +22,10 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("CreateResources")]
             [HarmonyPrefix]
-            static void CreateResourcesPre(ResourceController __instance) {
+            static bool CreateResourcesPre(ResourceController __instance) {
                 CreateResources.InvokePreHooks(__instance);
+
+                return CreateResources.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("CreateResources")]

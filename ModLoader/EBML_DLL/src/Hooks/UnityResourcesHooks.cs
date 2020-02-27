@@ -30,8 +30,8 @@ namespace EBML.Hooks {
 			}
 
 			[HarmonyPrefix]
-			static bool LoadPre(ref UnityEngine.Object __result, ref string path) {
-				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>();
+			static bool LoadPre(ref UnityEngine.Object __result, string path) {
+				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>(__result);
 				Load.InvokePreHooks(returnValue, path);
 
 				return Load.GetHarmonyReturnValue<UnityEngine.Object>(ref __result, returnValue);
@@ -50,7 +50,7 @@ namespace EBML.Hooks {
 
 			[HarmonyPrefix]
 			static bool LoadPre(ref Sprite __result, ref string path) {
-				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>();
+				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>(__result);
 				LoadSprite.InvokePreHooks(returnValue, path);
 
 				return LoadSprite.GetHarmonyReturnValue<Sprite>(ref __result, returnValue);

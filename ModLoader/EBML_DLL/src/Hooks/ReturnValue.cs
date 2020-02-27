@@ -32,10 +32,24 @@ namespace EBML.Hooks {
 	public class ReturnValue<T> : ReturnValueBase {
 
 		/// <summary>
+		/// The original return value.
+		/// </summary>
+		public T originalValue { get; private set; }
+
+		/// <summary>
 		/// The modified value of what will be returned.
 		/// This is null or default(T) if not set.
 		/// </summary>
 		public T customValue { get; private set; }
+
+		/// <summary>
+		/// Creates a new ReturnValue instance with
+		/// the original value.
+		/// </summary>
+		/// <param name="originalValue">The default return value</param>
+		public ReturnValue (T originalValue) {
+			this.originalValue = originalValue;
+		}
 
 		/// <summary>
 		/// Sets a new custom return value.

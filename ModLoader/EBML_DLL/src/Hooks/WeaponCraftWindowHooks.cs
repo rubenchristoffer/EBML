@@ -20,15 +20,17 @@ namespace EBML.Hooks {
         /// <summary>
         /// <code>GetResourceUsedCount(int resourceID) : long</code>.
         /// </summary>
-        public static HookSystem<WeaponCraftWindow, long, int> GetResourceUsedCount = new HookSystem<WeaponCraftWindow, long, int>();
+        public static HookSystem<WeaponCraftWindow, ReturnValue<long>, int> GetResourceUsedCount = new HookSystem<WeaponCraftWindow, ReturnValue<long>, int>();
 
         [HarmonyPatch(typeof (WeaponCraftWindow))]
 		private class Patch {
 
             [HarmonyPatch("Awake")]
             [HarmonyPrefix]
-            static void AwakePre(WeaponCraftWindow __instance) {
+            static bool AwakePre(WeaponCraftWindow __instance) {
                 Awake.InvokePreHooks(__instance);
+
+                return Awake.ResetOriginalMethodSkip();
             }
 
             [HarmonyPatch("Awake")]
@@ -39,14 +41,17 @@ namespace EBML.Hooks {
 
             [HarmonyPatch("GetResourceUsedCount")]
             [HarmonyPrefix]
-            static void GetResourceUsedCountPre(WeaponCraftWindow __instance, ref long __result, ref int resourceId) {
-                GetResourceUsedCount.InvokePreHooks(__instance, __result, resourceId);
+            static bool GetResourceUsedCountPre(WeaponCraftWindow __instance, ref long __result, int resourceId) {
+                ReturnValue<long> returnValue = new ReturnValue<long>(__result);
+                GetResourceUsedCount.InvokePreHooks(__instance, returnValue, resourceId);
+
+                return GetResourceUsedCount.GetHarmonyReturnValue<long>(ref __result, returnValue);
             }
 
             [HarmonyPatch("GetResourceUsedCount")]
             [HarmonyPostfix]
-            static void GetResourceUsedCountPost(WeaponCraftWindow __instance, ref long __result, ref int resourceId) {
-                GetResourceUsedCount.InvokePostHooks(__instance, __result, resourceId);
+            static void GetResourceUsedCountPost(WeaponCraftWindow __instance, ref long __result, int resourceId) {
+                GetResourceUsedCount.InvokePostHooks(__instance, new ReturnValue<long>(__result), resourceId);
             }
 
         }
