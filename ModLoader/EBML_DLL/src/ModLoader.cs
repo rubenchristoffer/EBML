@@ -86,7 +86,15 @@ namespace EBML {
             modGUI = new ModGUI();
 
             LogToFile("Adding Console GUI Object");
-            modGUI.Add(new GUIBox("log", new Rect(Screen.width - 505, 5, 500, 500), ""));
+            GUIBox log = new GUIBox("log", new Rect(Screen.width - 505f, (int)((Screen.height - 500f) / 2f), 500, 500), "");
+
+            GUIButton btn = new GUIButton("btn", log.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)), "_", () => {
+                log.enabled = !log.enabled;
+            });
+
+            modGUI.Add(log, btn);
+
+            ModLoader.Log("Bounds: " + log.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)));
 
             Log("ModLoader has been initialized!");
         }

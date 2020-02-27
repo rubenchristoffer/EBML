@@ -34,8 +34,10 @@ namespace EBML.GUI {
         /// Adds a new GUIObject to the GUI.
         /// </summary>
         /// <param name="obj">The object you want rendered.</param>
-        public void Add (GUIObject obj) {
+        /// <param name="additionalObjects">Additional (optional) objects</param>
+        public void Add (GUIObject obj, params GUIObject[] additionalObjects) {
             guiObjects.Add(obj);
+            guiObjects.AddRange(additionalObjects);
         }
 
         /// <summary>
@@ -63,7 +65,11 @@ namespace EBML.GUI {
         }
 
         private void OnGUI() {
-            guiObjects.ForEach(obj => obj.Render());
+            foreach (GUIObject obj in guiObjects) {
+                if (obj.enabled) {
+                    obj.Render();
+                }
+            }
         }
 
     }

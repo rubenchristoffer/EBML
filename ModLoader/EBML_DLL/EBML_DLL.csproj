@@ -106,6 +106,8 @@
     <Compile Include="src\GameAPI\ModProperties.cs" />
     <Compile Include="src\GameAPI\StructFactory.cs" />
     <Compile Include="src\GUI\GUIBox.cs" />
+    <Compile Include="src\GUI\GUIButton.cs" />
+    <Compile Include="src\GUI\GUIExtensionMethods.cs" />
     <Compile Include="src\GUI\GUIObject.cs" />
     <Compile Include="src\GUI\ModGUI.cs" />
     <Compile Include="src\Hooks\GameWindowHooks.cs" />
