@@ -13,11 +13,6 @@ namespace EBML.GUI {
     public class GUIBox : GUIObject {
 
         /// <summary>
-        /// The bounds of the box.
-        /// </summary>
-        public Rect rect { get; private set; }
-
-        /// <summary>
         /// The text inside the box.
         /// </summary>
         public string text { get; private set; }
@@ -26,10 +21,9 @@ namespace EBML.GUI {
         /// Creates a new GUIBox instance.
         /// </summary>
         /// <param name="name">The name of the object used to retrieve it later.</param>
-        /// <param name="rect">The bounds of the box</param>
+        /// <param name="bounds">The bounds of the box</param>
         /// <param name="text">The text inside the box.</param>
-        public GUIBox (string name, Rect rect, String text) : base(name) {
-            this.rect = rect;
+        public GUIBox (string name, Rect bounds, String text) : base(name, bounds) {
             this.text = text;
         }
 
@@ -59,10 +53,10 @@ namespace EBML.GUI {
         }
 
         /// <summary>
-        /// <see cref="GUIObject.Render"/>
-        /// </summary>
+		/// See <see cref="GUIObject.Render"/>.
+		/// </summary>
         public override void Render() {
-            UnityEngine.GUI.Box(rect, text);   
+            UnityEngine.GUI.Box(bounds, text);   
         }
 
     }

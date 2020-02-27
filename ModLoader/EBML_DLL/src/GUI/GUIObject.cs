@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace EBML.GUI {
 
@@ -17,11 +18,23 @@ namespace EBML.GUI {
         public string name { get; private set; }
 
         /// <summary>
+        /// The bounds of the box.
+        /// </summary>
+        public Rect bounds { get; private set; }
+
+        /// <summary>
+        /// Determines whether or not GUI Object should render or not
+        /// </summary>
+        public bool enabled = true;
+
+        /// <summary>
         /// Initializes GUI Object with provided name.
         /// </summary>
         /// <param name="name">The name of the object used to retrieve it later.</param>
-        protected GUIObject (string name) {
+        /// <param name="bounds">The bounds of the GUI object</param>
+        protected GUIObject (string name, Rect bounds) {
             this.name = name;
+            this.bounds = bounds;
         }
 
         /// <summary>
