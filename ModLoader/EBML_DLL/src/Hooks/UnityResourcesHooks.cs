@@ -9,10 +9,13 @@ using System.Reflection;
 
 namespace EBML.Hooks {
 
+	/// <summary>
+	/// Method hooks for <see cref="Resources"/>.
+	/// </summary>
 	public static class UnityResourcesHooks {
 
 		/// <summary>
-		/// The <code>Load(string path)</code> method.
+		/// The <code>Load(string path)</code> (non-generic) method.
 		/// </summary>
 		public static HookSystem<ReturnValue<UnityEngine.Object>, string> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string>();
 

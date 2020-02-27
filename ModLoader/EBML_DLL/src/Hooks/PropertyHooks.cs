@@ -15,7 +15,7 @@ namespace EBML.Hooks {
 	public static class PropertyHooks {
 
         /// <summary>
-        /// Constructor <code>Property()</code>.
+        /// The <code>GetIcon()</code> method.
         /// NOTE: There is no post hooks for this method
         /// since return value is return before it will
         /// get there.

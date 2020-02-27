@@ -13,7 +13,7 @@ namespace EBML.Hooks {
     public class ResourceControllerHooks {
 
         /// <summary>
-        /// <code>CreateResources()</code>.
+        /// The <code>CreateResources()</code> method.
         /// </summary>
         public static HookSystem<ResourceController> CreateResources = new HookSystem<ResourceController>();
 

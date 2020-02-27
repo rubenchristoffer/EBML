@@ -109,7 +109,7 @@ namespace EBML.GameAPI {
         }
 
         /// <summary>
-        /// Registers a new resource by calling <see cref="RegisterNewResource(StaticResourceData, Sprite, bool)"/>. 
+        /// Registers a new resource by calling <see cref="RegisterNewResource(StaticResourceData, ModAsset{Sprite}, bool)"/>. 
         /// In addition to this, it registers the resource production data, indicating that
         /// this is a resource that can be produced (typically grain or some kind of weapon).
         /// The IDs will be assigned automatically.

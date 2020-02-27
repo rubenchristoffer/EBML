@@ -226,11 +226,6 @@ namespace EBML.Hooks {
         private List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>>();
 
         /// <summary>
-        /// See <see cref="HookSystem{I}.skipOriginalMethod"/>
-        /// </summary>
-        public bool skipOriginalMethod = false;
-
-        /// <summary>
         /// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
         /// </summary>
         public void AddPreHook(System.Action<I, A1, A2, A3> preHook) {
