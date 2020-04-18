@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Static;
+﻿using Static;
 
 namespace EBML.GameAPI {
 
@@ -18,7 +13,7 @@ namespace EBML.GameAPI {
         /// See <see cref="CreateStaticResourceData(string, int, int, int)"/>
         /// </summary>
         public static StaticResourceData CreateStaticResourceData (string name, Resource.ResourceType resourceType, int basePrice, int turnDiscovery) {
-            return CreateStaticResourceData(name, (int)resourceType, basePrice, turnDiscovery);
+            return CreateStaticResourceData (name, (int) resourceType, basePrice, turnDiscovery);
         }
 
         /// <summary>
@@ -30,8 +25,8 @@ namespace EBML.GameAPI {
         /// <param name="basePrice">The starting (selling) price.</param>
         /// <param name="turnDiscovery">At which turn will it be available? 0 indicates from beginning of game.</param>
         /// <returns>StaticResourceData struct</returns>
-        public static StaticResourceData CreateStaticResourceData(string name, int resourceType, int basePrice, int turnDiscovery) {
-            StaticResourceData staticResourceData = new StaticResourceData();
+        public static StaticResourceData CreateStaticResourceData (string name, int resourceType, int basePrice, int turnDiscovery) {
+            StaticResourceData staticResourceData = new StaticResourceData ();
             staticResourceData.id = -1;
             staticResourceData.name = name;
             staticResourceData.resourse_type = resourceType;
@@ -45,7 +40,7 @@ namespace EBML.GameAPI {
         /// See <see cref="CreateStaticResourceProductionData(int, int, int, int, float, int, float)"/>
         /// </summary>
         public static StaticResourceProductionData CreateStaticResourceProductionData (int workAmount, Turn.Season autoseedingSeason, int turnMaturation, int priceSeedingID1, float priceSeedingID1Amount, int priceSeedingID2, float priceSeedingID2Amount) {
-            return CreateStaticResourceProductionData(workAmount, (int)autoseedingSeason, turnMaturation, priceSeedingID1, priceSeedingID1Amount, priceSeedingID2, priceSeedingID2Amount);
+            return CreateStaticResourceProductionData (workAmount, (int) autoseedingSeason, turnMaturation, priceSeedingID1, priceSeedingID1Amount, priceSeedingID2, priceSeedingID2Amount);
         }
 
         /// <summary>
@@ -62,8 +57,8 @@ namespace EBML.GameAPI {
         /// <param name="priceSeedingID2Amount">Amount of resource nr. 2 required.</param>
         /// <returns>StaticResourceProductionData struct</returns>
         public static StaticResourceProductionData CreateStaticResourceProductionData (int workAmount, int autoseedingSeason, int turnMaturation, int priceSeedingID1, float priceSeedingID1Amount, int priceSeedingID2, float priceSeedingID2Amount) {
-            StaticResourceProductionData staticResourceProductionData = new StaticResourceProductionData();
-            
+            StaticResourceProductionData staticResourceProductionData = new StaticResourceProductionData ();
+
             staticResourceProductionData.id = -1;
             staticResourceProductionData.resourse_id = -1;
 
@@ -81,8 +76,8 @@ namespace EBML.GameAPI {
         /// <summary>
         /// See <see cref="CreateStaticResourceBuildingsData(string, string, string, string, string, int, int, float)"/>.
         /// </summary>
-        public static StaticResourceBuildingsData CreateStaticResourceBuildingsData(string name1, string name2, string name3, string name4, string description, int resourceID, UserProperty.Type buildingType, float incomeBonus = 1f) {
-            return CreateStaticResourceBuildingsData(name1, name2, name3, name4, description, resourceID, (int)buildingType, incomeBonus);
+        public static StaticResourceBuildingsData CreateStaticResourceBuildingsData (string name1, string name2, string name3, string name4, string description, int resourceID, UserProperty.Type buildingType, float incomeBonus = 1f) {
+            return CreateStaticResourceBuildingsData (name1, name2, name3, name4, description, resourceID, (int) buildingType, incomeBonus);
         }
 
         /// <summary>
@@ -100,7 +95,7 @@ namespace EBML.GameAPI {
         /// <param name="incomeBonus">Bonus that (probably) influences how many resources you get (needs verification)</param>
         /// <returns></returns>
         public static StaticResourceBuildingsData CreateStaticResourceBuildingsData (string name1, string name2, string name3, string name4, string description, int resourceID, int buildingType, float incomeBonus = 1f) {
-            StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData();
+            StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData ();
 
             staticResourceBuildingsData.id = -1;
             staticResourceBuildingsData.id_ico_lvl1 = -1;

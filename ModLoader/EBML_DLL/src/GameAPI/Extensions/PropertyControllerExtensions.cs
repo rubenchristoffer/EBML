@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Static;
 using System.Reflection;
+using Static;
 
 namespace EBML.GameAPI.Extensions {
 
@@ -13,7 +9,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class PropertyControllerExtensions {
 
-		private static Type type = typeof(PropertyController);
+		private static Type type = typeof (PropertyController);
 
 		/// <summary>
 		/// Gets the staticResourceBuildings field.
@@ -21,9 +17,9 @@ namespace EBML.GameAPI.Extensions {
 		/// <param name="instance">Instance</param>
 		/// <returns>StaticResourceBuildings object</returns>
 		public static StaticResourceBuildings GetStaticResourceBuildings (this PropertyController instance) {
-			return (StaticResourceBuildings)type
-				.GetField("staticResourceBuildings", BindingFlags.NonPublic | BindingFlags.Instance)
-				.GetValue(instance);
+			return (StaticResourceBuildings) type
+				.GetField ("staticResourceBuildings", BindingFlags.NonPublic | BindingFlags.Instance)
+				.GetValue (instance);
 		}
 
 	}

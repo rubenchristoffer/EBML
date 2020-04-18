@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using System.IO;
+﻿using System.IO;
 using EBML.Logging;
+using UnityEngine;
 
 namespace EBML {
 
@@ -15,7 +10,7 @@ namespace EBML {
 	/// </summary>
 	public static class ModFiles {
 
-		static readonly ILog log = LogFactory.GetLogger(typeof(ModFiles));
+		static readonly ILog log = LogFactory.GetLogger (typeof (ModFiles));
 
 		/// <summary>
 		/// Creates a new sprite using the provided texture.
@@ -23,7 +18,7 @@ namespace EBML {
 		/// <param name="texture">The texture you want to create sprite from</param>
 		/// <returns>New sprite</returns>
 		public static Sprite CreateSprite (Texture2D texture) {
-			return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+			return Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);
 		}
 
 		/// <summary>
@@ -33,10 +28,10 @@ namespace EBML {
 		/// <param name="bytes">Raw bytes</param>
 		/// <returns>New texture or null if it couldn't create image</returns>
 		public static Texture2D CreateTexture (byte[] bytes) {
-			Texture2D texture = new Texture2D(0, 0);
+			Texture2D texture = new Texture2D (0, 0);
 
-			log.Info("CreateTexture: Loading image data...");
-			texture.LoadImage(bytes);
+			log.Info ("CreateTexture: Loading image data...");
+			texture.LoadImage (bytes);
 
 			return texture;
 		}
@@ -47,14 +42,14 @@ namespace EBML {
 		/// <param name="relativeModsPath">The path preceding the mods directory</param>
 		/// <returns>A raw byte array if file exists or null otherwise</returns>
 		public static byte[] ReadFileFromDisk (string relativeModsPath) {
-			string fullPath = GetFullPath(relativeModsPath);
+			string fullPath = GetFullPath (relativeModsPath);
 
-			log.Info(string.Format("Reading file from disk: {0}...", fullPath));
+			log.Info (string.Format ("Reading file from disk: {0}...", fullPath));
 
-			if (!File.Exists(fullPath))
+			if (!File.Exists (fullPath))
 				return null;
-			
-			return File.ReadAllBytes(fullPath);
+
+			return File.ReadAllBytes (fullPath);
 		}
 
 		/// <summary>
@@ -63,7 +58,7 @@ namespace EBML {
 		/// <param name="relativeModsPath">The path preceding the mods directory</param>
 		/// <returns>String containing full path</returns>
 		public static string GetFullPath (string relativeModsPath) {
-			return Path.Combine(ModPaths.MODS_PATH, relativeModsPath);
+			return Path.Combine (ModPaths.MODS_PATH, relativeModsPath);
 		}
 
 	}

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using System.IO;
 
 namespace EBML {
 
@@ -33,16 +28,16 @@ namespace EBML {
         public static string MODS_PATH { get; private set; }
 
         static ModPaths () {
-            GAME_PATH = new DirectoryInfo(@".\").FullName;
+            GAME_PATH = new DirectoryInfo (@".\").FullName;
             EBML_PATH = GAME_PATH + @"EBML\";
             LOG_PATH = EBML_PATH + @"DLL_Logs\";
             MODS_PATH = EBML_PATH + @"Mods\";
         }
 
         internal static void CreateAllModPaths () {
-            Directory.CreateDirectory(EBML_PATH);
-            Directory.CreateDirectory(MODS_PATH);
-            Directory.CreateDirectory(LOG_PATH);
+            Directory.CreateDirectory (EBML_PATH);
+            Directory.CreateDirectory (MODS_PATH);
+            Directory.CreateDirectory (LOG_PATH);
         }
 
     }

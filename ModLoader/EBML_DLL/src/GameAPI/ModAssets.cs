@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EBML.Hooks;
+﻿using System.Collections.Generic;
 using EBML.Logging;
 
 namespace EBML.GameAPI {
@@ -15,33 +10,33 @@ namespace EBML.GameAPI {
 	/// </summary>
 	public static class ModAssets {
 
-		static readonly ILog log = LogFactory.GetLogger(typeof(ModAssets));
+		static readonly ILog log = LogFactory.GetLogger (typeof (ModAssets));
 
 		/// <summary>
 		/// This is the ID that the next ModAsset will have.
 		/// </summary>
-		public static int nextID { get; private set; }
+		public static int NextID { get; private set; }
 
-		static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset>();
-		static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
+		static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset> ();
+		static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int> ();
 
 		static ModAssets () {
-			nextID = 1000;
+			NextID = 1000;
 
 			// Create Load hooks so that when you use the UnityEngine.Resources.Load functions
 			// it will automatically return mod asset if it has a resource mapping
 
-			Hooks.UnityResourcesHooks.Load.AddPreHook((returnObj, path) => {
-				if (DoesMappingExist(path)) {
-					log.Debug(String.Format("General mapping exists for '{0}'", path));
-					returnObj.SetValue(GetAssetWithMapping(path).asset);
+			Hooks.UnityResourcesHooks.Load.AddPreHook ((returnObj, path) => {
+				if (DoesMappingExist (path)) {
+					log.Debug (string.Format ("General mapping exists for '{0}'", path));
+					returnObj.SetValue (GetAssetWithMapping (path).Asset);
 				}
 			});
 
-			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnObj, path) => {
-				if (DoesMappingExist(path)) {
-					log.Debug(String.Format("Sprite mapping exists for '{0}'", path));
-					returnObj.SetValue(GetAssetWithMapping(path).GetAs<UnityEngine.Sprite>());
+			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook ((returnObj, path) => {
+				if (DoesMappingExist (path)) {
+					log.Debug (string.Format ("Sprite mapping exists for '{0}'", path));
+					returnObj.SetValue (GetAssetWithMapping (path).GetAs<UnityEngine.Sprite> ());
 				}
 			});
 		}
@@ -53,10 +48,10 @@ namespace EBML.GameAPI {
 		/// <typeparam name="T">The asset type</typeparam>
 		/// <param name="asset">The asset itself</param>
 		/// <returns>ModAsset with unique ID</returns>
-		public static ModAsset<T> CreateAsset<T>(T asset) where T : UnityEngine.Object {
-			ModAsset<T> modAsset = new ModAsset<T>(nextID, asset);
-			assets.Add(nextID, modAsset);
-			nextID++;
+		public static ModAsset<T> CreateAsset<T> (T asset) where T : UnityEngine.Object {
+			ModAsset<T> modAsset = new ModAsset<T> (NextID, asset);
+			assets.Add (NextID, modAsset);
+			NextID++;
 
 			return modAsset;
 		}
@@ -71,7 +66,7 @@ namespace EBML.GameAPI {
 		/// <param name="resourceURL">The resource URL used for mapping</param>
 		/// <param name="assetID">The ID of the asset you want to map it to</param>
 		public static void AddResourceMapping (string resourceURL, int assetID) {
-			resourceToAssetMappings.Add(resourceURL, assetID);
+			resourceToAssetMappings.Add (resourceURL, assetID);
 		}
 
 		/// <summary>
@@ -82,7 +77,7 @@ namespace EBML.GameAPI {
 		/// <param name="resourceURL">The resourceURL you want to check</param>
 		/// <returns>True if mapping exists, otherwise false</returns>
 		public static bool DoesMappingExist (string resourceURL) {
-			return resourceToAssetMappings.ContainsKey(resourceURL);
+			return resourceToAssetMappings.ContainsKey (resourceURL);
 		}
 
 		/// <summary>
@@ -101,7 +96,7 @@ namespace EBML.GameAPI {
 		/// <param name="resourceURL">The resource mapping URL</param>
 		/// <returns>ModAsset mapped to resourceURL if it exists</returns>
 		public static ModAsset GetAssetWithMapping (string resourceURL) {
-			return GetAsset(resourceToAssetMappings[resourceURL]);
+			return GetAsset (resourceToAssetMappings[resourceURL]);
 		}
 
 	}

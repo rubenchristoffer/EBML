@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace EBML.GameAPI.Extensions {
@@ -12,7 +8,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class ResourceExtensions {
 
-		private static Type type = typeof(Resource);
+		private static Type type = typeof (Resource);
 
 		/// <summary>
 		/// Sets the icon property.
@@ -22,7 +18,7 @@ namespace EBML.GameAPI.Extensions {
 		/// <param name="instance">Instance</param>
 		/// <param name="sprite">The icon image</param>
 		public static void SetIcon (this Resource instance, Sprite sprite) {
-			type.GetProperty("icon").SetValue(instance, sprite);
+			type.GetProperty ("icon").SetValue (instance, sprite);
 		}
 
 	}

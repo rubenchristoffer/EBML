@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace EBML.GameAPI.Extensions {
@@ -12,7 +8,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class PropertyExtensions {
 
-		private static Type type = typeof(Property);
+		private static Type type = typeof (Property);
 
 		/// <summary>
 		/// Sets the propertyIcons property.
@@ -20,7 +16,7 @@ namespace EBML.GameAPI.Extensions {
 		/// <param name="instance">Instance</param>
 		/// <param name="icons">Array of sprite icons</param>
 		public static void SetPropertyIcons (this Property instance, Sprite[] icons) {
-			type.GetProperty("propertyIcons").SetValue(instance, icons);
+			type.GetProperty ("propertyIcons").SetValue (instance, icons);
 		}
 
 	}

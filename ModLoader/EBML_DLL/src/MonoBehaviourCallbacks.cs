@@ -13,66 +13,66 @@ namespace EBML {
         /// <summary>
         /// Delegate for void functions with no parameters.
         /// </summary>
-        public delegate void VoidDelegate();
+        public delegate void VoidDelegate ();
 
         /// <summary>
         /// Event for subscribing to the Awake callback.
         /// </summary>
-        public static event VoidDelegate awake;
+        public static event VoidDelegate AwakeEvent;
 
         /// <summary>
         /// Event for subscribing to the Start callback.
         /// </summary>
-        public static event VoidDelegate start;
+        public static event VoidDelegate StartEvent;
 
         /// <summary>
         /// Event for subscribing to the Update callback.
         /// </summary>
-        public static event VoidDelegate update;
+        public static event VoidDelegate UpdateEvent;
 
         /// <summary>
         /// Event for subscribing to the LateUpdate callback.
         /// </summary>
-        public static event VoidDelegate lateUpdate;
+        public static event VoidDelegate LateUpdateEvent;
 
         /// <summary>
         /// Event for subscribing to the OnGUI callback.
         /// </summary>
-        public static event VoidDelegate onGUI;
+        public static event VoidDelegate OnGUIEvent;
 
         /// <summary>
         /// Event for subscribing to the FixedUpdate callback.
         /// </summary>
-        public static event VoidDelegate fixedUpdate;
+        public static event VoidDelegate FixedUpdateEvent;
 
         void Awake () {
-            if (awake != null)
-                awake();
+            if (AwakeEvent != null)
+                AwakeEvent ();
         }
 
-        void Start() {
-            if (start != null)
-                start();
+        void Start () {
+            if (StartEvent != null)
+                StartEvent ();
         }
 
         void Update () {
-            if (update != null)
-                update();
+            if (UpdateEvent != null)
+                UpdateEvent ();
         }
 
         void LateUpdate () {
-            if (lateUpdate != null)
-                lateUpdate();
+            if (LateUpdateEvent != null)
+                LateUpdateEvent ();
         }
 
         void OnGUI () {
-            if (onGUI != null)
-                onGUI();
+            if (OnGUIEvent != null)
+                OnGUIEvent ();
         }
 
         void FixedUpdate () {
-            if (fixedUpdate != null)
-                fixedUpdate();
+            if (FixedUpdateEvent != null)
+                FixedUpdateEvent ();
         }
 
     }

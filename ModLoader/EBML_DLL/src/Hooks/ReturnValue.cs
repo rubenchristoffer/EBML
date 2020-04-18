@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EBML.Hooks {
+﻿namespace EBML.Hooks {
 
 	/// <summary>
 	/// This is the base for ReturnValue.
@@ -19,7 +13,7 @@ namespace EBML.Hooks {
 		/// the value has been set or if the method
 		/// should return the value of the original method.
 		/// </summary>
-		public bool isSet { get; protected set; }
+		public bool IsSet { get; protected set; }
 
 	}
 
@@ -34,13 +28,13 @@ namespace EBML.Hooks {
 		/// <summary>
 		/// The original return value.
 		/// </summary>
-		public T originalValue { get; private set; }
+		public T OriginalValue { get; private set; }
 
 		/// <summary>
 		/// The modified value of what will be returned.
 		/// This is null or default(T) if not set.
 		/// </summary>
-		public T customValue { get; private set; }
+		public T CustomValue { get; private set; }
 
 		/// <summary>
 		/// Creates a new ReturnValue instance with
@@ -48,7 +42,7 @@ namespace EBML.Hooks {
 		/// </summary>
 		/// <param name="originalValue">The default return value</param>
 		public ReturnValue (T originalValue) {
-			this.originalValue = originalValue;
+			this.OriginalValue = originalValue;
 		}
 
 		/// <summary>
@@ -56,17 +50,17 @@ namespace EBML.Hooks {
 		/// </summary>
 		/// <param name="value">The modified return value.</param>
 		public void SetValue (T value) {
-			this.customValue = value;
-			this.isSet = true;
+			this.CustomValue = value;
+			this.IsSet = true;
 		}
 
 		/// <summary>
 		/// Sets the reference value to custom value if it is set.
 		/// </summary>
 		/// <param name="referenceValue">The reference value</param>
-		public void UpdateReferenceValue(ref T referenceValue) {
-			if (isSet)
-				referenceValue = customValue;
+		public void UpdateReferenceValue (ref T referenceValue) {
+			if (IsSet)
+				referenceValue = CustomValue;
 		}
 
 	}

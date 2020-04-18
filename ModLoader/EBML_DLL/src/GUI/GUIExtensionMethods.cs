@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EBML.GUI {
 
@@ -12,18 +7,55 @@ namespace EBML.GUI {
 	/// </summary>
 	public static class GUIExtensionMethods {
 
+		/// <summary>
+		/// Horizontal anchor
+		/// </summary>
 		public enum AnchorX {
+			/// <summary>
+			/// Left anchor
+			/// </summary>
 			LEFT,
+
+			/// <summary>
+			/// Center anchor
+			/// </summary>
 			CENTER,
+
+			/// <summary>
+			/// Right anchor
+			/// </summary>
 			RIGHT
 		}
 
+		/// <summary>
+		/// Vertical anchor
+		/// </summary>
 		public enum AnchorY {
+			/// <summary>
+			/// Upper (top) anchor
+			/// </summary>
 			UPPER,
+
+			/// <summary>
+			/// Center anchor
+			/// </summary>
 			CENTER,
+
+			/// <summary>
+			/// Lower (bottom) anchor
+			/// </summary>
 			LOWER
 		}
 
+		/// <summary>
+		/// Creates a new Rect based on reference Rect and horizontal and vertical anchor points.
+		/// </summary>
+		/// <param name="instance">The reference Rect</param>
+		/// <param name="anchorX">Horizontal anchor</param>
+		/// <param name="anchorY">Vertical anchor</param>
+		/// <param name="size">Size of rect</param>
+		/// <param name="roundPositionToInt">Determines whether position should be cast to integer</param>
+		/// <returns></returns>
 		public static Rect FromAnchor (this Rect instance, AnchorX anchorX, AnchorY anchorY, Vector2 size, bool roundPositionToInt = true) {
 			float x = 0f;
 			float y = 0f;
@@ -52,7 +84,7 @@ namespace EBML.GUI {
 					break;
 			}
 
-			return new Rect(roundPositionToInt ? (int) x : x, roundPositionToInt ? (int) y : y, size.x, size.y);
+			return new Rect (roundPositionToInt ? (int) x : x, roundPositionToInt ? (int) y : y, size.x, size.y);
 		}
 
 	}

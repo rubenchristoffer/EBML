@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
-using System.Reflection;
 
 namespace EBML.Hooks {
 
@@ -17,27 +13,27 @@ namespace EBML.Hooks {
 		/// <summary>
 		/// The <code>Load(string path)</code> (non-generic) method.
 		/// </summary>
-		public static HookSystem<ReturnValue<UnityEngine.Object>, string> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string>();
+		public static HookSystem<ReturnValue<UnityEngine.Object>, string> Load = new HookSystem<ReturnValue<UnityEngine.Object>, string> ();
 
 		/// <summary>
 		/// The <code>Load&lt;Sprite&gt; (string path)</code> method.
 		/// </summary>
-		public static HookSystem<ReturnValue<Sprite>, string> LoadSprite = new HookSystem<ReturnValue<Sprite>, string>();
+		public static HookSystem<ReturnValue<Sprite>, string> LoadSprite = new HookSystem<ReturnValue<Sprite>, string> ();
 
 		[HarmonyPatch]
 		private class Patch_Load {
 
 			static MethodInfo TargetMethod () {
-				return typeof(Resources).GetMethods()
-				.FirstOrDefault(m => m.Name.Equals("Load") && !m.IsGenericMethod && m.CustomAttributes.Count() == 0);
+				return typeof (Resources).GetMethods ()
+				.FirstOrDefault (m => m.Name.Equals ("Load") && !m.IsGenericMethod && m.CustomAttributes.Count () == 0);
 			}
 
 			[HarmonyPrefix]
-			static bool LoadPre(ref UnityEngine.Object __result, string path) {
-				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object>(__result);
-				Load.InvokePreHooks(returnValue, path);
+			static bool LoadPre (ref UnityEngine.Object __result, string path) {
+				ReturnValue<UnityEngine.Object> returnValue = new ReturnValue<UnityEngine.Object> (__result);
+				Load.InvokePreHooks (returnValue, path);
 
-				return Load.GetHarmonyReturnValue<UnityEngine.Object>(ref __result, returnValue);
+				return Load.GetHarmonyReturnValue<UnityEngine.Object> (ref __result, returnValue);
 			}
 
 		}
@@ -45,18 +41,18 @@ namespace EBML.Hooks {
 		[HarmonyPatch]
 		private class Patch_LoadSprite {
 
-			static MethodInfo TargetMethod() {
-				return typeof(Resources).GetMethods()
-				.FirstOrDefault(m => m.Name.Equals("Load") && m.IsGenericMethod && m.CustomAttributes.Count() == 0)
-				.MakeGenericMethod (typeof(Sprite));
+			static MethodInfo TargetMethod () {
+				return typeof (Resources).GetMethods ()
+				.FirstOrDefault (m => m.Name.Equals ("Load") && m.IsGenericMethod && m.CustomAttributes.Count () == 0)
+				.MakeGenericMethod (typeof (Sprite));
 			}
 
 			[HarmonyPrefix]
-			static bool LoadPre(ref Sprite __result, ref string path) {
-				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite>(__result);
-				LoadSprite.InvokePreHooks(returnValue, path);
+			static bool LoadPre (ref Sprite __result, ref string path) {
+				ReturnValue<Sprite> returnValue = new ReturnValue<Sprite> (__result);
+				LoadSprite.InvokePreHooks (returnValue, path);
 
-				return LoadSprite.GetHarmonyReturnValue<Sprite>(ref __result, returnValue);
+				return LoadSprite.GetHarmonyReturnValue<Sprite> (ref __result, returnValue);
 			}
 
 		}

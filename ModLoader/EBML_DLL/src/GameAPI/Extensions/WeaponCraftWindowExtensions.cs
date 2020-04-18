@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 
 namespace EBML.GameAPI.Extensions {
@@ -12,7 +9,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class WeaponCraftWindowExtensions {
 
-		private static Type type = typeof(WeaponCraftWindow);
+		private static Type type = typeof (WeaponCraftWindow);
 
 		/// <summary>
 		/// Gets the usedResources field.
@@ -21,8 +18,8 @@ namespace EBML.GameAPI.Extensions {
 		/// <returns>Dictionary with resource ID as key and amount as value</returns>
 		public static Dictionary<int, long> GetUsedResources (this WeaponCraftWindow instance) {
 			return (Dictionary<int, long>) type
-				.GetField("usedResources", BindingFlags.NonPublic | BindingFlags.Instance)
-				.GetValue(instance);
+				.GetField ("usedResources", BindingFlags.NonPublic | BindingFlags.Instance)
+				.GetValue (instance);
 		}
 
 	}

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace EBML.GUI {
@@ -17,12 +13,12 @@ namespace EBML.GUI {
 		/// The action that should be performed
 		/// when clicking the button.
 		/// </summary>
-		public Action action { get; private set; }
+		public Action Action { get; private set; }
 
 		/// <summary>
 		/// The text inside the button.
 		/// </summary>
-		public string text { get; private set; }
+		public string Text { get; private set; }
 
 		/// <summary>
 		/// Creates a new GUIButton.
@@ -32,17 +28,17 @@ namespace EBML.GUI {
 		/// <param name="text">The text inside the button</param>
 		/// <param name="action">The action that should be performed when clicking button</param>
 		public GUIButton (string name, Rect bounds, string text, Action action) : base (name, bounds) {
-			this.text = text;
-			this.action = action;
+			this.Text = text;
+			this.Action = action;
 		}
 
 		/// <summary>
 		/// See <see cref="GUIObject.Render"/>.
 		/// </summary>
-		public override void Render() {
-			if (UnityEngine.GUI.Button (bounds, text)) {
-				if (action != null) {
-					action();
+		public override void Render () {
+			if (UnityEngine.GUI.Button (Bounds, Text)) {
+				if (Action != null) {
+					Action ();
 				}
 			}
 		}

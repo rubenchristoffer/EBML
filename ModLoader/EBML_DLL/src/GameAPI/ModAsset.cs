@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EBML.GameAPI {
+﻿namespace EBML.GameAPI {
 
 	/// <summary>
 	/// A ModAsset is a Unity asset (object) with its
@@ -25,12 +19,12 @@ namespace EBML.GameAPI {
 		/// from 1000 and up to ensure no collision with the
 		/// game API.
 		/// </summary>
-		public int id { get; private set; }
+		public int Id { get; private set; }
 
 		/// <summary>
 		/// The actual asset itself.
 		/// </summary>
-		public UnityEngine.Object asset { get; private set; }
+		public UnityEngine.Object Asset { get; private set; }
 
 		/// <summary>
 		/// Creates a new ModAsset without type safety.
@@ -38,8 +32,8 @@ namespace EBML.GameAPI {
 		/// <param name="id">The unique ID</param>
 		/// <param name="asset">The actual asset</param>
 		protected ModAsset (int id, UnityEngine.Object asset) {
-			this.id = id;
-			this.asset = asset;
+			this.Id = id;
+			this.Asset = asset;
 		}
 
 		/// <summary>
@@ -48,7 +42,7 @@ namespace EBML.GameAPI {
 		/// <typeparam name="T">The type you want to cast to</typeparam>
 		/// <returns>Asset itself casted to <code>T</code></returns>
 		public T GetAs<T> () where T : UnityEngine.Object {
-			return (T) asset;
+			return (T) Asset;
 		}
 
 	}
@@ -59,7 +53,7 @@ namespace EBML.GameAPI {
 	/// <typeparam name="T">The asset type</typeparam>
 	public class ModAsset<T> : ModAsset where T : UnityEngine.Object {
 
-		internal ModAsset (int id, T asset) : base (id, asset) {}
+		internal ModAsset (int id, T asset) : base (id, asset) { }
 
 	}
 
