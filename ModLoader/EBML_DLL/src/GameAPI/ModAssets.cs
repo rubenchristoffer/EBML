@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EBML.Hooks;
+using EBML.Logging;
 
 namespace EBML.GameAPI {
 
@@ -14,13 +15,15 @@ namespace EBML.GameAPI {
 	/// </summary>
 	public static class ModAssets {
 
+		static readonly ILog log = LogFactory.GetLogger(typeof(ModAssets));
+
 		/// <summary>
 		/// This is the ID that the next ModAsset will have.
 		/// </summary>
 		public static int nextID { get; private set; }
 
-		private static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset>();
-		private static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
+		static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset>();
+		static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int>();
 
 		static ModAssets () {
 			nextID = 1000;
@@ -30,14 +33,14 @@ namespace EBML.GameAPI {
 
 			Hooks.UnityResourcesHooks.Load.AddPreHook((returnObj, path) => {
 				if (DoesMappingExist(path)) {
-					ModLoader.Log(path);
+					log.Debug(String.Format("General mapping exists for '{0}'", path));
 					returnObj.SetValue(GetAssetWithMapping(path).asset);
 				}
 			});
 
 			Hooks.UnityResourcesHooks.LoadSprite.AddPreHook((returnObj, path) => {
 				if (DoesMappingExist(path)) {
-					ModLoader.Log(path);
+					log.Debug(String.Format("Sprite mapping exists for '{0}'", path));
 					returnObj.SetValue(GetAssetWithMapping(path).GetAs<UnityEngine.Sprite>());
 				}
 			});

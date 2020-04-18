@@ -39,6 +39,12 @@ namespace EBML {
             MODS_PATH = EBML_PATH + @"Mods\";
         }
 
+        internal static void CreateAllModPaths () {
+            Directory.CreateDirectory(EBML_PATH);
+            Directory.CreateDirectory(MODS_PATH);
+            Directory.CreateDirectory(LOG_PATH);
+        }
+
     }
 
 }

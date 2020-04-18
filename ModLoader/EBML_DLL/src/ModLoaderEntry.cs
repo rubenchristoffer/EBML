@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using System.Reflection;
 using System.Linq;
+using EBML.Logging;
 
 namespace EBML {
 
@@ -12,31 +13,31 @@ namespace EBML {
     /// This is the entry point for the EBML DLL
     /// and API
     /// </summary>
-    public class ModLoaderEntry {
+    static class ModLoaderEntry {
+
+        private static readonly ILog log = LogFactory.GetLogger(typeof(ModLoaderEntry));
 
         /// <summary>
         /// The 'Bootstrapper' gameObject that is used to ensure
         /// that the ModLoader code is executed on the Unity thread.
         /// The MonoBehaviourCallbacks component is attached to this gameObject.
         /// </summary>
-        public static GameObject bootstrapperGameObject { get; private set; }
+        static GameObject bootstrapperGameObject;
 
         /// <summary>
         /// This will be called by injector
         /// after assembly is injected.
         /// </summary>
         static void OnInjection () {
-            Directory.CreateDirectory(ModPaths.EBML_PATH);
-            Directory.CreateDirectory(ModPaths.MODS_PATH);
-            Directory.CreateDirectory(ModPaths.LOG_PATH);
+            // Create required directories if they do not exist
+            ModPaths.CreateAllModPaths();
 
-            ModLoader.LogToFile("", false);
-            ModLoader.LogToFile("### New Session ###");
-            ModLoader.LogToFile("ModLoader has been injected.");
+            log.Info("### New Session ###");
+            log.Info("ModLoader has been injected.");
 
             WaitUntilLoaderIsPresent();
 
-            ModLoader.LogToFile("Loader is present (not null), so creating bootstrapper");
+            log.Info("Loader is present (not null), so creating bootstrapper");
             CreateBootstrapper();
         }
 
@@ -46,9 +47,9 @@ namespace EBML {
         /// that nothing is affecting game before it is 
         /// properly loaded.
         /// </summary>
-        private static void WaitUntilLoaderIsPresent () {
+        static void WaitUntilLoaderIsPresent () {
             if (Singletons.LOADER == null) {
-                ModLoader.LogToFile("Loader is null, so waiting a couple of seconds before checking again...");
+                log.Info("Loader is null, so waiting a couple of seconds before checking again...");
                 System.Threading.Thread.Sleep(2000);
                 WaitUntilLoaderIsPresent();
             }
@@ -58,14 +59,14 @@ namespace EBML {
         /// Create a Bootstrapper gameobject in order to ensure
         /// that code will be executed by the Unity Thread
         /// </summary>
-        private static void CreateBootstrapper () {
-            ModLoader.LogToFile("Creating new Bootstrapper GameObject...");
+        static void CreateBootstrapper () {
+            log.Info("Creating new Bootstrapper GameObject...");
             bootstrapperGameObject = new GameObject("ModLoader");
 
-            ModLoader.LogToFile("Enabling DontDestroyOnLoad");
+            log.Info("Enabling DontDestroyOnLoad");
             MonoBehaviour.DontDestroyOnLoad(bootstrapperGameObject);
 
-            ModLoader.LogToFile("Setting up MonoBehaviour callbacks");
+            log.Info("Setting up MonoBehaviour callbacks");
             MonoBehaviourCallbacks.start += Bootstrapper_Start;
 
             // Initialize mono behaviour callbacks
@@ -77,13 +78,13 @@ namespace EBML {
         /// and is therefore guaranteed to be run on the Unity
         /// thread.
         /// </summary>
-        private static void Bootstrapper_Start () {
-            ModLoader.LogToFile("ModLoaderEntry Start has been invoked");
+        static void Bootstrapper_Start () {
+            log.Info("ModLoaderEntry Start has been invoked");
 
             // We only want to call this code ONCE
             MonoBehaviourCallbacks.start -= Bootstrapper_Start;
 
-            ModLoader.LogToFile("Initializing ModLoader...");
+            log.Info("Initializing ModLoader...");
             ModLoader.__Initialize();
 
             try {
@@ -91,16 +92,16 @@ namespace EBML {
                 // try and prevent game from crashing if anything goes wrong
                 // (there is a real possibility that it will crash anyway)
 
-                ModLoader.Log("Attemping to install method hooks...");
+                log.Info("Attemping to install method hooks...");
                 ModLoader.__InstallMethodHooks();
 
-                ModLoader.Log("Loading mods...");
+                log.Info("Loading mods...");
                 ModLoader.__LoadMods();
 
-                ModLoader.LogToFile("Initializing mods...");
+                log.Info("Initializing mods...");
                 ModLoader.__InitializeMods();
             } catch (Exception e) {
-                ModLoader.Log(e.ToString());
+                log.Error("Something went wrong initializing ModLoader", e);
             }
         }
 

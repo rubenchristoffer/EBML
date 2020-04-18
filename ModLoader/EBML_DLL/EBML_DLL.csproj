@@ -120,6 +120,9 @@
     <Compile Include="src\Hooks\ReturnValue.cs" />
     <Compile Include="src\Hooks\UnityResourcesHooks.cs" />
     <Compile Include="src\Hooks\WeaponCraftWindowHooks.cs" />
+    <Compile Include="src\Logging\ILog.cs" />
+    <Compile Include="src\Logging\Log.cs" />
+    <Compile Include="src\Logging\LogFactory.cs" />
     <Compile Include="src\ModFiles.cs" />
     <Compile Include="src\SceneMapper.cs" />
     <Compile Include="src\Singletons.cs" />
@@ -394,7 +397,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

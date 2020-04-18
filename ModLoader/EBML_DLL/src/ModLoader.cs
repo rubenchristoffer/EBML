@@ -8,16 +8,17 @@ using System.IO;
 using UnityEngine;
 using HarmonyLib;
 using EBML.GUI;
+using EBML.Logging;
 
 namespace EBML {
 
     /// <summary>
     /// This is the class responsible for
-    /// actually loading mods, but also
-    /// logging debug information to console
-    /// and log file. 
+    /// actually loading mods
     /// </summary>
     public static class ModLoader {
+
+        private static readonly ILog log = LogFactory.GetLogger(typeof(ModLoader));
 
         /// <summary>
         /// This list contains all the loaded Mod instances.
@@ -32,7 +33,7 @@ namespace EBML {
 
         /// <summary>
         /// The ModGUI instance responsible for rendering
-        /// the Console / Log GUI.
+        /// the Console / log.Info GUI.
         /// </summary>
         public static ModGUI modGUI { get; private set; }
 
@@ -45,58 +46,31 @@ namespace EBML {
         }
 
         /// <summary>
-        /// The default Log function.
-        /// This will log info to the Console GUI, but also
-        /// the log file and it includes a timestamp.
-        /// </summary>
-        /// <param name="message">The message you want to log</param>
-        public static void Log (string message) {
-            LogToFile(message);
-            modGUI.GetObject<GUIBox>("log").AppendLine(message);
-        }
-
-        /// <summary>
-        /// This will log info to the log file and NOT
-        /// to the Console GUI.
-        /// This can be called before the ModLoader is initialized.
-        /// </summary>
-        /// <param name="message">The message you want to log</param>
-        /// <param name="includeTimestamp">Should the timestamp be included or not?</param>
-        public static void LogToFile (string message, bool includeTimestamp = true) {
-            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(ModPaths.LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
-                if (includeTimestamp)
-                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
-                else
-                    outputFile.WriteLine(message);
-            }
-        }
-
-        /// <summary>
         /// Initializes the ModLoader by loading required assemblies
-        /// and creates a new Log GUI.
+        /// and creates a new log.Info GUI.
         /// </summary>
         internal static void __Initialize() {
-            ModLoader.LogToFile("Loading assembly Mono.Cecil.dll");
+            log.Info("Loading assembly Mono.Cecil.dll");
             Assembly.LoadFile(ModPaths.EBML_PATH + "Mono.Cecil.dll");
 
-            ModLoader.LogToFile("Loading assembly 0Harmony.dll");
+            log.Info("Loading assembly 0Harmony.dll");
             Assembly.LoadFile(ModPaths.EBML_PATH + "0Harmony.dll");
 
-            LogToFile("Creating new ModGUI");
+            log.Info("Creating new ModGUI");
             modGUI = new ModGUI();
 
-            LogToFile("Adding Console GUI Object");
-            GUIBox log = new GUIBox("log", new Rect(Screen.width - 505f, (int)((Screen.height - 500f) / 2f), 500, 500), "");
+            log.Info("Adding Console GUI Object");
+            GUIBox logBox = new GUIBox("log", new Rect(Screen.width - 505f, (int)((Screen.height - 500f) / 2f), 500, 500), "");
 
-            GUIButton btn = new GUIButton("btn", log.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)), "_", () => {
-                log.enabled = !log.enabled;
+            GUIButton btn = new GUIButton("btn", logBox.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)), "_", () => {
+                logBox.enabled = !logBox.enabled;
             });
 
-            modGUI.Add(log, btn);
+            modGUI.Add(logBox, btn);
 
-            ModLoader.Log("Bounds: " + log.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)));
+            log.Info("Bounds: " + logBox.bounds.FromAnchor(GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2(20, 20)));
 
-            Log("ModLoader has been initialized!");
+            log.Info("ModLoader has been initialized!");
         }
 
         /// <summary>
@@ -121,7 +95,7 @@ namespace EBML {
                     .First();
 
                 if (modType == null) {
-                    Log("Could not find entry point of mod at " + fullPath);
+                    log.Error("Could not find entry point of mod at " + fullPath);
                     return;
                 }
 
@@ -129,9 +103,9 @@ namespace EBML {
                 loadedMods.Add(mod);
                 mod.OnLoad();
 
-                Log("Loaded " + mod.modInfo.ToString());
+                log.Info("Loaded " + mod.modInfo.ToString());
             } catch (Exception e) {
-                Log(e.ToString());
+                log.Error(String.Format("Something went wrong loading mod '{0}'", fullPath), e);
             }
         }
 
@@ -155,13 +129,13 @@ namespace EBML {
         /// namespace.
         /// </summary>
         internal static void __InstallMethodHooks() {
-            Log("Injecting method hooks...");
+            log.Info("Injecting method hooks...");
 
             try {
                 harmony = new Harmony("ModLoader");
                 ((Harmony)harmony).PatchAll();
             } catch (Exception e) {
-                Log(e.ToString());
+                log.Error("Something went wrong installing method hooks", e);
             }
         }
 
@@ -179,8 +153,21 @@ namespace EBML {
         /// for all mods
         /// </summary>
         internal static void __InitializeMods() {
-            loadedMods.ForEach(mod => mod.OnInit());
-            loadedMods.ForEach(mod => mod.OnPostInit());
+            foreach (Mod mod in loadedMods) {
+                try {
+                    mod.OnInit();
+                } catch (Exception e) {
+                    log.Error("Something went wrong in OnInit method for mod " + mod.modInfo.name, e);
+                }
+            }
+
+            foreach (Mod mod in loadedMods) {
+                try {
+                    mod.OnPostInit();
+                } catch (Exception e) {
+                    log.Error("Something went wrong in OnPostInit method for mod " + mod.modInfo.name, e);
+                }
+            }
         }
 
     }

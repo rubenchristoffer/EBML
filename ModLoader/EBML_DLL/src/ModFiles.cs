@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.IO;
+using EBML.Logging;
 
 namespace EBML {
 
@@ -13,6 +14,8 @@ namespace EBML {
 	/// into the game from files such as textures / sprites. 
 	/// </summary>
 	public static class ModFiles {
+
+		static readonly ILog log = LogFactory.GetLogger(typeof(ModFiles));
 
 		/// <summary>
 		/// Creates a new sprite using the provided texture.
@@ -32,7 +35,7 @@ namespace EBML {
 		public static Texture2D CreateTexture (byte[] bytes) {
 			Texture2D texture = new Texture2D(0, 0);
 
-			ModLoader.LogToFile("CreateTexture: Loading image data...");
+			log.Info("CreateTexture: Loading image data...");
 			texture.LoadImage(bytes);
 
 			return texture;
@@ -46,7 +49,7 @@ namespace EBML {
 		public static byte[] ReadFileFromDisk (string relativeModsPath) {
 			string fullPath = GetFullPath(relativeModsPath);
 
-			ModLoader.LogToFile(string.Format("Reading file from disk: {0}...", fullPath));
+			log.Info(string.Format("Reading file from disk: {0}...", fullPath));
 
 			if (!File.Exists(fullPath))
 				return null;

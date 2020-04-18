@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using log4net;
+using log4net.Config;
+using log4net.Appender;
+using log4net.Layout;
 
 namespace EBML_GUI {
 
     public partial class MainWindow : Form {
 
-        public static string GAME_PATH = new DirectoryInfo(@".\").FullName;
-        public static string EBML_PATH = GAME_PATH + @"EBML\";
-        public static string LOG_PATH = EBML_PATH + @"GUI_Logs\";
+        private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
+
+        public static readonly string GAME_PATH = new DirectoryInfo(@".\").FullName;
+        public static readonly string EBML_PATH = GAME_PATH + @"EBML\";
+        public static readonly string LOG_PATH = EBML_PATH + @"GUI_Logs\";
 
         private static bool processRunning = false;
         private static bool injected = false;
@@ -34,8 +37,29 @@ namespace EBML_GUI {
             Directory.CreateDirectory(EBML_PATH);
             Directory.CreateDirectory(LOG_PATH);
 
-            LogToFile("", false);
-            LogToFile("### New Session ###");
+            // Configure logging
+            PatternLayout fileLayout = new PatternLayout();
+            fileLayout.ConversionPattern = "%date [%name] %-5level %logger - %message%newline";
+            fileLayout.ActivateOptions();
+
+            PatternLayout textBoxLayout = new PatternLayout();
+            textBoxLayout.ConversionPattern = "%date - %message%newline";
+            textBoxLayout.ActivateOptions();
+
+            FileAppender fileAppender = new FileAppender();
+            fileAppender.AppendToFile = true;
+            fileAppender.ImmediateFlush = true;
+            fileAppender.File = Path.Combine(LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt");
+            fileAppender.Layout = fileLayout;
+            fileAppender.ActivateOptions();
+
+            TextboxAppender textboxAppender = new TextboxAppender("mainappender", textBox1);
+            textboxAppender.Layout = textBoxLayout;
+            textboxAppender.ActivateOptions();
+
+            BasicConfigurator.Configure(fileAppender, textboxAppender);
+
+            log.Info("### New Session ###");
 
             PerformUpdate();
             updateTimer.Start();
@@ -54,7 +78,7 @@ namespace EBML_GUI {
                 injected = false;
                 hasAutoInjected = false;
                 injectedAssemblyAddress = null;
-                Log("Game process with injected DLL has stopped");
+                log.Warn("Game process with injected DLL has stopped");
                 statusLabel.Text = "Ready - ModLoader not injected";
             }
 
@@ -75,8 +99,8 @@ namespace EBML_GUI {
         }
 
         public void InjectModLoaderDLL () {
-            Log("Attempting to inject ModLoader DLL...");
-            Log("Starting injector process...");
+            log.Info("Attempting to inject ModLoader DLL...");
+            log.Info("Starting injector process...");
             statusLabel.Text = "Injecting DLL...";
             statusProgressBar.Visible = true;
 
@@ -86,7 +110,7 @@ namespace EBML_GUI {
         }
 
         public void EjectModLoaderDLL () {
-            Log("Attempting to eject ModLoader DLL...");
+            log.Info("Attempting to eject ModLoader DLL...");
 
             Process ejector = new Process() {
                 StartInfo = new ProcessStartInfo {
@@ -99,7 +123,7 @@ namespace EBML_GUI {
                 }
             };
 
-            Log("Starting ejector process...");
+            log.Info("Starting ejector process...");
             string ejectorProcessOutput = "";
 
             try {
@@ -109,12 +133,12 @@ namespace EBML_GUI {
                 while (!ejector.StandardOutput.EndOfStream) {
                     ejectorProcessOutput += ejector.StandardOutput.ReadLine();
                 }
-
-                Log("Ejector Output: " + ejectorProcessOutput);
+                
+                log.Debug("Ejector Output: " + ejectorProcessOutput);
 
                 injected = !ejectorProcessOutput.StartsWith("Ejection successful");
             } catch (Exception e) {
-                Log(e.ToString());
+                log.Error("Something went wrong with ejector process", e);
             }
 
             if (!injected)
@@ -122,7 +146,7 @@ namespace EBML_GUI {
         }
 
         public void StartGameProcess () {
-            Log("Starting game process using steam URL ('steam://rungameid/896160')...");
+            log.Info("Starting game process using steam URL ('steam://rungameid/896160')...");
             Process.Start("steam://rungameid/896160");
         }
 
@@ -136,21 +160,6 @@ namespace EBML_GUI {
         private void button2_Click(object sender, EventArgs e) {
             if (!processRunning)
                 StartGameProcess();
-        }
-
-        public void Log (string message) {
-            LogToFile(message);
-
-            textBox1.AppendText(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message) + Environment.NewLine);
-        }
-
-        public void LogToFile (string message, bool includeTimestamp = true) {
-            using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter(System.IO.Path.Combine(LOG_PATH, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)) {
-                if (includeTimestamp)
-                    outputFile.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), message));
-                else
-                    outputFile.WriteLine(message);
-            }
         }
 
         private void injectorWorker_DoWork(object sender, DoWorkEventArgs args) {
@@ -177,18 +186,23 @@ namespace EBML_GUI {
 
                 injected = injectorProcessOutput.StartsWith("EBML.dll");
             } catch (Exception e) {
-                Log("Something went wrong with injector: " + e.ToString());
+                log.Error("Something went wrong with injector process", e);
             }
         }
 
         private void injectorWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            Log("Injector Output: " + injectorProcessOutput);
+            log.Debug("Injector Output: " + injectorProcessOutput);
 
-            if (injected)
+            if (injected) {
                 injectedAssemblyAddress = injectorProcessOutput.Split(' ')[1];
 
-            Log(injected ? "DLL has been successfully injected at address " + injectedAssemblyAddress : "An error occured while injecting DLL!");
-            statusLabel.Text = injected ? "ModLoader DLL injected at memory address " + injectedAssemblyAddress : "Could not inject ModLoader DLL. Try restarting game.";
+                log.Info("DLL has been successfully injected at address " + injectedAssemblyAddress);
+                statusLabel.Text = "ModLoader DLL injected at memory address " + injectedAssemblyAddress;
+            } else {
+                log.Error("An error occured while injecting DLL!");
+                statusLabel.Text = "Could not inject ModLoader DLL. Try restarting game.";
+            }
+
             statusProgressBar.Visible = false;
         }
 
