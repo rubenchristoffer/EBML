@@ -1,7 +1,0 @@
-# Visual studio ignores
-obj/
-bin/
-.vs/
-
-# Symbolic links
-*.symlink
