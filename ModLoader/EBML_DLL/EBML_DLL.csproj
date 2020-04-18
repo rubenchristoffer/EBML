@@ -104,7 +104,7 @@
     <Compile Include="src\GameAPI\ModAsset.cs" />
     <Compile Include="src\GameAPI\ModAssets.cs" />
     <Compile Include="src\GameAPI\ModProperties.cs" />
-    <Compile Include="src\GameAPI\StructFactory.cs" />
+    <Compile Include="src\GameAPI\DataFactory.cs" />
     <Compile Include="src\GUI\GUIBox.cs" />
     <Compile Include="src\GUI\GUIButton.cs" />
     <Compile Include="src\GUI\GUIExtensionMethods.cs" />

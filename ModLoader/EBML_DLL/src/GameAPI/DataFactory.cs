@@ -3,11 +3,11 @@
 namespace EBML.GameAPI {
 
     /// <summary>
-    /// Utility class that generates common structs in the game.
+    /// Factory class that generates common data structs in the game.
     /// ID fields are left out, since they should usually be assigned
     /// by the EBML API and not the Modder. 
     /// </summary>
-    public static class StructFactory {
+    public static class DataFactory {
 
         /// <summary>
         /// See <see cref="CreateStaticResourceData(string, int, int, int)"/>

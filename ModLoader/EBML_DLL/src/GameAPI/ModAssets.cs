@@ -11,14 +11,13 @@ namespace EBML.GameAPI {
 	public static class ModAssets {
 
 		static readonly ILog log = LogFactory.GetLogger (typeof (ModAssets));
+		static readonly Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset> ();
+		static readonly Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int> ();
 
 		/// <summary>
 		/// This is the ID that the next ModAsset will have.
 		/// </summary>
 		public static int NextID { get; private set; }
-
-		static Dictionary<int, ModAsset> assets = new Dictionary<int, ModAsset> ();
-		static Dictionary<string, int> resourceToAssetMappings = new Dictionary<string, int> ();
 
 		static ModAssets () {
 			NextID = 1000;

@@ -12,6 +12,10 @@ namespace EBML.GameAPI {
 	/// </summary>
 	public static class ModResources {
 
+		static readonly Dictionary<int, Sprite> modResourceIcons = new Dictionary<int, Sprite> ();
+		static readonly List<int> modProductionResources = new List<int> ();
+		static readonly List<int> modWarResources = new List<int> ();
+
 		/// <summary>
 		/// The ID that the next modded resource object will have
 		/// </summary>
@@ -21,10 +25,6 @@ namespace EBML.GameAPI {
 		/// The ID that the next modded resource production object will have
 		/// </summary>
 		public static int NextResourceProductionID { get; private set; }
-
-		private static Dictionary<int, Sprite> modResourceIcons = new Dictionary<int, Sprite> ();
-		private static List<int> modProductionResources = new List<int> ();
-		private static List<int> modWarResources = new List<int> ();
 
 		static ModResources () {
 			NextResourceID = 48; // Last vanilla ID is 47
@@ -67,14 +67,6 @@ namespace EBML.GameAPI {
 					}));
 				}
 			});
-
-			// This hook will properly set the image icon of the modded resource
-			// if a icon has been provided. 
-			/*Hooks.ResourceControllerHooks.CreateResources.AddPostHook((instance) => {
-                foreach (int resourceID in modResourceIcons.Keys) {
-                    Singletons.RESOURCE_CONTROLLER.GetResource(resourceID).SetIcon(modResourceIcons[resourceID]);
-                }
-            });*/
 		}
 
 		/// <summary>
@@ -113,8 +105,8 @@ namespace EBML.GameAPI {
 		/// <see cref="ResourceController.CreateResources"/> has been called, but this will
 		/// happen automatically.
 		/// </summary>
-		/// <param name="staticResourceData">See <see cref="StructFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/> to create this</param>
-		/// <param name="staticResourceProductionData">See <see cref="StructFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/> to create this</param>
+		/// <param name="staticResourceData">See <see cref="DataFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/> to create this</param>
+		/// <param name="staticResourceProductionData">See <see cref="DataFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/> to create this</param>
 		/// <param name="iconSprite">Optional icon. See <see cref="ModAssets.CreateAsset{T}(T)"/> and 
 		/// <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
 		/// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
@@ -137,7 +129,7 @@ namespace EBML.GameAPI {
 			return new Tuple<int, int> (resourceID, NextResourceProductionID++);
 		}
 
-		private static void AddStaticResource (StaticResourceData resource) {
+		static void AddStaticResource (StaticResourceData resource) {
 			StaticResource staticResource = Singletons.RESOURCE_CONTROLLER.GetStaticResource ();
 
 			StaticResourceData[] newData = new StaticResourceData[staticResource.staticResourceDataArr.Length + 1];
@@ -147,7 +139,7 @@ namespace EBML.GameAPI {
 			staticResource.staticResourceDataArr = newData;
 		}
 
-		private static void AddStaticResourceProduction (StaticResourceProductionData resourceProduction) {
+		static void AddStaticResourceProduction (StaticResourceProductionData resourceProduction) {
 			StaticResourceProduction staticResourceProduction = Singletons.RESOURCE_CONTROLLER.GetStaticResourceProduction ();
 
 			StaticResourceProductionData[] newData = new StaticResourceProductionData[staticResourceProduction.staticResourceProductionDataArr.Length + 1];

@@ -5,7 +5,7 @@
 	/// own unique ID. It is used by the mod API to keep
 	/// track of modded assets. It is also possible to create
 	/// a mapping between path and ModAsset so that if you use any
-	/// <see cref="UnityEngine.Resources"/> Load function you load 
+	/// <see cref="UnityEngine.Resources"/> <code>Load</code> function you load 
 	/// the ModAsset, although not all types might be supported using 
 	/// the generic version of Load.
 	/// Use <see cref="ModAssets"/> to create a ModAsset.

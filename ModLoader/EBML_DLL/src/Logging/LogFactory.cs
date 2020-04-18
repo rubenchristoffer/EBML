@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace EBML.Logging {
 
 	/// <summary>
-	/// Factory class for EBML Logging
+	/// Factory class for EBML Logging.
 	/// </summary>
 	public static class LogFactory {
 

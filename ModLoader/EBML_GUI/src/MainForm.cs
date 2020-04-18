@@ -39,11 +39,11 @@ namespace EBML_GUI {
 
             // Configure logging
             PatternLayout fileLayout = new PatternLayout();
-            fileLayout.ConversionPattern = "%date [%name] %-5level %logger - %message%newline";
+            fileLayout.ConversionPattern = "[%date][%name] %-5level %logger - %message%newline";
             fileLayout.ActivateOptions();
 
             PatternLayout textBoxLayout = new PatternLayout();
-            textBoxLayout.ConversionPattern = "%date - %message%newline";
+            textBoxLayout.ConversionPattern = "[%date] - %message%newline";
             textBoxLayout.ActivateOptions();
 
             FileAppender fileAppender = new FileAppender();
