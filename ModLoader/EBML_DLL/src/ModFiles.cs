@@ -13,30 +13,6 @@ namespace EBML {
 		static readonly ILog log = LogFactory.GetLogger (typeof (ModFiles));
 
 		/// <summary>
-		/// Creates a new sprite using the provided texture.
-		/// </summary>
-		/// <param name="texture">The texture you want to create sprite from</param>
-		/// <returns>New sprite</returns>
-		public static Sprite CreateSprite (Texture2D texture) {
-			return Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), Vector2.zero);
-		}
-
-		/// <summary>
-		/// Creates a new texture object based on
-		/// raw bytes. 
-		/// </summary>
-		/// <param name="bytes">Raw bytes</param>
-		/// <returns>New texture or null if it couldn't create image</returns>
-		public static Texture2D CreateTexture (byte[] bytes) {
-			Texture2D texture = new Texture2D (0, 0);
-
-			log.Info ("CreateTexture: Loading image data...");
-			texture.LoadImage (bytes);
-
-			return texture;
-		}
-
-		/// <summary>
 		/// Reads a file from disk and stores the data in a byte array.
 		/// </summary>
 		/// <param name="relativeModsPath">The path preceding the mods directory</param>
@@ -44,7 +20,7 @@ namespace EBML {
 		public static byte[] ReadFileFromDisk (string relativeModsPath) {
 			string fullPath = GetFullPath (relativeModsPath);
 
-			log.Info (string.Format ("Reading file from disk: {0}...", fullPath));
+			log.Debug (string.Format ("Reading file from disk: {0}...", fullPath));
 
 			if (!File.Exists (fullPath))
 				return null;

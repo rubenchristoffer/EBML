@@ -94,6 +94,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\GameAPI\ByteArrayFactory.cs" />
     <Compile Include="src\GameAPI\Extensions\PropertyControllerExtensions.cs" />
     <Compile Include="src\GameAPI\Extensions\PropertyExtensions.cs" />
     <Compile Include="src\GameAPI\Extensions\ResourceControllerExtensions.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="src\Hooks\ReturnValue.cs" />
     <Compile Include="src\Hooks\UnityResourcesHooks.cs" />
     <Compile Include="src\Hooks\WeaponCraftWindowHooks.cs" />
+    <Compile Include="src\GameAPI\Factory.cs" />
     <Compile Include="src\Logging\ILog.cs" />
     <Compile Include="src\Logging\Log.cs" />
     <Compile Include="src\Logging\LogFactory.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="src\ModLoaderEntry.cs" />
     <Compile Include="src\MonoBehaviourCallbacks.cs" />
     <Compile Include="src\ModPaths.cs" />
+    <Compile Include="src\GameAPI\SpriteFactory.cs" />
+    <Compile Include="src\GameAPI\TextureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
