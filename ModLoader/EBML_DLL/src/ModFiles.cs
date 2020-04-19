@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using EBML.Logging;
-using UnityEngine;
 
 namespace EBML {
 

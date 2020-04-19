@@ -77,10 +77,10 @@ namespace EBML.GameAPI {
 		/// happen automatically.
 		/// </summary>
 		/// <param name="staticResourceData">Resource information</param>
-		/// <param name="iconSprite">Optional icon. See <see cref="ModAssets.CreateAsset{T}(T)"/> and 
-		/// <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+		/// <param name="iconSprite">Optional icon.</param>
 		/// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
 		/// <returns>ID of the new resource</returns>
+		/// <seealso cref="SpriteFactory"/>
 		public static int RegisterNewResource (StaticResourceData staticResourceData, ModAsset<Sprite> iconSprite = null, bool isWarResource = false) {
 			staticResourceData.id = NextResourceID;
 			AddStaticResource (staticResourceData);
@@ -105,13 +105,16 @@ namespace EBML.GameAPI {
 		/// <see cref="ResourceController.CreateResources"/> has been called, but this will
 		/// happen automatically.
 		/// </summary>
-		/// <param name="staticResourceData">See <see cref="DataFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/> to create this</param>
-		/// <param name="staticResourceProductionData">See <see cref="DataFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/> to create this</param>
-		/// <param name="iconSprite">Optional icon. See <see cref="ModAssets.CreateAsset{T}(T)"/> and 
-		/// <see cref="ModFiles.CreateSprite(Texture2D)"/></param>
+		/// <param name="staticResourceData">Generate this using DataFactory</param>
+		/// <param name="staticResourceProductionData">Generate this using DataFactory</param>
+		/// <param name="iconSprite">Optional icon.</param>
 		/// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
 		/// <returns>Tuple containing assigned ID of resource and 
 		/// ID of production resource respectively</returns>
+		/// <seealso cref="ModAssets.CreateAsset{T}(T)"/>
+		/// <seealso cref="SpriteFactory"/>
+		/// <seealso cref="DataFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/>
+		/// <seealso cref="DataFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/>
 		public static Tuple<int, int> RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, ModAsset<Sprite> iconSprite = null, bool isWarResource = true) {
 			int resourceID = RegisterNewResource (staticResourceData, iconSprite, isWarResource);
 

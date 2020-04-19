@@ -22,11 +22,13 @@ namespace MyMod {
 
 			int id = ModResources.RegisterNewResource (
 				DataFactory.CreateStaticResourceData ("Uranium", Resource.ResourceType.Luxury, 5, 0),
-				ModAssets.CreateAsset (ModFiles.CreateSprite (ModFiles.CreateTexture (ModFiles.ReadFileFromDisk (@"ExampleMod\uranium.png")))),
+				ModAssets.CreateAsset (SpriteFactory.GetSprite (usingTexture => usingTexture.FromBytes (usingBytes => usingBytes.FromFile(@"ExampleMod\uranium.png")))),
 				true
 			);
 
-			ModAsset<UnityEngine.Sprite> atomBomb = ModAssets.CreateAsset (ModFiles.CreateSprite (ModFiles.CreateTexture (ModFiles.ReadFileFromDisk (@"ExampleMod\atombomb.png"))));
+			ModAsset<UnityEngine.Sprite> atomBomb = ModAssets.CreateAsset (
+				SpriteFactory.GetSprite (usingTexture => usingTexture.FromBytes (usingBytes => usingBytes.FromFile (@"ExampleMod\atombomb.png")))
+			);
 
 			Tuple<int, int> ids = ModResources.RegisterNewProductionResource (
 				DataFactory.CreateStaticResourceData ("Atom Bomb", Resource.ResourceType.Weapon, 1000000, 0),

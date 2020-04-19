@@ -9,7 +9,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class PropertyControllerExtensions {
 
-		private static Type type = typeof (PropertyController);
+		private static readonly Type type = typeof (PropertyController);
 
 		/// <summary>
 		/// Gets the staticResourceBuildings field.

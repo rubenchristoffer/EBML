@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EBML {
 
+	/// <summary>
+	/// Singleton base class for Lambda-based Factory classes.
+	/// </summary>
+	/// <typeparam name="T">The actual factory class type itself</typeparam>
 	public abstract class Factory<T> where T : Factory<T> {
 
-		public static T Instance { get; private set; }
+		/// <summary>
+		/// Static singleton instance.
+		/// </summary>
+		protected static T Instance { get; private set; }
 
 		static Factory () {
 			Instance = Activator.CreateInstance<T> ();
 		}
-
-		protected Factory () {}
 
 	}
 

@@ -8,7 +8,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class ResourceExtensions {
 
-		private static Type type = typeof (Resource);
+		private static readonly Type type = typeof (Resource);
 
 		/// <summary>
 		/// Sets the icon property.

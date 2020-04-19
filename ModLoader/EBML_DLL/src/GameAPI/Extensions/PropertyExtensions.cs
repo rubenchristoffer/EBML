@@ -8,7 +8,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class PropertyExtensions {
 
-		private static Type type = typeof (Property);
+		private static readonly Type type = typeof (Property);
 
 		/// <summary>
 		/// Sets the propertyIcons property.

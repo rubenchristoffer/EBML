@@ -9,7 +9,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class WeaponCraftWindowExtensions {
 
-		private static Type type = typeof (WeaponCraftWindow);
+		private static readonly Type type = typeof (WeaponCraftWindow);
 
 		/// <summary>
 		/// Gets the usedResources field.

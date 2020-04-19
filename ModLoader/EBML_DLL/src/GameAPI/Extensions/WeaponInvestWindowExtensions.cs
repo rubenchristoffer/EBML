@@ -9,7 +9,7 @@ namespace EBML.GameAPI.Extensions {
 	/// </summary>
 	public static class WeaponInvestWindowExtensions {
 
-		private static Type type = typeof (WeaponInvestWindow);
+		private static readonly Type type = typeof (WeaponInvestWindow);
 
 		/// <summary>
 		/// Gets the sellCardsPool field.

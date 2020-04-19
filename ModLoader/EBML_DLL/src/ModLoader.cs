@@ -21,7 +21,7 @@ namespace EBML {
         /// <summary>
         /// This list contains all the loaded Mod instances.
         /// </summary>
-        static List<Mod> loadedMods = new List<Mod> ();
+        static readonly List<Mod> loadedMods = new List<Mod> ();
 
         /// <summary>
         /// The Harmony object that handles all the method patches.
