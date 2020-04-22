@@ -80,7 +80,7 @@ namespace EBML.GameAPI {
 		/// <param name="iconSprite">Optional icon.</param>
 		/// <param name="isWarResource">If this is true, it will be possible to sell it to other countries.</param>
 		/// <returns>ID of the new resource</returns>
-		/// <seealso cref="SpriteFactory"/>
+		/// <seealso cref="SimpleSpriteFactory"/>
 		public static int RegisterNewResource (StaticResourceData staticResourceData, ModAsset<Sprite> iconSprite = null, bool isWarResource = false) {
 			staticResourceData.id = NextResourceID;
 			AddStaticResource (staticResourceData);
@@ -112,7 +112,7 @@ namespace EBML.GameAPI {
 		/// <returns>Tuple containing assigned ID of resource and 
 		/// ID of production resource respectively</returns>
 		/// <seealso cref="ModAssets.CreateAsset{T}(T)"/>
-		/// <seealso cref="SpriteFactory"/>
+		/// <seealso cref="SimpleSpriteFactory"/>
 		/// <seealso cref="DataFactory.CreateStaticResourceData(string, Resource.ResourceType, int, int)"/>
 		/// <seealso cref="DataFactory.CreateStaticResourceProductionData(int, Turn.Season, int, int, float, int, float)"/>
 		public static Tuple<int, int> RegisterNewProductionResource (StaticResourceData staticResourceData, StaticResourceProductionData staticResourceProductionData, ModAsset<Sprite> iconSprite = null, bool isWarResource = true) {

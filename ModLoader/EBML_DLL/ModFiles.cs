@@ -14,10 +14,10 @@ namespace EBML {
 		/// <summary>
 		/// Reads a file from disk and stores the data in a byte array.
 		/// </summary>
-		/// <param name="relativeModsPath">The path preceding the mods directory</param>
+		/// <param name="relativeFilePath">Path relative to Mods folder</param>
 		/// <returns>A raw byte array if file exists or null otherwise</returns>
-		public static byte[] ReadFileFromDisk (string relativeModsPath) {
-			string fullPath = GetFullPath (relativeModsPath);
+		public static byte[] ReadFileFromDisk (string relativeFilePath) {
+			string fullPath = GetFullPath (relativeFilePath);
 
 			log.Debug (string.Format ("Reading file from disk: {0}...", fullPath));
 
@@ -30,10 +30,10 @@ namespace EBML {
 		/// <summary>
 		/// Gets the full path based on relative mods path.
 		/// </summary>
-		/// <param name="relativeModsPath">The path preceding the mods directory</param>
+		/// <param name="relativeFilePath">Path relative to Mods folder</param>
 		/// <returns>String containing full path</returns>
-		public static string GetFullPath (string relativeModsPath) {
-			return Path.Combine (ModPaths.MODS_PATH, relativeModsPath);
+		public static string GetFullPath (string relativeFilePath) {
+			return Path.Combine (ModPaths.MODS_PATH, relativeFilePath);
 		}
 
 	}

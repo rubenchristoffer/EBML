@@ -94,7 +94,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EBMLInfo.cs" />
-    <Compile Include="GameAPI\ByteArrayFactory.cs" />
     <Compile Include="GameAPI\DataFactory.cs" />
     <Compile Include="GameAPI\Extensions\AutoPoolExtensions.cs" />
     <Compile Include="GameAPI\Extensions\PropertyControllerExtensions.cs" />
@@ -103,14 +102,13 @@
     <Compile Include="GameAPI\Extensions\ResourceExtensions.cs" />
     <Compile Include="GameAPI\Extensions\WeaponCraftWindowExtensions.cs" />
     <Compile Include="GameAPI\Extensions\WeaponInvestWindowExtensions.cs" />
-    <Compile Include="GameAPI\Factory.cs" />
     <Compile Include="GameAPI\ModAsset.cs" />
     <Compile Include="GameAPI\ModAssets.cs" />
     <Compile Include="GameAPI\ModAssetSet.cs" />
     <Compile Include="GameAPI\ModProperties.cs" />
     <Compile Include="GameAPI\ModResources.cs" />
-    <Compile Include="GameAPI\SpriteFactory.cs" />
-    <Compile Include="GameAPI\TextureFactory.cs" />
+    <Compile Include="GameAPI\SimpleSpriteFactory.cs" />
+    <Compile Include="GameAPI\SimpleTextureFactory.cs" />
     <Compile Include="GUI\GUIBox.cs" />
     <Compile Include="GUI\GUIButton.cs" />
     <Compile Include="GUI\GUIExtensionMethods.cs" />
