@@ -8,7 +8,7 @@ namespace EBML.Logging {
 	/// </summary>
 	public static class LogFactory {
 
-		private static readonly Dictionary<Type, ILog> loggerDB = new Dictionary<Type, ILog> ();
+		static readonly Dictionary<Type, ILog> loggerDB = new Dictionary<Type, ILog> ();
 
 		/// <summary>
 		/// Gets an existing logger if it exists or creates a new one.

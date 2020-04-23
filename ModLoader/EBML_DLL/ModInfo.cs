@@ -19,7 +19,13 @@
 		/// <summary>
 		/// This is the current version of the mod.
 		/// </summary>
-		public string Version { get; private set; }
+		public Version Version { get; private set; }
+
+		/// <summary>
+		/// This is the version of the EBML API that
+		/// you are targetting. 
+		/// </summary>
+		public Version TargetAPIVersion { get; private set; }
 
 		/// <summary>
 		/// Creates a new ModInfo instance.
@@ -27,10 +33,13 @@
 		/// <param name="name">The name of the mod</param>
 		/// <param name="description">The description of the mod</param>
 		/// <param name="version">The current version of the mod</param>
-		public ModInfo (string name, string description, string version) {
-			this.Name = name;
-			this.Description = description;
-			this.Version = version;
+		/// <param name="targetAPIVersion">The EBML API version that this mod is using / targetting.
+		/// This should not be a dynamic value that might change over time!</param>
+		public ModInfo (string name, string description, Version version, Version targetAPIVersion) {
+			Name = name;
+			Description = description;
+			Version = version;
+			TargetAPIVersion = targetAPIVersion;
 		}
 
 		/// <summary>
