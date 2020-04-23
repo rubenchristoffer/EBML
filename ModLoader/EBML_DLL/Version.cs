@@ -8,7 +8,7 @@ namespace EBML {
 
 	/// <summary>
 	/// Data class representing a Semantic version.
-	/// <seealso cref="https://semver.org/"/>
+	/// See https://semver.org/ for more information.
 	/// </summary>
 	public struct Version {
 

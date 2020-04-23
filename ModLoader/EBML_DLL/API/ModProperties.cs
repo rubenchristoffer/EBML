@@ -68,8 +68,8 @@ namespace EBML.API {
 		}
 
 		private static void AddStaticResourceBuilding (StaticResourceBuildingsData staticResourceBuildingsData) {
-			StaticResourceBuildings staticResourceBuildings = Singletons.PROPERTY_CONTROLLER.GetStaticResourceBuildings ();
-
+			StaticResourceBuildings staticResourceBuildings = Singletons.PropertyController.GetStaticResourceBuildings ();
+			
 			StaticResourceBuildingsData[] newData = new StaticResourceBuildingsData[staticResourceBuildings.staticResourceBuildingsDataArr.Length + 1];
 			staticResourceBuildings.staticResourceBuildingsDataArr.CopyTo (newData, 0);
 			newData[newData.Length - 1] = staticResourceBuildingsData;

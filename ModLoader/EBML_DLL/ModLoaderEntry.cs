@@ -26,7 +26,7 @@ namespace EBML {
 		/// </summary>
 		static void OnInjection () {
 			// Create required directories if they do not exist
-			ModPaths.CreateAllModPaths ();
+			Paths.CreateAllModPaths ();
 
 			log.Info ("### New Session ###");
 			log.Info ("ModLoader has been injected.");

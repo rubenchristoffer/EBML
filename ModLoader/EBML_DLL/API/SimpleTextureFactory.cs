@@ -28,7 +28,7 @@ namespace EBML.API {
 		/// 
 		/// <seealso cref="CreateFromImage(byte[])"/>
 		public static Texture2D CreateFromImageFile (string relativeFilePath) {
-			return CreateFromImage (ModFiles.ReadFileFromDisk (relativeFilePath));
+			return CreateFromImage (Files.ReadFileFromDisk (relativeFilePath));
 		}
 
 	}

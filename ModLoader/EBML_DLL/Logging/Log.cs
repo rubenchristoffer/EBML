@@ -23,7 +23,7 @@ namespace EBML.Logging {
 			if (exception != null)
 				formattedMessage += Environment.NewLine + exception.ToString ();
 
-			using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter (System.IO.Path.Combine (ModPaths.LOG_PATH, DateTime.Now.ToString ("yyyy-MM-dd") + ".txt"), true)) {
+			using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter (System.IO.Path.Combine (Paths.LOG_PATH, DateTime.Now.ToString ("yyyy-MM-dd") + ".txt"), true)) {
 				outputFile.WriteLine (formattedMessage);
 			}
 

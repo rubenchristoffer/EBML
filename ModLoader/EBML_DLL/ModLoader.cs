@@ -49,10 +49,10 @@ namespace EBML {
         /// </summary>
         internal static void Initialize () {
             log.Info ("Loading assembly Mono.Cecil.dll");
-            Assembly.LoadFile (ModPaths.EBML_PATH + "Mono.Cecil.dll");
+            Assembly.LoadFile (Paths.EBML_PATH + "Mono.Cecil.dll");
 
             log.Info ("Loading assembly 0Harmony.dll");
-            Assembly.LoadFile (ModPaths.EBML_PATH + "0Harmony.dll");
+            Assembly.LoadFile (Paths.EBML_PATH + "0Harmony.dll");
 
             log.Info ("Creating ModLoader GUICanvas");
             MainCanvas = new GUICanvas ();
@@ -112,7 +112,7 @@ namespace EBML {
         /// <returns>String array containing full paths to DLLs</returns>
         internal static string[] GetDLLsInModsFolder () {
             return Directory
-                .EnumerateFiles (ModPaths.MODS_PATH, "*.*", SearchOption.AllDirectories)
+                .EnumerateFiles (Paths.MODS_PATH, "*.*", SearchOption.AllDirectories)
                 .Where (file => Path.GetExtension (file).ToLowerInvariant ().Equals (".dll"))
                 .ToArray ();
         }

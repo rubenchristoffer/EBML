@@ -132,7 +132,7 @@ namespace EBML.API {
 		}
 
 		static void AddStaticResource (StaticResourceData resource) {
-			StaticResource staticResource = Singletons.RESOURCE_CONTROLLER.GetStaticResource ();
+			StaticResource staticResource = Singletons.ResourceController.GetStaticResource ();
 
 			StaticResourceData[] newData = new StaticResourceData[staticResource.staticResourceDataArr.Length + 1];
 			staticResource.staticResourceDataArr.CopyTo (newData, 0);
@@ -142,7 +142,7 @@ namespace EBML.API {
 		}
 
 		static void AddStaticResourceProduction (StaticResourceProductionData resourceProduction) {
-			StaticResourceProduction staticResourceProduction = Singletons.RESOURCE_CONTROLLER.GetStaticResourceProduction ();
+			StaticResourceProduction staticResourceProduction = Singletons.ResourceController.GetStaticResourceProduction ();
 
 			StaticResourceProductionData[] newData = new StaticResourceProductionData[staticResourceProduction.staticResourceProductionDataArr.Length + 1];
 			staticResourceProduction.staticResourceProductionDataArr.CopyTo (newData, 0);
