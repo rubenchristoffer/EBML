@@ -5,7 +5,7 @@ namespace EBML.Hooks {
 	/// <summary>
 	/// Method hooks for <see cref="WeaponCraftWindow"/>.
 	/// </summary>
-	public class WeaponCraftWindowHooks {
+	public static class WeaponCraftWindowHooks {
 
 		/// <summary>
 		/// The Unity <code>Awake()</code> method.

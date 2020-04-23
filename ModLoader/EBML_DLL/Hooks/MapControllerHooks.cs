@@ -5,7 +5,7 @@ namespace EBML.Hooks {
 	/// <summary>
 	/// Method hooks for <see cref="MapController"/>.
 	/// </summary>
-	public class MapControllerHooks {
+	public static class MapControllerHooks {
 
 		/// <summary>
 		/// <code>GenerateStartMap()</code>.

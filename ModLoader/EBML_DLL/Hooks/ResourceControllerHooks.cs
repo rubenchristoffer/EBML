@@ -5,7 +5,7 @@ namespace EBML.Hooks {
 	/// <summary>
 	/// Method hooks for <see cref="ResourceController"/>.
 	/// </summary>
-	public class ResourceControllerHooks {
+	public static class ResourceControllerHooks {
 
 		/// <summary>
 		/// The <code>CreateResources()</code> method.

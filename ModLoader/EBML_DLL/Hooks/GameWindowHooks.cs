@@ -5,7 +5,7 @@ namespace EBML.Hooks {
 	/// <summary>
 	/// Method hooks for <see cref="GameWindow"/>.
 	/// </summary>
-	public class GameWindowHooks {
+	public static class GameWindowHooks {
 
 		/// <summary>
 		/// The Unity <code>Start()</code> method.

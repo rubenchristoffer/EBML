@@ -5,7 +5,7 @@ namespace EBML.Hooks {
 	/// <summary>
 	/// Method hooks for <see cref="Loader"/>.
 	/// </summary>
-	public class LoaderHooks {
+	public static class LoaderHooks {
 
 		/// <summary>
 		/// The Unity <code>Start()</code> method.
