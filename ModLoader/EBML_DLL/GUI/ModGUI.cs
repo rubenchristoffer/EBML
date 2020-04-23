@@ -27,13 +27,13 @@ namespace EBML.GUI {
 		}
 
 		/// <summary>
-		/// Adds a new GUIObject to the GUI.
+		/// Adds new GUI objects.
 		/// </summary>
-		/// <param name="obj">The object you want rendered.</param>
-		/// <param name="additionalObjects">Additional (optional) objects</param>
-		public void Add (GUIObject obj, params GUIObject[] additionalObjects) {
-			guiObjects.Add (obj);
-			guiObjects.AddRange (additionalObjects);
+		/// <param name="objects">All the GUI objects you want rendered</param>
+		public void Add (params GUIObject[] objects) {
+			foreach (GUIObject obj in objects) {
+				guiObjects.Add (obj);
+			}
 		}
 
 		/// <summary>

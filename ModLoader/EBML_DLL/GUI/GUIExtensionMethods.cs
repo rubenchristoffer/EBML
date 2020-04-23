@@ -48,12 +48,13 @@ namespace EBML.GUI {
 		}
 
 		/// <summary>
-		/// Creates a new Rect based on reference Rect and horizontal and vertical anchor points.
+		/// Creates a new Rect where the position is based on reference Rect and horizontal and vertical anchor points.
+		/// Useful if you for example want a button in the corner of a box.
 		/// </summary>
 		/// <param name="instance">The reference Rect</param>
 		/// <param name="anchorX">Horizontal anchor</param>
 		/// <param name="anchorY">Vertical anchor</param>
-		/// <param name="size">Size of rect</param>
+		/// <param name="size">Size of new rect</param>
 		/// <param name="roundPositionToInt">Determines whether position should be cast to integer</param>
 		/// <returns></returns>
 		public static Rect FromAnchor (this Rect instance, AnchorX anchorX, AnchorY anchorY, Vector2 size, bool roundPositionToInt = true) {

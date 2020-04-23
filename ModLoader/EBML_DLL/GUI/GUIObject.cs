@@ -20,7 +20,7 @@ namespace EBML.GUI {
 		/// <summary>
 		/// Determines whether or not GUI Object should render or not
 		/// </summary>
-		public bool enabled = true;
+		public bool enabled;
 
 		/// <summary>
 		/// Initializes GUI Object with provided name.
@@ -28,8 +28,8 @@ namespace EBML.GUI {
 		/// <param name="name">The name of the object used to retrieve it later.</param>
 		/// <param name="bounds">The bounds of the GUI object</param>
 		protected GUIObject (string name, Rect bounds) {
-			this.Name = name;
-			this.Bounds = bounds;
+			Name = name;
+			Bounds = bounds;
 		}
 
 		/// <summary>

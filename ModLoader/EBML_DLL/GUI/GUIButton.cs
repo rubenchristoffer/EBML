@@ -13,7 +13,7 @@ namespace EBML.GUI {
 		/// The action that should be performed
 		/// when clicking the button.
 		/// </summary>
-		public Action Action { get; private set; }
+		public Action OnClickAction { get; private set; }
 
 		/// <summary>
 		/// The text inside the button.
@@ -26,10 +26,10 @@ namespace EBML.GUI {
 		/// <param name="name">The name of the object used to retrieve it later.</param>
 		/// <param name="bounds">The bounds of the button</param>
 		/// <param name="text">The text inside the button</param>
-		/// <param name="action">The action that should be performed when clicking button</param>
-		public GUIButton (string name, Rect bounds, string text, Action action) : base (name, bounds) {
-			this.Text = text;
-			this.Action = action;
+		/// <param name="onClickAction">The action that should be performed after button is pressed</param>
+		public GUIButton (string name, Rect bounds, string text, Action onClickAction) : base (name, bounds) {
+			Text = text;
+			OnClickAction = onClickAction;
 		}
 
 		/// <summary>
@@ -37,8 +37,8 @@ namespace EBML.GUI {
 		/// </summary>
 		public override void Render () {
 			if (UnityEngine.GUI.Button (Bounds, Text)) {
-				if (Action != null) {
-					Action ();
+				if (OnClickAction != null) {
+					OnClickAction ();
 				}
 			}
 		}
