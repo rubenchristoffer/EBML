@@ -12,6 +12,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<MapController> GenerateStartMap = new HookSystem<MapController> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (MapController))]
 		private class Patch {
 
@@ -30,6 +32,8 @@ namespace EBML.Hooks {
 			}
 
 		}
+
+#pragma warning restore IDE0051
 
 	}
 

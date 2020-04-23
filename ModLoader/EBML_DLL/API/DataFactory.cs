@@ -26,12 +26,13 @@ namespace EBML.API {
         /// <param name="turnDiscovery">At which turn will it be available? 0 indicates from beginning of game.</param>
         /// <returns>StaticResourceData struct</returns>
         public static StaticResourceData CreateStaticResourceData (string name, int resourceType, int basePrice, int turnDiscovery) {
-            StaticResourceData staticResourceData = new StaticResourceData ();
-            staticResourceData.id = -1;
-            staticResourceData.name = name;
-            staticResourceData.resourse_type = resourceType;
-            staticResourceData.base_price = basePrice;
-            staticResourceData.turn_discovery = turnDiscovery;
+            StaticResourceData staticResourceData = new StaticResourceData {
+                id = -1,
+                name = name,
+                resourse_type = resourceType,
+                base_price = basePrice,
+                turn_discovery = turnDiscovery
+            };
 
             return staticResourceData;
         }
@@ -57,18 +58,18 @@ namespace EBML.API {
         /// <param name="priceSeedingID2Amount">Amount of resource nr. 2 required.</param>
         /// <returns>StaticResourceProductionData struct</returns>
         public static StaticResourceProductionData CreateStaticResourceProductionData (int workAmount, int autoseedingSeason, int turnMaturation, int priceSeedingID1, float priceSeedingID1Amount, int priceSeedingID2, float priceSeedingID2Amount) {
-            StaticResourceProductionData staticResourceProductionData = new StaticResourceProductionData ();
+            StaticResourceProductionData staticResourceProductionData = new StaticResourceProductionData {
+                id = -1,
+                resourse_id = -1,
 
-            staticResourceProductionData.id = -1;
-            staticResourceProductionData.resourse_id = -1;
-
-            staticResourceProductionData.work_amount = workAmount;
-            staticResourceProductionData.autoseeding_season = autoseedingSeason;
-            staticResourceProductionData.turn_maturation = turnMaturation;
-            staticResourceProductionData.price_seeding_id1 = priceSeedingID1;
-            staticResourceProductionData.price_seeding_id1_amount = priceSeedingID1Amount;
-            staticResourceProductionData.price_seeding_id2 = priceSeedingID2;
-            staticResourceProductionData.price_seeding_id2_amount = priceSeedingID2Amount;
+                work_amount = workAmount,
+                autoseeding_season = autoseedingSeason,
+                turn_maturation = turnMaturation,
+                price_seeding_id1 = priceSeedingID1,
+                price_seeding_id1_amount = priceSeedingID1Amount,
+                price_seeding_id2 = priceSeedingID2,
+                price_seeding_id2_amount = priceSeedingID2Amount
+            };
 
             return staticResourceProductionData;
         }
@@ -95,22 +96,22 @@ namespace EBML.API {
         /// <param name="incomeBonus">Bonus that (probably) influences how many resources you get (needs verification)</param>
         /// <returns></returns>
         public static StaticResourceBuildingsData CreateStaticResourceBuildingsData (string name1, string name2, string name3, string name4, string description, int resourceID, int buildingType, float incomeBonus = 1f) {
-            StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData ();
+            StaticResourceBuildingsData staticResourceBuildingsData = new StaticResourceBuildingsData {
+                id = -1,
+                id_ico_lvl1 = -1,
+                id_ico_lvl2 = -1,
+                id_ico_lvl3 = -1,
+                id_ico_lvl4 = -1,
 
-            staticResourceBuildingsData.id = -1;
-            staticResourceBuildingsData.id_ico_lvl1 = -1;
-            staticResourceBuildingsData.id_ico_lvl2 = -1;
-            staticResourceBuildingsData.id_ico_lvl3 = -1;
-            staticResourceBuildingsData.id_ico_lvl4 = -1;
-
-            staticResourceBuildingsData.name1 = name1;
-            staticResourceBuildingsData.name2 = name2;
-            staticResourceBuildingsData.name3 = name3;
-            staticResourceBuildingsData.name4 = name4;
-            staticResourceBuildingsData.des = description;
-            staticResourceBuildingsData.resourse_id = resourceID;
-            staticResourceBuildingsData.income_bonus = incomeBonus;
-            staticResourceBuildingsData.building_type = buildingType;
+                name1 = name1,
+                name2 = name2,
+                name3 = name3,
+                name4 = name4,
+                des = description,
+                resourse_id = resourceID,
+                income_bonus = incomeBonus,
+                building_type = buildingType
+            };
 
             return staticResourceBuildingsData;
         }

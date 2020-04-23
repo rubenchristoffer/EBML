@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+#pragma warning disable IDE0051
+
 namespace EBML.API {
 
     /// <summary>
@@ -78,3 +80,5 @@ namespace EBML.API {
     }
 
 }
+
+#pragma warning restore IDE0051

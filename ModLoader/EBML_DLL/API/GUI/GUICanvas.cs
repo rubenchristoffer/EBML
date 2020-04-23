@@ -10,7 +10,7 @@ namespace EBML.API.GUI {
 	/// </summary>
 	public class GUICanvas {
 
-		private List<GUIObject> guiObjects = new List<GUIObject> ();
+		readonly List<GUIObject> guiObjects = new List<GUIObject> ();
 
 		/// <summary>
 		/// Creates a new ModGUI instance.

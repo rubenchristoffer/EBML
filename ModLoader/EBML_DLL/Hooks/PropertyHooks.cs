@@ -16,6 +16,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<Property, ReturnValue<Sprite>> GetIcon = new HookSystem<Property, ReturnValue<Sprite>> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (Property))]
 		private class Patch {
 
@@ -29,6 +31,8 @@ namespace EBML.Hooks {
 			}
 
 		}
+
+#pragma warning restore IDE0051
 
 	}
 

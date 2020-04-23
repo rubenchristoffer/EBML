@@ -32,6 +32,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<Loader, bool> SetActivity = new HookSystem<Loader, bool> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (Loader))]
 		private class Patch {
 
@@ -93,6 +95,9 @@ namespace EBML.Hooks {
 
 		}
 
+#pragma warning restore IDE0051
+
 	}
 
 }
+

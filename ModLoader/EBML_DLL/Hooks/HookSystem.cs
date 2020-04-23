@@ -53,8 +53,8 @@ namespace EBML.Hooks {
 	/// <typeparam name="I">The Instance type.</typeparam>
 	public class HookSystem<I> : HookSystemBase<I> {
 
-		private List<System.Action<I>> preHooks = new List<Action<I>> ();
-		private List<System.Action<I>> postHooks = new List<Action<I>> ();
+		readonly List<System.Action<I>> preHooks = new List<Action<I>> ();
+		readonly List<System.Action<I>> postHooks = new List<Action<I>> ();
 
 		/// <summary>
 		/// Adds a pre hook. This means that the Action will be called
@@ -114,8 +114,8 @@ namespace EBML.Hooks {
 	/// <typeparam name="A1">The argument.</typeparam>
 	public class HookSystem<I, A1> : HookSystemBase<I> {
 
-		private List<System.Action<I, A1>> preHooks = new List<Action<I, A1>> ();
-		private List<System.Action<I, A1>> postHooks = new List<Action<I, A1>> ();
+		readonly List<System.Action<I, A1>> preHooks = new List<Action<I, A1>> ();
+		readonly List<System.Action<I, A1>> postHooks = new List<Action<I, A1>> ();
 
 		/// <summary>
 		/// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
@@ -166,8 +166,8 @@ namespace EBML.Hooks {
 	/// <typeparam name="A2">The second argument.</typeparam>
 	public class HookSystem<I, A1, A2> : HookSystemBase<I> {
 
-		private List<System.Action<I, A1, A2>> preHooks = new List<Action<I, A1, A2>> ();
-		private List<System.Action<I, A1, A2>> postHooks = new List<Action<I, A1, A2>> ();
+		readonly List<System.Action<I, A1, A2>> preHooks = new List<Action<I, A1, A2>> ();
+		readonly List<System.Action<I, A1, A2>> postHooks = new List<Action<I, A1, A2>> ();
 
 		/// <summary>
 		/// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.
@@ -219,8 +219,8 @@ namespace EBML.Hooks {
 	/// <typeparam name="A3">The third argument.</typeparam>
 	public class HookSystem<I, A1, A2, A3> : HookSystemBase<I> {
 
-		private List<System.Action<I, A1, A2, A3>> preHooks = new List<Action<I, A1, A2, A3>> ();
-		private List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>> ();
+		readonly List<System.Action<I, A1, A2, A3>> preHooks = new List<Action<I, A1, A2, A3>> ();
+		readonly List<System.Action<I, A1, A2, A3>> postHooks = new List<Action<I, A1, A2, A3>> ();
 
 		/// <summary>
 		/// See <see cref="HookSystem{I}.AddPreHook(Action{I})"/>.

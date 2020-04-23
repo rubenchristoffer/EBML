@@ -20,6 +20,8 @@ namespace EBML {
 		/// </summary>
 		static GameObject bootstrapperGameObject;
 
+		#pragma warning disable IDE0051
+
 		/// <summary>
 		/// This will be called by injector
 		/// after assembly is injected.
@@ -36,6 +38,17 @@ namespace EBML {
 			log.Info ("Loader is present (not null), so creating bootstrapper");
 			CreateBootstrapper ();
 		}
+
+		/// <summary>
+		/// This will be called by ejector
+		/// before assembly is ejected.
+		/// </summary>
+		static void OnEjection () {
+			ModLoader.UninstallMethodHooks ();
+			MonoBehaviour.Destroy (bootstrapperGameObject);
+		}
+
+		#pragma warning restore IDE0051
 
 		/// <summary>
 		/// This will simply wait until the Loader
@@ -99,15 +112,6 @@ namespace EBML {
 			} catch (Exception e) {
 				log.Error ("Something went wrong initializing ModLoader", e);
 			}
-		}
-
-		/// <summary>
-		/// This will be called by ejector
-		/// before assembly is ejected.
-		/// </summary>
-		static void OnEjection () {
-			ModLoader.UninstallMethodHooks ();
-			MonoBehaviour.Destroy (bootstrapperGameObject);
 		}
 
 	}

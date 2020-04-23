@@ -20,6 +20,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<GameWindow, object> OnWindowShowing = new HookSystem<GameWindow, object> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (GameWindow))]
 		private class Patch {
 
@@ -52,6 +54,8 @@ namespace EBML.Hooks {
 			}
 
 		}
+
+#pragma warning restore IDE0051
 
 	}
 

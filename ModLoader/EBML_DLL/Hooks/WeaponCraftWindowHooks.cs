@@ -17,6 +17,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<WeaponCraftWindow, ReturnValue<long>, int> GetResourceUsedCount = new HookSystem<WeaponCraftWindow, ReturnValue<long>, int> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (WeaponCraftWindow))]
 		private class Patch {
 
@@ -51,6 +53,9 @@ namespace EBML.Hooks {
 
 		}
 
+#pragma warning restore IDE0051
+
 	}
 
 }
+

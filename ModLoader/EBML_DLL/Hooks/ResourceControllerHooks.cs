@@ -12,6 +12,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<ResourceController> CreateResources = new HookSystem<ResourceController> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch (typeof (ResourceController))]
 		private class Patch {
 
@@ -30,6 +32,8 @@ namespace EBML.Hooks {
 			}
 
 		}
+
+#pragma warning restore IDE0051
 
 	}
 

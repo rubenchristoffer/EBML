@@ -83,7 +83,9 @@ namespace EBML.API {
 		public static int RegisterNewResource (StaticResourceData staticResourceData, ModAsset<Sprite> iconSprite = null, bool isWarResource = false) {
 			staticResourceData.id = NextResourceID;
 			AddStaticResource (staticResourceData);
-			modWarResources.Add (NextResourceID);
+
+			if (isWarResource)
+				modWarResources.Add (NextResourceID);
 
 			if (iconSprite != null) {
 				string resourceURL = "ResourceIcons/" + NextResourceID;

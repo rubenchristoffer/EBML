@@ -20,6 +20,8 @@ namespace EBML.Hooks {
 		/// </summary>
 		public static HookSystem<ReturnValue<Sprite>, string> LoadSprite = new HookSystem<ReturnValue<Sprite>, string> ();
 
+#pragma warning disable IDE0051
+
 		[HarmonyPatch]
 		private class Patch_Load {
 
@@ -56,6 +58,8 @@ namespace EBML.Hooks {
 			}
 
 		}
+
+#pragma warning restore IDE0051
 
 	}
 
