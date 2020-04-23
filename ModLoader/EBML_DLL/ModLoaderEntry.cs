@@ -1,5 +1,6 @@
 ﻿using System;
 using EBML.Logging;
+using EBML.API;
 using UnityEngine;
 
 namespace EBML {
@@ -10,7 +11,7 @@ namespace EBML {
 	/// </summary>
 	static class ModLoaderEntry {
 
-		private static readonly ILog log = LogFactory.GetLogger (typeof (ModLoaderEntry));
+		static readonly ILog log = LogFactory.GetLogger (typeof (ModLoaderEntry));
 
 		/// <summary>
 		/// The 'Bootstrapper' gameObject that is used to ensure
@@ -43,7 +44,7 @@ namespace EBML {
 		/// properly loaded.
 		/// </summary>
 		static void WaitUntilLoaderIsPresent () {
-			if (Singletons.LOADER == null) {
+			if (Singletons.Loader == null) {
 				log.Info ("Loader is null, so waiting a couple of seconds before checking again...");
 				System.Threading.Thread.Sleep (2000);
 				WaitUntilLoaderIsPresent ();

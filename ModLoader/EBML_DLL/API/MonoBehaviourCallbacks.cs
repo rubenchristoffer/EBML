@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EBML {
+namespace EBML.API {
 
     /// <summary>
     /// This class is used to "hook" Unity's MonoBehaviour

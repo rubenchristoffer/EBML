@@ -12,7 +12,7 @@
 		/// The Loader is responsible for loading
 		/// the game scene and main menu.
 		/// </summary>
-		public static Loader LOADER {
+		public static Loader Loader {
 			get {
 				return SingletonMonoBehaviour<Loader>.THIS;
 			}
@@ -31,7 +31,7 @@
 		/// The TurnManager is holds the current turn and is responsible
 		/// for turn control.
 		/// </summary>
-		public static TurnManager TURN_MANAGER {
+		public static TurnManager TurnManager {
 			get {
 				return SingletonMonoBehaviour<TurnManager>.THIS;
 			}
@@ -41,7 +41,7 @@
 		/// The MapController is responsible for the various regions
 		/// and countries, along with generating the start map.
 		/// </summary>
-		public static MapController MAP_CONTROLLER {
+		public static MapController MapController {
 			get {
 				return SingletonMonoBehaviour<MapController>.THIS;
 			}
@@ -51,7 +51,7 @@
 		/// The SaveController is responsible for saving game progress
 		/// to disk.
 		/// </summary>
-		public static SaveController SAVE_CONTROLLER {
+		public static SaveController SaveController {
 			get {
 				return SingletonMonoBehaviour<SaveController>.THIS;
 			}
@@ -61,7 +61,7 @@
 		/// The TasksController is responsible for handling various
 		/// game tasks.
 		/// </summary>
-		public static TasksController TASKS_CONTROLLER {
+		public static TasksController TasksController {
 			get {
 				return SingletonMonoBehaviour<TasksController>.THIS;
 			}
@@ -71,7 +71,7 @@
 		/// The PropertyController is responsible for handling
 		/// the properties in the game.
 		/// </summary>
-		public static PropertyController PROPERTY_CONTROLLER {
+		public static PropertyController PropertyController {
 			get {
 				return SingletonMonoBehaviour<PropertyController>.THIS;
 			}
@@ -81,7 +81,7 @@
 		/// The WarController is responsible for handing wars
 		/// in the game.
 		/// </summary>
-		public static WarController WAR_CONTROLLER {
+		public static WarController WarController {
 			get {
 				return SingletonMonoBehaviour<WarController>.THIS;
 			}
@@ -91,7 +91,7 @@
 		/// The DiplomacyController is responsible for diplomacy
 		/// in the game.
 		/// </summary>
-		public static DiplomacyController DIPLOMACY_CONTROLLER {
+		public static DiplomacyController DiplomacyController {
 			get {
 				return SingletonMonoBehaviour<DiplomacyController>.THIS;
 			}
@@ -101,7 +101,7 @@
 		/// The LocalizationController is responsible for getting the correct
 		/// words based on which language profile is active.
 		/// </summary>
-		public static LocalizationController LOCALIZATION_CONTROLLER {
+		public static LocalizationController LocalizationController {
 			get {
 				return SingletonMonoBehaviour<LocalizationController>.THIS;
 			}
@@ -111,7 +111,7 @@
 		/// The ResourceController is responsible for all resources in the game,
 		/// including weapons.
 		/// </summary>
-		public static ResourceController RESOURCE_CONTROLLER {
+		public static ResourceController ResourceController {
 			get {
 				return SingletonMonoBehaviour<ResourceController>.THIS;
 			}
@@ -121,7 +121,7 @@
 		/// The UserBank is responsible for the actual player and contains
 		/// data about the player.
 		/// </summary>
-		public static UserBank USER_BANK {
+		public static UserBank UserBank {
 			get {
 				return SingletonMonoBehaviour<UserBank>.THIS;
 			}
@@ -130,7 +130,7 @@
 		/// <summary>
 		/// The NPCBankController is responsible for the opponents in the game.
 		/// </summary>
-		public static NPCBankController NPC_BANK_CONTROLLER {
+		public static NPCBankController NPCBankController {
 			get {
 				return SingletonMonoBehaviour<NPCBankController>.THIS;
 			}
@@ -140,27 +140,16 @@
 		/// The IMFController is responsible for handling IMF
 		/// (International Monetary Fund)
 		/// </summary>
-		public static IMFController IMF_CONTROLLER {
+		public static IMFController IMFController {
 			get {
 				return SingletonMonoBehaviour<IMFController>.THIS;
 			}
 		}
 
 		/// <summary>
-		/// The BankLoger is included in the game,
-		/// but serves no function.
-		/// </summary>
-		[System.Obsolete]
-		public static BankLoger BANK_LOGER {
-			get {
-				return SingletonMonoBehaviour<BankLoger>.THIS;
-			}
-		}
-
-		/// <summary>
 		/// The CamerasController is responsible for game cameras.
 		/// </summary>
-		public static CamerasController CAMERAS_CONTROLLER {
+		public static CamerasController CamerasController {
 			get {
 				return SingletonMonoBehaviour<CamerasController>.THIS;
 			}
@@ -170,7 +159,7 @@
 		/// The MapEventController is responsible for various map events
 		/// such as hunger, rebellion, industry booms etc.
 		/// </summary>
-		public static MapEventController MAP_EVENT_CONTROLLER {
+		public static MapEventController MapEventController {
 			get {
 				return SingletonMonoBehaviour<MapEventController>.THIS;
 			}
@@ -180,7 +169,7 @@
 		/// The NationController is responsible for the different
 		/// nations in the game.
 		/// </summary>
-		public static NationController NATION_CONTROLLER {
+		public static NationController NationController {
 			get {
 				return SingletonMonoBehaviour<NationController>.THIS;
 			}
@@ -190,7 +179,7 @@
 		/// The MercenariesController is responsible for Mercenary
 		/// actions.
 		/// </summary>
-		public static MercenariesController MERCENARIES_CONTROLLER {
+		public static MercenariesController MercenariesController {
 			get {
 				return SingletonMonoBehaviour<MercenariesController>.THIS;
 			}
@@ -200,7 +189,7 @@
 		/// The QualityController is responsible for some of the
 		/// graphics of the game.
 		/// </summary>
-		public static QualityController QUALITY_CONTROLLER {
+		public static QualityController QualityController {
 			get {
 				return SingletonMonoBehaviour<QualityController>.THIS;
 			}
@@ -210,7 +199,7 @@
 		/// The RevolutionController is responsible for handling
 		/// revolutions in the game.
 		/// </summary>
-		public static RevolutionController REVOLUTION_CONTROLLER {
+		public static RevolutionController RevolutionController {
 			get {
 				return SingletonMonoBehaviour<RevolutionController>.THIS;
 			}
@@ -220,7 +209,7 @@
 		/// The TavernController is responsible for all the objects
 		/// in the tavern.
 		/// </summary>
-		public static TavernController TAVERN_CONTROLLER {
+		public static TavernController TavernController {
 			get {
 				return SingletonMonoBehaviour<TavernController>.THIS;
 			}
@@ -229,7 +218,7 @@
 		/// <summary>
 		/// The TaxController is responsible for calculating tax.
 		/// </summary>
-		public static TaxController TAX_CONTROLLER {
+		public static TaxController TaxController {
 			get {
 				return SingletonMonoBehaviour<TaxController>.THIS;
 			}
@@ -239,7 +228,7 @@
 		/// The RecordController is responsible for keeping the "records"
 		/// of various fictional banks that you can see on the main menu.
 		/// </summary>
-		public static RecordController RECORD_CONTROLLER {
+		public static RecordController RecordController {
 			get {
 				return SingletonMonoBehaviour<RecordController>.THIS;
 			}
@@ -248,7 +237,7 @@
 		/// <summary>
 		/// The DifficultyController is responsible for game difficulty.
 		/// </summary>
-		public static DifficultyController DIFFICULTY_CONTROLLER {
+		public static DifficultyController DifficultyController {
 			get {
 				return SingletonMonoBehaviour<DifficultyController>.THIS;
 			}
@@ -259,7 +248,7 @@
 		/// you can issue to people. See NPC_CREDITS_CONTROLLER for credits
 		/// regarding other banks.
 		/// </summary>
-		public static CreditsController CREDITS_CONTROLLER {
+		public static CreditsController CreditsController {
 			get {
 				return SingletonMonoBehaviour<CreditsController>.THIS;
 			}
@@ -269,7 +258,7 @@
 		/// The HintsController is responsible for all the hints
 		/// in the game.
 		/// </summary>
-		public static HintsController HINTS_CONTROLLER {
+		public static HintsController HintsController {
 			get {
 				return SingletonMonoBehaviour<HintsController>.THIS;
 			}
@@ -279,7 +268,7 @@
 		/// The ManagerController is responsible for managers
 		/// in the game (hiring, firing, searching for).
 		/// </summary>
-		public static ManagerController MANAGER_CONTROLLER {
+		public static ManagerController ManagerController {
 			get {
 				return SingletonMonoBehaviour<ManagerController>.THIS;
 			}
@@ -289,7 +278,7 @@
 		/// The ScienceTreeController is responsible for the science tree.
 		/// (researching sciences, progress, etc.)
 		/// </summary>
-		public static ScienceTreeController SCIENCE_TREE_CONTROLLER {
+		public static ScienceTreeController ScienceTreeController {
 			get {
 				return SingletonMonoBehaviour<ScienceTreeController>.THIS;
 			}
@@ -301,7 +290,7 @@
 		/// See CREDITS_CONTROLLER for credits
 		/// regarding people.
 		/// </summary>
-		public static NPCCreditsController NPC_CREDITS_CONTROLLER {
+		public static NPCCreditsController NPCCreditsController {
 			get {
 				return SingletonMonoBehaviour<NPCCreditsController>.THIS;
 			}
@@ -311,7 +300,7 @@
 		/// The MainMenu provides the various functions connected
 		/// to the buttons on the main menu.
 		/// </summary>
-		public static MainMenu MAIN_MENU {
+		public static MainMenu MainMenu {
 			get {
 				return SingletonMonoBehaviour<MainMenu>.THIS;
 			}
@@ -321,7 +310,7 @@
 		/// The SteamAchievements handle Steam Achievements.
 		/// NOTE! USE THIS WITH CAUTION!
 		/// </summary>
-		public static SteamAchievements STEAM_ACHIEVEMENTS {
+		public static SteamAchievements SteamAchievements {
 			get {
 				return SingletonMonoBehaviour<SteamAchievements>.THIS;
 			}

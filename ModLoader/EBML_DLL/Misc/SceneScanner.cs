@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EBML {
+namespace EBML.Misc {
 
 	/// <summary>
 	/// Utility class containing various functions
 	/// that collects information about the current scene.
 	/// </summary>
-	public static class SceneMapper {
+	public static class SceneScanner {
 
 		/// <summary>
 		/// Creates a scene tree of all the gameobjects that exists.
@@ -25,8 +25,9 @@ namespace EBML {
 		}
 
 		private static void AppendGameobjectsRecursively (GameObject obj, StringBuilder builder, int level) {
-			for (int i = 0; i < level; i++)
+			for (int i = 0; i < level; i++) {
 				builder.Append ("\t");
+			}
 
 			builder.AppendLine (obj.name);
 

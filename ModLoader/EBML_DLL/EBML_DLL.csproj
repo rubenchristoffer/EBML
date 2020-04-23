@@ -130,9 +130,9 @@
     <Compile Include="ModLoader.cs" />
     <Compile Include="ModLoaderEntry.cs" />
     <Compile Include="ModPaths.cs" />
-    <Compile Include="MonoBehaviourCallbacks.cs" />
+    <Compile Include="API\MonoBehaviourCallbacks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneMapper.cs" />
+    <Compile Include="Misc\SceneScanner.cs" />
     <Compile Include="Singletons.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
