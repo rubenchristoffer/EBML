@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EBML.GUI {
+namespace EBML.API.GUI {
 
 	/// <summary>
 	/// GUI Object that renders a standard Unity Box.

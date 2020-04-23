@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EBML.GUI {
+namespace EBML.API.GUI {
 
 	/// <summary>
 	/// Class containing extension methods related to GUI.

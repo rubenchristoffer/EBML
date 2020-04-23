@@ -1,4 +1,4 @@
-﻿namespace EBML.GameAPI {
+﻿namespace EBML.API {
 
 	/// <summary>
 	/// You can look at this as an array of ModAssets.

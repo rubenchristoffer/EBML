@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace EBML.GameAPI.Extensions {
+namespace EBML.Extensions {
 
 	/// <summary>
 	/// Extension methods for <see cref="WeaponCraftWindow"/>.

@@ -93,26 +93,25 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameAPI\DataFactory.cs" />
-    <Compile Include="GameAPI\Extensions\AutoPoolExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\PropertyControllerExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\PropertyExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\ResourceControllerExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\ResourceExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\WeaponCraftWindowExtensions.cs" />
-    <Compile Include="GameAPI\Extensions\WeaponInvestWindowExtensions.cs" />
-    <Compile Include="GameAPI\ModAsset.cs" />
-    <Compile Include="GameAPI\ModAssets.cs" />
-    <Compile Include="GameAPI\ModAssetSet.cs" />
-    <Compile Include="GameAPI\ModProperties.cs" />
-    <Compile Include="GameAPI\ModResources.cs" />
-    <Compile Include="GameAPI\SimpleSpriteFactory.cs" />
-    <Compile Include="GameAPI\SimpleTextureFactory.cs" />
-    <Compile Include="GUI\GUIBox.cs" />
-    <Compile Include="GUI\GUIButton.cs" />
-    <Compile Include="GUI\GUIExtensionMethods.cs" />
-    <Compile Include="GUI\GUIObject.cs" />
-    <Compile Include="GUI\ModGUI.cs" />
+    <Compile Include="API\DataFactory.cs" />
+    <Compile Include="Extensions\PropertyControllerExtensions.cs" />
+    <Compile Include="Extensions\PropertyExtensions.cs" />
+    <Compile Include="Extensions\ResourceControllerExtensions.cs" />
+    <Compile Include="Extensions\ResourceExtensions.cs" />
+    <Compile Include="Extensions\WeaponCraftWindowExtensions.cs" />
+    <Compile Include="Extensions\WeaponInvestWindowExtensions.cs" />
+    <Compile Include="API\ModAsset.cs" />
+    <Compile Include="API\ModAssets.cs" />
+    <Compile Include="API\ModAssetSet.cs" />
+    <Compile Include="API\ModProperties.cs" />
+    <Compile Include="API\ModResources.cs" />
+    <Compile Include="API\SimpleSpriteFactory.cs" />
+    <Compile Include="API\SimpleTextureFactory.cs" />
+    <Compile Include="API\GUI\GUIBox.cs" />
+    <Compile Include="API\GUI\GUIButton.cs" />
+    <Compile Include="API\GUI\GUIExtensionMethods.cs" />
+    <Compile Include="API\GUI\GUIObject.cs" />
+    <Compile Include="API\GUI\GUICanvas.cs" />
     <Compile Include="Hooks\GameWindowHooks.cs" />
     <Compile Include="Hooks\HookSystem.cs" />
     <Compile Include="Hooks\LoaderHooks.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogFactory.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="ModBehaviour.cs" />
     <Compile Include="ModFiles.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="ModLoader.cs" />
@@ -136,6 +134,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneMapper.cs" />
     <Compile Include="Singletons.cs" />
+    <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">

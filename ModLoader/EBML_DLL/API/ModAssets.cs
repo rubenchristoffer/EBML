@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EBML.Logging;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
 	/// <summary>
 	/// This class is responsible for storing all the

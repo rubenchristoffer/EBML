@@ -27,8 +27,8 @@ namespace EBML.Logging {
 				outputFile.WriteLine (formattedMessage);
 			}
 
-			if (level != Level.Debug && ModLoader.ModGUI != null && ModLoader.ModGUI.GetObject ("log") != null) {
-				ModLoader.ModGUI.GetObject<EBML.GUI.GUIBox> ("log").AppendLine (formattedMessage);
+			if (level != Level.Debug && ModLoader.MainCanvas != null && ModLoader.MainCanvas.GetObject ("log") != null) {
+				ModLoader.MainCanvas.GetObject<EBML.API.GUI.GUIBox> ("log").AppendLine (formattedMessage);
 			}
 		}
 

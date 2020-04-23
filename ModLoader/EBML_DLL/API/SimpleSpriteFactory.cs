@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
 	/// <summary>
 	/// Simple factory for creating Sprite objects.

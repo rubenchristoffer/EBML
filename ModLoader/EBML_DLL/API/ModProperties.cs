@@ -1,8 +1,8 @@
-﻿using EBML.GameAPI.Extensions;
+﻿using EBML.Extensions;
 using Static;
 using UnityEngine;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
 	/// <summary>
 	/// This class should be used by mods to register new

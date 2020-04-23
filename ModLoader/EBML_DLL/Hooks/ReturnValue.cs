@@ -6,7 +6,7 @@
 	/// generic type and want to access a field
 	/// unrelated to generic type.
 	/// </summary>
-	public abstract class ReturnValueBase {
+	public abstract class ReturnValue {
 
 		/// <summary>
 		/// This is a flag that is used to check if
@@ -23,7 +23,7 @@
 	/// optionally manipulate return value of a method.
 	/// </summary>
 	/// <typeparam name="T">Return type</typeparam>
-	public class ReturnValue<T> : ReturnValueBase {
+	public class ReturnValue<T> : ReturnValue {
 
 		/// <summary>
 		/// The original return value.
@@ -59,8 +59,9 @@
 		/// </summary>
 		/// <param name="referenceValue">The reference value</param>
 		public void UpdateReferenceValue (ref T referenceValue) {
-			if (IsSet)
+			if (IsSet) {
 				referenceValue = CustomValue;
+			}
 		}
 
 	}

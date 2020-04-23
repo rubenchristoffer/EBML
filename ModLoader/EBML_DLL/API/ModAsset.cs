@@ -1,4 +1,4 @@
-﻿namespace EBML.GameAPI {
+﻿namespace EBML.API {
 
 	/// <summary>
 	/// A ModAsset is a Unity asset (object) with its

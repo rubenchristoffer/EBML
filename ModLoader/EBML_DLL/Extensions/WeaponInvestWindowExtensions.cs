@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace EBML.GameAPI.Extensions {
+namespace EBML.Extensions {
 
 	/// <summary>
 	/// Extension methods for <see cref="WeaponInvestWindow"/>.

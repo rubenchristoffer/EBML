@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EBML.GUI {
+namespace EBML.API.GUI {
 
 	/// <summary>
 	/// This is a class used to make it easier to create a GUI.
 	/// It allows multiple "GUI Objects" to be added and they
 	/// will all be rendered when OnGUI is called.
 	/// </summary>
-	public class ModGUI {
+	public class GUICanvas {
 
 		private List<GUIObject> guiObjects = new List<GUIObject> ();
 
 		/// <summary>
 		/// Creates a new ModGUI instance.
 		/// </summary>
-		public ModGUI () {
+		public GUICanvas () {
 			MonoBehaviourCallbacks.OnGUIEvent += OnGUI;
 		}
 
 		/// <summary>
 		/// Unsubscribes from the OnGUI callback.
 		/// </summary>
-		~ModGUI () {
+		~GUICanvas () {
 			MonoBehaviourCallbacks.OnGUIEvent -= OnGUI;
 		}
 

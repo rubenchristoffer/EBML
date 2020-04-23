@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
 	/// <summary>
 	/// Simple texture factory useful for creating Texture2D objects.

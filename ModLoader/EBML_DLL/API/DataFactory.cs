@@ -1,6 +1,6 @@
 ﻿using Static;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
     /// <summary>
     /// Factory class that generates common data structs in the game.

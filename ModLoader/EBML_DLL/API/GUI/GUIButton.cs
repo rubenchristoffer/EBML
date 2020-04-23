@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EBML.GUI {
+namespace EBML.API.GUI {
 
 	/// <summary>
 	/// Creates a new GUI Button that performs

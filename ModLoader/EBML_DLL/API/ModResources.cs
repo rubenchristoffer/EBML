@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EBML.GameAPI.Extensions;
+using EBML.Extensions;
 using Static;
 using UnityEngine;
 
-namespace EBML.GameAPI {
+namespace EBML.API {
 
 	/// <summary>
 	/// This class should be used by mods to register new
@@ -12,7 +12,6 @@ namespace EBML.GameAPI {
 	/// </summary>
 	public static class ModResources {
 
-		static readonly Dictionary<int, Sprite> modResourceIcons = new Dictionary<int, Sprite> ();
 		static readonly List<int> modProductionResources = new List<int> ();
 		static readonly List<int> modWarResources = new List<int> ();
 

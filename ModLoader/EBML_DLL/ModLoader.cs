@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using EBML.GUI;
+using EBML.API.GUI;
 using EBML.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace EBML {
         /// The ModGUI instance responsible for rendering
         /// the Console / log.Info GUI.
         /// </summary>
-        public static ModGUI ModGUI { get; private set; }
+        public static GUICanvas MainCanvas { get; private set; }
 
         /// <summary>
         /// Gets mod info for all the loaded mods.
@@ -54,8 +54,8 @@ namespace EBML {
             log.Info ("Loading assembly 0Harmony.dll");
             Assembly.LoadFile (ModPaths.EBML_PATH + "0Harmony.dll");
 
-            log.Info ("Creating new ModGUI");
-            ModGUI = new ModGUI ();
+            log.Info ("Creating ModLoader GUICanvas");
+            MainCanvas = new GUICanvas ();
 
             log.Info ("Adding Console GUI Object");
             GUIBox logBox = new GUIBox ("log", new Rect (Screen.width - 505f, (int) ((Screen.height - 500f) / 2f), 500, 500), "");
@@ -64,7 +64,7 @@ namespace EBML {
                 logBox.enabled = !logBox.enabled;
             });
 
-            ModGUI.Add (logBox, btn);
+            MainCanvas.Add (logBox, btn);
 
             log.Info ("ModLoader has been initialized!");
         }
