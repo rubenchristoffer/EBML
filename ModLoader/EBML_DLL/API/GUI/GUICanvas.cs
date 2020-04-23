@@ -62,7 +62,7 @@ namespace EBML.API.GUI {
 
 		void OnGUI () {
 			foreach (GUIObject obj in guiObjects) {
-				if (obj.enabled) {
+				if (obj.Enabled) {
 					obj.Render ();
 				}
 			}

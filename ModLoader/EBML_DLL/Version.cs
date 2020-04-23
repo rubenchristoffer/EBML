@@ -10,7 +10,13 @@ namespace EBML {
 	/// Data class representing a Semantic version.
 	/// See https://semver.org/ for more information.
 	/// </summary>
-	public struct Version {
+	public class Version {
+
+		/// <summary>
+		/// Hard-coded EBML API Version code.
+		/// This is safe to use in ModInfo as TargetAPIVersion.
+		/// </summary>
+		public const string API_VERSION = "1.0.0";
 
 		/// <summary>
 		/// Determines backward-incompatable changes that can break existing mods.
@@ -42,19 +48,25 @@ namespace EBML {
 		}
 
 		/// <summary>
+		/// Create a new Version.
+		/// </summary>
+		/// <param name="formattedVersionString">String in the form [MAJOR].[MINOR].[PATCH]</param>
+		/// 
+		/// <example><code>new Version("1.1.1")</code></example>
+		public Version (string formattedVersionString) {
+			string[] split = formattedVersionString.Split ('.');
+			
+			Major = int.Parse (split[0]);
+			Minor = int.Parse (split[1]);
+			Patch = int.Parse (split[2]);
+		}
+
+		/// <summary>
 		/// Gets formatted string for Version.
 		/// </summary>
 		/// <returns>String in the form [MAJOR].[MINOR].[PATCH]</returns>
 		public override string ToString () {
 			return String.Format ("{0}.{1}.{2}", Major, Minor, Patch);
-		}
-
-		/// <summary>
-		/// Gets the official EBML version.
-		/// </summary>
-		/// <returns>Official API version</returns>
-		public static Version GetAPIVersion () {
-			return new Version (1, 0, 0);
 		}
 
 	}

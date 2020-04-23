@@ -61,7 +61,7 @@ namespace EBML {
             GUIBox logBox = new GUIBox ("log", new Rect (Screen.width - 505f, (int) ((Screen.height - 500f) / 2f), 500, 500), "");
 
             GUIButton btn = new GUIButton ("btn", logBox.Bounds.FromAnchor (GUIExtensionMethods.AnchorX.RIGHT, GUIExtensionMethods.AnchorY.CENTER, new Vector2 (20, 20)), "_", () => {
-                logBox.enabled = !logBox.enabled;
+                logBox.Enabled = !logBox.Enabled;
             });
 
             MainCanvas.Add (logBox, btn);
