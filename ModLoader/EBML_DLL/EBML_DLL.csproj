@@ -93,7 +93,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EBMLInfo.cs" />
     <Compile Include="GameAPI\DataFactory.cs" />
     <Compile Include="GameAPI\Extensions\AutoPoolExtensions.cs" />
     <Compile Include="GameAPI\Extensions\PropertyControllerExtensions.cs" />
