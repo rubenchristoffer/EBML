@@ -23,7 +23,7 @@ namespace EBML.Hooks {
 #pragma warning disable IDE0051
 
 		[HarmonyPatch]
-		private class Patch_Load {
+		class Patch_Load {
 
 			static MethodInfo TargetMethod () {
 				return typeof (Resources).GetMethods ()
@@ -41,7 +41,7 @@ namespace EBML.Hooks {
 		}
 
 		[HarmonyPatch]
-		private class Patch_LoadSprite {
+		class Patch_LoadSprite {
 
 			static MethodInfo TargetMethod () {
 				return typeof (Resources).GetMethods ()

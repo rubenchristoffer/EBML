@@ -8,7 +8,7 @@ namespace EBML.Extensions {
 	/// </summary>
 	public static class PropertyExtensions {
 
-		private static readonly Type type = typeof (Property);
+		static readonly Type type = typeof (Property);
 
 		/// <summary>
 		/// Sets the propertyIcons property.

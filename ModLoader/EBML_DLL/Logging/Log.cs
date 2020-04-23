@@ -17,7 +17,7 @@ namespace EBML.Logging {
 			Error
 		}
 
-		private void DoLog (object message, Level level, Exception exception = null) {
+		void DoLog (object message, Level level, Exception exception = null) {
 			string formattedMessage = string.Format ("[{0}][{2}] {1}", DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss"), message, type.Name);
 
 			if (exception != null)

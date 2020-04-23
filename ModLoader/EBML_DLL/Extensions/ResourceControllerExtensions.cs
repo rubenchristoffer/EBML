@@ -10,7 +10,7 @@ namespace EBML.Extensions {
 	/// </summary>
 	public static class ResourceControllerExtensions {
 
-		private static readonly Type type = typeof (ResourceController);
+		static readonly Type type = typeof (ResourceController);
 
 		/// <summary>
 		/// Gets the staticResource field.

@@ -67,7 +67,7 @@ namespace EBML.API {
 			return NextResourceBuildingID++;
 		}
 
-		private static void AddStaticResourceBuilding (StaticResourceBuildingsData staticResourceBuildingsData) {
+		static void AddStaticResourceBuilding (StaticResourceBuildingsData staticResourceBuildingsData) {
 			StaticResourceBuildings staticResourceBuildings = Singletons.PropertyController.GetStaticResourceBuildings ();
 			
 			StaticResourceBuildingsData[] newData = new StaticResourceBuildingsData[staticResourceBuildings.staticResourceBuildingsDataArr.Length + 1];

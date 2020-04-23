@@ -35,7 +35,7 @@ namespace EBML.Hooks {
 #pragma warning disable IDE0051
 
 		[HarmonyPatch (typeof (Loader))]
-		private class Patch {
+		class Patch {
 
 			[HarmonyPatch ("StartLoadGameScene")]
 			[HarmonyPrefix]

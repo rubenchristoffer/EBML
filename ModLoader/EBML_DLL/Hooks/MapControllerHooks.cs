@@ -15,7 +15,7 @@ namespace EBML.Hooks {
 #pragma warning disable IDE0051
 
 		[HarmonyPatch (typeof (MapController))]
-		private class Patch {
+		class Patch {
 
 			[HarmonyPatch ("GenerateStartMap")]
 			[HarmonyPrefix]

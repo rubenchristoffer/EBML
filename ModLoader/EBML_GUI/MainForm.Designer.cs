@@ -3,7 +3,7 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -212,21 +212,21 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox autoInjectCheckbox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Timer updateTimer;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
-        private System.ComponentModel.BackgroundWorker injectorWorker;
-        private System.Windows.Forms.Timer injectorWaitTimer;
+        System.Windows.Forms.Button button2;
+        System.Windows.Forms.CheckBox autoInjectCheckbox;
+        System.Windows.Forms.Button button1;
+        System.Windows.Forms.Timer updateTimer;
+        System.Windows.Forms.Label label1;
+        System.Windows.Forms.StatusStrip statusStrip1;
+        System.Windows.Forms.TabControl tabControl1;
+        System.Windows.Forms.TabPage tabPage1;
+        System.Windows.Forms.TabPage tabPage2;
+        System.Windows.Forms.Label label2;
+        System.Windows.Forms.TextBox textBox1;
+        System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        System.Windows.Forms.ToolStripProgressBar statusProgressBar;
+        System.ComponentModel.BackgroundWorker injectorWorker;
+        System.Windows.Forms.Timer injectorWaitTimer;
     }
 }
 

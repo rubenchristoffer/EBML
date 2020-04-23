@@ -20,7 +20,7 @@ namespace EBML.Hooks {
 #pragma warning disable IDE0051
 
 		[HarmonyPatch (typeof (WeaponCraftWindow))]
-		private class Patch {
+		class Patch {
 
 			[HarmonyPatch ("Awake")]
 			[HarmonyPrefix]

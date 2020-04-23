@@ -15,7 +15,7 @@ namespace EBML.Hooks {
 #pragma warning disable IDE0051
 
 		[HarmonyPatch (typeof (ResourceController))]
-		private class Patch {
+		class Patch {
 
 			[HarmonyPatch ("CreateResources")]
 			[HarmonyPrefix]

@@ -15,23 +15,23 @@ namespace EBML_GUI {
 
 	public partial class MainWindow : Form {
 
-		private static readonly ILog log = LogManager.GetLogger (typeof (MainWindow));
+		static readonly ILog log = LogManager.GetLogger (typeof (MainWindow));
 
 		public static readonly string GAME_PATH = new DirectoryInfo (@".\").FullName;
 		public static readonly string EBML_PATH = GAME_PATH + @"EBML\";
 		public static readonly string LOG_PATH = EBML_PATH + @"GUI_Logs\";
 
-		private static bool processRunning = false;
-		private static bool injected = false;
-		private static string injectorProcessOutput;
-		private static string injectedAssemblyAddress;
-		private static bool hasAutoInjected = false;
+		static bool processRunning = false;
+		static bool injected = false;
+		static string injectorProcessOutput;
+		static string injectedAssemblyAddress;
+		static bool hasAutoInjected = false;
 
 		public MainWindow () {
 			InitializeComponent ();
 		}
 
-		private void MainWindow_Load (object sender, EventArgs e) {
+		void MainWindow_Load (object sender, EventArgs e) {
 			// Create required directories if they do not exist
 			Directory.CreateDirectory (GAME_PATH);
 			Directory.CreateDirectory (EBML_PATH);
@@ -65,11 +65,11 @@ namespace EBML_GUI {
 			updateTimer.Start ();
 		}
 
-		private void updateTimer_Tick (object sender, EventArgs e) {
+		void updateTimer_Tick (object sender, EventArgs e) {
 			PerformUpdate ();
 		}
 
-		private void PerformUpdate () {
+		void PerformUpdate () {
 			processRunning = Process.GetProcesses ()
 			   .Select (p => p.ProcessName.ToLower ())
 			   .Contains ("evilbankmanager");
@@ -150,19 +150,19 @@ namespace EBML_GUI {
 			Process.Start ("steam://rungameid/896160");
 		}
 
-		private void button1_Click (object sender, EventArgs e) {
+		void button1_Click (object sender, EventArgs e) {
 			if (!injected)
 				InjectModLoaderDLL ();
 			else
 				EjectModLoaderDLL ();
 		}
 
-		private void button2_Click (object sender, EventArgs e) {
+		void button2_Click (object sender, EventArgs e) {
 			if (!processRunning)
 				StartGameProcess ();
 		}
 
-		private void injectorWorker_DoWork (object sender, DoWorkEventArgs args) {
+		void injectorWorker_DoWork (object sender, DoWorkEventArgs args) {
 			injectorProcessOutput = "";
 
 			Process injector = new Process () {
@@ -190,7 +190,7 @@ namespace EBML_GUI {
 			}
 		}
 
-		private void injectorWorker_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e) {
+		void injectorWorker_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e) {
 			log.Debug ("Injector Output: " + injectorProcessOutput);
 
 			if (injected) {
@@ -206,7 +206,7 @@ namespace EBML_GUI {
 			statusProgressBar.Visible = false;
 		}
 
-		private void injectorWaitTimer_Tick (object sender, EventArgs e) {
+		void injectorWaitTimer_Tick (object sender, EventArgs e) {
 			injectorWaitTimer.Stop ();
 			InjectModLoaderDLL ();
 		}

@@ -24,18 +24,6 @@ namespace EBML.Misc {
 			return builder.ToString ();
 		}
 
-		private static void AppendGameobjectsRecursively (GameObject obj, StringBuilder builder, int level) {
-			for (int i = 0; i < level; i++) {
-				builder.Append ("\t");
-			}
-
-			builder.AppendLine (obj.name);
-
-			foreach (Transform child in obj.transform) {
-				AppendGameobjectsRecursively (child.gameObject, builder, level + 1);
-			}
-		}
-
 		/// <summary>
 		/// Creates a list of all the names of MonoBehaviours attached
 		/// to gameobjects in the scene.
@@ -49,6 +37,18 @@ namespace EBML.Misc {
 			}
 
 			return builder.ToString ();
+		}
+
+		static void AppendGameobjectsRecursively (GameObject obj, StringBuilder builder, int level) {
+			for (int i = 0; i < level; i++) {
+				builder.Append ("\t");
+			}
+
+			builder.AppendLine (obj.name);
+
+			foreach (Transform child in obj.transform) {
+				AppendGameobjectsRecursively (child.gameObject, builder, level + 1);
+			}
 		}
 
 	}

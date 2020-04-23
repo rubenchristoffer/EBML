@@ -8,7 +8,7 @@ namespace EBML.Extensions {
 	/// </summary>
 	public static class ResourceExtensions {
 
-		private static readonly Type type = typeof (Resource);
+		static readonly Type type = typeof (Resource);
 
 		/// <summary>
 		/// Sets the icon property.
