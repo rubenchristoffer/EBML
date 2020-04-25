@@ -6,8 +6,6 @@ namespace MyMod {
 
 	public class TestMod : Mod {
 
-		static readonly ILog log = LogFactory.GetLogger (typeof (TestMod));
-
 		public override ModInfo Info {
 			get {
 				return new ModInfo (

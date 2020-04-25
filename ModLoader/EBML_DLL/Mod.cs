@@ -1,4 +1,6 @@
-﻿namespace EBML {
+﻿using EBML.Logging;
+
+namespace EBML {
 
 	/// <summary>
 	/// This is a an abstract class representation
@@ -8,6 +10,12 @@
 	/// class when creating your mod.
 	/// </summary>
 	public abstract class Mod {
+
+		/// <summary>
+		/// Logger provided by ModLoader.
+		/// It is recommended to use this log when logging to console.
+		/// </summary>
+		protected readonly ILog log;
 
 		/// <summary>
 		/// This contains information about the mod (metadata).

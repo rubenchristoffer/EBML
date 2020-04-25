@@ -96,6 +96,11 @@ namespace EBML {
                 }
 
                 Mod mod = (Mod) Activator.CreateInstance (modType);
+
+                typeof (Mod)
+                    .GetField ("log", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .SetValue (mod, EBML.Logging.LogFactory.GetLogger(modType));
+
                 loadedMods.Add (mod);
                 mod.OnLoad ();
 

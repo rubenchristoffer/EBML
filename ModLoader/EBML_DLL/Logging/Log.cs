@@ -4,10 +4,10 @@ namespace EBML.Logging {
 
 	class Log : ILog {
 
-		readonly Type type;
+		readonly string name;
 
-		public Log (Type type) {
-			this.type = type;
+		public Log (string name) {
+			this.name = name;
 		}
 
 		enum Level {
@@ -18,7 +18,7 @@ namespace EBML.Logging {
 		}
 
 		void DoLog (object message, Level level, Exception exception = null) {
-			string formattedMessage = string.Format ("[{0}][{2}] {1}", DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss"), message, type.Name);
+			string formattedMessage = string.Format ("[{0}][{2}] {1}", DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss"), message, name);
 
 			if (exception != null)
 				formattedMessage += Environment.NewLine + exception.ToString ();

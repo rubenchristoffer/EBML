@@ -8,7 +8,7 @@ namespace EBML.Logging {
 	/// </summary>
 	public static class LogFactory {
 
-		static readonly Dictionary<Type, ILog> loggerDB = new Dictionary<Type, ILog> ();
+		static readonly Dictionary<string, ILog> loggerDB = new Dictionary<string, ILog> ();
 
 		/// <summary>
 		/// Gets an existing logger if it exists or creates a new one.
@@ -16,10 +16,19 @@ namespace EBML.Logging {
 		/// <param name="type">The class type where you want to use this logger</param>
 		/// <returns>Logger interface</returns>
 		public static ILog GetLogger (Type type) {
-			if (!loggerDB.ContainsKey (type))
-				loggerDB.Add (type, new Log (type));
+			return GetLogger (type.Name);
+		}
 
-			return loggerDB[type];
+		/// <summary>
+		/// Gets an existing logger if it exists or creates a new one.
+		/// </summary>
+		/// <param name="name">Preferably the name of the class type where you want to use this logger</param>
+		/// <returns>Logger interface</returns>
+		public static ILog GetLogger (string name) {
+			if (!loggerDB.ContainsKey (name))
+				loggerDB.Add (name, new Log (name));
+
+			return loggerDB[name];
 		}
 
 	}

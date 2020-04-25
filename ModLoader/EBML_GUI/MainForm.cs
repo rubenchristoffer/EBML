@@ -56,7 +56,6 @@ namespace EBML_GUI {
 			TextboxAppender textboxAppender = new TextboxAppender ("mainappender", textBox1);
 			textboxAppender.Layout = textBoxLayout;
 			textboxAppender.ActivateOptions ();
-
 			BasicConfigurator.Configure (fileAppender, textboxAppender);
 
 			log.Info ("### New Session ###");
