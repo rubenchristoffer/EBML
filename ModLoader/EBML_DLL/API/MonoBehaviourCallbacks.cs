@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-#pragma warning disable IDE0051
-
 namespace EBML.API {
 
     /// <summary>
@@ -47,6 +45,8 @@ namespace EBML.API {
         /// </summary>
         public static event VoidDelegate FixedUpdateEvent;
 
+#pragma warning disable IDE0051
+
         void Awake () {
             if (AwakeEvent != null)
                 AwakeEvent ();
@@ -77,8 +77,8 @@ namespace EBML.API {
                 FixedUpdateEvent ();
         }
 
+#pragma warning restore IDE0051
+
     }
 
 }
-
-#pragma warning restore IDE0051
