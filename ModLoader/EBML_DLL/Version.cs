@@ -16,6 +16,7 @@ namespace EBML {
 		/// Hard-coded EBML API Version code.
 		/// This is safe to use in ModInfo as TargetAPIVersion.
 		/// </summary>
+		/// <remarks>Do not use this to check the current version!</remarks>
 		public const string API_VERSION = "1.0.0";
 
 		/// <summary>

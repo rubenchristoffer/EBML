@@ -8,7 +8,7 @@ v1.0.0 is currently under development.
 3.  Open file linker.config and change variable 'ebml' to your Evil Bank Manager installation folder
 4.  Open cmd.exe (you might need admin privileges)
 5.  CD to root of repository
-6.  Type 'mklinker.exe linkall'
+6.  Type `mklinker.exe linkall`
 7.  Build EBML.sln
 8.  Build EBML_TestMod.sln
 9.  Repeat step 4 to 6

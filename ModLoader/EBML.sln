@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBML_GUI", "EBML_GUI\EBML_G
 		{5D142F9B-E91D-70BA-33EB-0757DDC90B36} = {5D142F9B-E91D-70BA-33EB-0757DDC90B36}
 	EndProjectSection
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5D142F9B-E91D-70BA-33EB-0757DDC90B36} = {5D142F9B-E91D-70BA-33EB-0757DDC90B36}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +54,18 @@ Global
 		{C742BB2E-52B3-40A7-9301-C24FBC38B039}.Release|x64.Build.0 = Release|Any CPU
 		{C742BB2E-52B3-40A7-9301-C24FBC38B039}.Release|x86.ActiveCfg = Release|Any CPU
 		{C742BB2E-52B3-40A7-9301-C24FBC38B039}.Release|x86.Build.0 = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|x64.Build.0 = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Debug|x86.Build.0 = Debug|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|x64.ActiveCfg = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|x64.Build.0 = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|x86.ActiveCfg = Release|Any CPU
+		{934FA061-DB9A-4C8B-8CC6-4A1D788B2FA9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
